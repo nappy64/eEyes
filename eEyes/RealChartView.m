@@ -34,8 +34,8 @@
     bool isWaitingResponse;
 }
 
-const CGFloat kXScale = 15.0; // 每个点的间隔
-const CGFloat kYScale = 1.0; // 每个图像的高度
+const CGFloat kXScale = 25.0; // 每个点的间隔
+const CGFloat kYScale = 3.0; // 每个图像的高度
 
 static inline CGAffineTransform
 CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat dy)
@@ -60,12 +60,7 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
         _values = [NSMutableArray array];
     }
     
-    
-
-    CGFloat height = frame.size.height;
-    CGFloat width = frame.size.width;
-    
-    
+    self.backgroundColor = [UIColor whiteColor];
     
     return self;
 }
@@ -97,11 +92,11 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
     NSUInteger  maxValues = (NSUInteger)floorl(maxDimension / kXScale);
     
     // 是否超過顯示點數
-//    if ([self.values count] > maxValues) {
-//        NSLog(@"Remove Value...self.bounds.size Width : %f, total count : %lu, maxValues : %lu", maxDimension, (unsigned long)self.values.count, (unsigned long)maxValues);
-//        // 從 values 移除掉超過顯示點數的數值
-//        [self.values removeObjectsInRange:NSMakeRange(0, [self.values count] - maxValues)];
-//    }
+    if ([self.values count] > maxValues) {
+        NSLog(@"Remove Value...self.bounds.size Width : %f, total count : %lu, maxValues : %lu", maxDimension, (unsigned long)self.values.count, (unsigned long)maxValues);
+        // 從 values 移除掉超過顯示點數的數值
+        [self.values removeObjectsInRange:NSMakeRange(0, [self.values count] - maxValues)];
+    }
     
     // 会重新调用 drawRect: 方法
     [self setNeedsDisplay];
@@ -155,7 +150,8 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
     // 获取当前的上下文
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     // 设置线条颜色
-    CGContextSetStrokeColorWithColor(ctx, [GraphColor CGColor]);
+//    CGContextSetStrokeColorWithColor(ctx, [GraphColor CGColor]);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
     // 设置连接点样式
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
     // 设置线条寬度

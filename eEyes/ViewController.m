@@ -7,12 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "DrawChartTableViewController.h"
+#import "DrawChartSettingViewController.h"
 #import "ExportTableViewController.h"
 #import "AlarmTableViewController.h"
 #import "ConfigTableViewController.h"
 #import "ConfigManager.h"
 #import "HTTPComm.h"
+#import "AllSensors.h"
 
 @interface ViewController ()
 
@@ -22,6 +23,7 @@
 {
     HTTPComm *httpComm;
     ConfigManager *config;
+    AllSensors *allSensors;
 }
 
 - (void)viewDidLoad {
@@ -45,9 +47,29 @@
     
     httpComm = [HTTPComm sharedInstance];
     config = [ConfigManager sharedInstance];
+    allSensors = [AllSensors sharedInstance];
+    
     [config initialConfigPlist];
 //    [config resetAllConfig];
     [config getAllConfig];
+    
+    NSURL *url = [[NSURL alloc] initWithString:config.dbInfoAddress];
+    
+    [httpComm sendHTTPPost:url timeout:1 sensorID:@"1" startDate:config.startDate endDate:config.endDate functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"!!! ERROR1 !!!");
+            NSLog(@"HTTP Get Sensor Info. Faile : %@", error.localizedDescription);
+        }else {
+            
+            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"JSON : %@", jsonString);
+            
+            NSMutableDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
+            
+            [allSensors transferJSONToSensorsInfo:dataDictionary];
+        }
+    }];
     
 }
 
@@ -59,7 +81,40 @@
 
 - (IBAction)drawChartButtonPressed:(UIButton *)sender {
     // goto next page DrawChartTableViewController
-    DrawChartTableViewController *drawChartPage = [self.storyboard instantiateViewControllerWithIdentifier:@"DrawChartTableViewController"];
+    
+    // message
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"繪圖種類" message:@"選擇曲線種類" preferredStyle:UIAlertControllerStyleAlert];
+    
+    // real time chart
+    UIAlertAction* realTimeChart = [UIAlertAction actionWithTitle:@"即時曲線" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"即時曲線...");
+        [config setDisplayRealTimeChartEnable:true];
+        [self setToDrawChartTableViewController];
+    }];
+    
+    // history chart
+    UIAlertAction* historyChart = [UIAlertAction actionWithTitle:@"歷史曲線" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"歷史曲線...");
+        [config setDisplayRealTimeChartEnable:false];
+        [self setToDrawChartTableViewController];
+    }];
+    
+    // cancel
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"取消...");
+    }];
+    
+    [alert addAction:realTimeChart];
+    [alert addAction:historyChart];
+    [alert addAction:cancel];
+    
+    // 顯示警告視窗
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void) setToDrawChartTableViewController {
+    DrawChartSettingViewController *drawChartPage = [self.storyboard instantiateViewControllerWithIdentifier:@"DrawChartSettingViewController"];
     
     [self showViewController:drawChartPage sender:nil];
 }

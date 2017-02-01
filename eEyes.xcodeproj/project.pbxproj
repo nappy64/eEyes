@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */; };
+		0B1E67861E3CDB2C00BFE8FC /* DrawChartSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */; };
 		0B4E40141E3237B300C07569 /* HistoryChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40131E3237B300C07569 /* HistoryChartViewController.m */; };
 		0B4E401E1E3237F600C07569 /* DVLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40171E3237F600C07569 /* DVLineChartView.m */; };
 		0B4E401F1E3237F600C07569 /* DVPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40191E3237F600C07569 /* DVPlot.m */; };
@@ -43,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B1E677E1E3B3B7500BFE8FC /* AllSensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSensors.h; sourceTree = "<group>"; };
+		0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSensors.m; sourceTree = "<group>"; };
+		0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawChartSettingViewController.h; sourceTree = "<group>"; };
+		0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawChartSettingViewController.m; sourceTree = "<group>"; };
 		0B4E40121E3237B300C07569 /* HistoryChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryChartViewController.h; sourceTree = "<group>"; };
 		0B4E40131E3237B300C07569 /* HistoryChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryChartViewController.m; sourceTree = "<group>"; };
 		0B4E40161E3237F600C07569 /* DVLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVLineChartView.h; sourceTree = "<group>"; };
@@ -154,6 +160,10 @@
 			isa = PBXGroup;
 			children = (
 				0B4E40151E3237F600C07569 /* DVLineChartView */,
+				0BB21FDD1E2533E600786F3A /* ViewController.h */,
+				0BB21FDE1E2533E600786F3A /* ViewController.m */,
+				0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */,
+				0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */,
 				0B4E40121E3237B300C07569 /* HistoryChartViewController.h */,
 				0B4E40131E3237B300C07569 /* HistoryChartViewController.m */,
 				0BDE0D0D1E2DDD4C000C9EC6 /* RealtimeChartViewController.h */,
@@ -186,10 +196,10 @@
 				0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */,
 				0BB21FFD1E25352700786F3A /* RegularAction.h */,
 				0BB21FFE1E25352700786F3A /* RegularAction.m */,
+				0B1E677E1E3B3B7500BFE8FC /* AllSensors.h */,
+				0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */,
 				0BD14BFC1E2606240009F6C2 /* Sensor.h */,
 				0BD14BFD1E2606240009F6C2 /* Sensor.m */,
-				0BB21FDD1E2533E600786F3A /* ViewController.h */,
-				0BB21FDE1E2533E600786F3A /* ViewController.m */,
 				0BB220091E25362D00786F3A /* XMLParserDelegate.h */,
 				0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */,
 				0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */,
@@ -304,11 +314,13 @@
 				0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */,
 				0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */,
 				0BB21FF01E25341F00786F3A /* ConfigManager.m in Sources */,
+				0B1E67861E3CDB2C00BFE8FC /* DrawChartSettingViewController.m in Sources */,
 				0BB21FDC1E2533E600786F3A /* AppDelegate.m in Sources */,
 				0B4E40201E3237F600C07569 /* DVXAxisView.m in Sources */,
 				0BB220021E25356400786F3A /* AlarmTableViewController.m in Sources */,
 				0BB21FF61E25346500786F3A /* DrawRealChart.m in Sources */,
 				0BB21FFF1E25352700786F3A /* RegularAction.m in Sources */,
+				0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */,
 				0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */,
 				0BB21FF91E25347F00786F3A /* DrawHitoryChart.m in Sources */,
 				0BB21FD91E2533E600786F3A /* main.m in Sources */,

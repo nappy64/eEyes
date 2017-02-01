@@ -38,9 +38,9 @@
     values = [NSMutableArray array];
     date = [NSMutableArray array];
     
-    NSURL *url = [[NSURL alloc] initWithString:config.dbMainAddress];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     
-    [httpComm sendHTTPPost:url timeout:1 sensorID:@"10001" startDate:config.startDate endDate:config.endDate functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [httpComm sendHTTPPost:url timeout:1 sensorID:@"1" startDate:config.startDate endDate:config.endDate functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (error) {
             NSLog(@"!!! ERROR1 !!!");
@@ -87,7 +87,10 @@
 //    self.view.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
     _historyChartView.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
     
-    DVLineChartView *ccc = [[DVLineChartView alloc] init];
+//    DVLineChartView *ccc = [[DVLineChartView alloc] init];
+    
+    DVLineChartView *ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
+    
 //    [self.view addSubview:ccc];
     [_historyChartView addSubview:ccc];
     

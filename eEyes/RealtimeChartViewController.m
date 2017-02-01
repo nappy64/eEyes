@@ -44,6 +44,10 @@
     
     values = [NSMutableArray array];
     
+    RealChartView *ccc = [[RealChartView alloc] initWithFrame:_realChartView.bounds];
+    
+    [_realChartView addSubview:ccc];
+    
     double delayInSeconds = 1.0;  // 1 秒畫一點
     // 创建一个 timer 类型定时器 （ DISPATCH_SOURCE_TYPE_TIMER）
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
@@ -68,7 +72,7 @@
         
         NSLog(@"start date : %@", requestCurrentDate);
         
-        [httpComm sendHTTPPost:url timeout:1 sensorID:@"10001" startDate:requestCurrentDate endDate:config.endDate functionType:@"getNew" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        [httpComm sendHTTPPost:url timeout:1 sensorID:@"1" startDate:requestCurrentDate endDate:config.endDate functionType:@"getNew" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
             
             if (error) {
                 NSLog(@"!!! ERROR1 !!!");
@@ -102,10 +106,10 @@
                                 [values addObject:[NSNumber numberWithDouble:[sensor.value doubleValue]]];
                                 requestCurrentDate = sensor.date;
                             }
-                            _realChartView.backgroundColor = [UIColor grayColor];
                             
-                            RealChartView *ccc = [[RealChartView alloc] init];
-                            [_realChartView addSubview:ccc];
+//                            RealChartView *ccc = [[RealChartView alloc] initWithFrame:_realChartView.bounds];
+//                            
+//                            [_realChartView addSubview:ccc];
                             [ccc updateValues:values];
                             
 //                            CGRect frame = _realChartView.frame;
@@ -124,6 +128,11 @@
     
     // 开始定时器任务（定时器默认开始是暂停的，需要复位开启）
     dispatch_resume(_timer);
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    
+    dispatch_source_cancel(_timer);
 }
 
 - (void)didReceiveMemoryWarning {

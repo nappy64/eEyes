@@ -49,6 +49,8 @@ static ConfigManager *_singletonConfigManager = nil;
 - (void) getAllConfig {
     
     _dbMainAddress = [allConfigDictionary objectForKey:@"dbMainAddress"];
+    _dbInfoAddress = [allConfigDictionary objectForKey:@"dbInfoAddress"];
+    _dbSensorValueAddress = [allConfigDictionary objectForKey:@"dbSensorValueAddress"];
     _dbRegisterAddress = [allConfigDictionary objectForKey:@"dbRegisterAddress"];
     _dbUserName = [allConfigDictionary objectForKey:@"dbUserName"];
     _dbPassword = [allConfigDictionary objectForKey:@"dbPassword"];
@@ -57,11 +59,16 @@ static ConfigManager *_singletonConfigManager = nil;
     _dbField = [allConfigDictionary objectForKey:@"dbField"];
     _startDate = [allConfigDictionary objectForKey:@"startDate"];
     _endDate = [allConfigDictionary objectForKey:@"endDate"];
+    _appUserName = [allConfigDictionary objectForKey:@"appUserName"];
+    _appPassword = [allConfigDictionary objectForKey:@"appPassword"];
+    _isDisplayRealTimeChart = [[allConfigDictionary objectForKey:@"isDisplayRealTimeChart"] boolValue];
 }
 
 - (void) setAllConfig {
     
     [allConfigDictionary setObject:_dbMainAddress forKey:@"dbMainAddress"];
+    [allConfigDictionary setObject:_dbInfoAddress forKey:@"dbInfoAddress"];
+    [allConfigDictionary setObject:_dbSensorValueAddress forKey:@"dbSensorValueAddress"];
     [allConfigDictionary setObject:_dbRegisterAddress forKey:@"dbRegisterAddress"];
     [allConfigDictionary setObject:_dbUserName forKey:@"dbUserName"];
     [allConfigDictionary setObject:_dbPassword forKey:@"dbPassword"];
@@ -70,6 +77,9 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary setObject:_dbField forKey:@"dbField"];
     [allConfigDictionary setObject:_startDate forKey:@"startDate"];
     [allConfigDictionary setObject:_endDate forKey:@"endDate"];
+    [allConfigDictionary setObject:_appUserName forKey:@"appUserName"];
+    [allConfigDictionary setObject:_appPassword forKey:@"appPassword"];
+    [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"isDisplayRealTimeChart"];
     
     // save file Setting.plist
     NSString *SaveRootPath = [NSSearchPathForDirectoriesInDomains (NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
@@ -81,6 +91,18 @@ static ConfigManager *_singletonConfigManager = nil;
 - (NSDictionary*) getConfigDictionary {
     
     return allConfigDictionary;
+}
+
+- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable {
+    
+    _isDisplayRealTimeChart = displayRealTimeChartEnable;
+    [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"displayRealTimeChart"];
+    [self setAllConfig];
+}
+
+- (bool) getDisplayRealTimeChartEnable {
+    
+    return _isDisplayRealTimeChart;
 }
 
 @end

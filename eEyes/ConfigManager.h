@@ -10,17 +10,20 @@
 
 @interface ConfigManager : NSObject
 
-@property NSString *dbMainAddress;          // 00 DB Main Address
-@property NSString *dbRegisterAddress;      // 01 DB Register Address
-@property NSString *dbUserName;             // 02 DB Username
-@property NSNumber *dbPassword;             // 03 DB Password
-@property NSNumber *dbName;                 // 04 DB Name
-@property NSNumber *dbTable;                // 05 DB Table
-@property NSNumber *dbField;                // 06 DB Field
-//@property NSDate *startDate;                // 07 Start Date
-//@property NSDate *endDate;                  // 08 End Date
-@property NSString *startDate;                // 07 Start Date
-@property NSString *endDate;                  // 08 End Date
+@property NSString *dbMainAddress;          // DB Sensor Address
+@property NSString *dbInfoAddress;          // DB Info. Address
+@property NSString *dbSensorValueAddress;   // DB Sensor Value Address
+@property NSString *dbRegisterAddress;      // DB Register Address
+@property NSString *dbUserName;             // DB Username
+@property NSString *dbPassword;             // DB Password
+@property NSString *dbName;                 // DB Name
+@property NSString *dbTable;                // DB Table
+@property NSString *dbField;                // DB Field
+@property NSString *startDate;              // Start Date
+@property NSString *endDate;                // End Date
+@property NSString *appUserName;            // User Name
+@property NSString *appPassword;            // Password
+@property bool isDisplayRealTimeChart;      // Display Ral Time Chart
 
 
 + (instancetype) sharedInstance;
@@ -30,5 +33,7 @@
 - (void) getAllConfig;
 - (void) setAllConfig;
 - (NSDictionary*) getConfigDictionary;
+- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable;
+- (bool) getDisplayRealTimeChartEnable;
 
 @end

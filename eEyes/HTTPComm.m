@@ -7,6 +7,7 @@
 //
 
 #import "HTTPComm.h"
+#import "ConfigManager.h"
 
 @implementation HTTPComm
 
@@ -35,6 +36,9 @@ static HTTPComm *_singletonHTTPComm = nil;
 
 - (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate functionType:(NSString*)functionType completion:(DoneHandler)doneHandler {
     
+    // initial ConfigManager singleton
+    ConfigManager *config = [ConfigManager sharedInstance];
+    
     // 1、创建URL资源地址
 //    NSURL *url = [[NSURL alloc] initWithString:phpLinkText];
     //    NSURL *url = [NSURL URLWithString:Post_Url_String];
@@ -47,9 +51,11 @@ static HTTPComm *_singletonHTTPComm = nil;
     NSDictionary *parametersDict;
     // 4.1、创建字典参数，将参数放入字典中，可防止程序员在主观意识上犯错误，即参数写错。
     if([functionType isEqualToString:@"getNew"]) {
-        parametersDict = @{@"username":@"root", @"password":@"root", @"database":@"gutc", @"table":@"svid10001", @"field":@"PARAM_VAL", @"sensorID":@"10001", @"datefield":@"DATE", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":@"RealID10001", @"field":@"RealValue", @"sensorID":@"1", @"datefield":@"Date", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
     } else if([functionType isEqualToString:@"getRange"]) {
-        parametersDict = @{@"username":@"root", @"password":@"root", @"database":@"gutc", @"table":@"parameter_val", @"field":@"PARAM_VAL", @"sensorID":@"10001", @"datefield":@"START_DATE", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":@"SensorRawData", @"field":@"RawValue", @"sensorID":sensorID, @"datefield":@"StartDate", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
+    } else if([functionType isEqualToString:@"getSensorByUser"]) {
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName,@"appUserName":config.appUserName, @"appPassword":config.appPassword, @"type":functionType};
     }
     
     

@@ -16,4 +16,17 @@
 @property (nonatomic, strong) NSNumber *value;
 @property (nonatomic, strong) NSString *date;
 
+@property float latitude;
+@property float longitude;
+@property (nonatomic, strong) NSString *type;
+@property float rangeHi;
+@property float rangeLo;
+@property (nonatomic, strong) NSString *unit;
+@property (nonatomic, strong) NSString *desc;
+
+@property (nonatomic, strong) NSString *dbRealValueTable;
+@property (nonatomic, strong) NSString *dbAverageValueTable;
+
+@property bool isSelected;
+
 @end
