@@ -17,54 +17,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    fileList = [NSMutableArray new];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    httpComm = [HTTPComm sharedInstance];
-    NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
     
-    [httpComm sendHTTPPost:url timeout:1 sensorID:@"1" startDate:@"2017-01-25 21:46:04" endDate:@"2017-01-25 21:48:08" functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        if (error) {
-            NSLog(@"!!! ERROR1 !!!");
-            NSLog(@"HTTP Get Range Data Faile : %@", error.localizedDescription);
-        }else {
-            
-            NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"XML : %@", xmlString);
-            
-            // parse the XML data
-            // 创建解析器
-            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-            XMLParserDelegate *parserDelegate = [XMLParserDelegate new];
-            // 设置代理
-            parser.delegate = parserDelegate;
-            
-            // called to start the event-driven parse.
-            // 開始使用 delegate 的 parse 動作
-            if([parser parse]) {
-                // success
-                objects = [parserDelegate getParserResults];
-                
-                NSLog(@"get XML count : %lu", (unsigned long)objects.count);
-                
-                if(objects.count > 0) {
-                    // switch to main queue to reload the tableView
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //...
-                    });
-                } else {
-                    NSLog(@"??? no data in range %@ to %@ ???", config.startDate, config.endDate);
-                }
-            } else {
-                // fail to parse
-                NSLog(@"!!! parser range data error !!!");
-            }
-            
+     exportCSVFile = [ExportCSVFile new];
+    [exportCSVFile prepareDataForGenerateCSV:@"1" startDate:@"2017-01-25 21:46:04" endDate:@"2017-01-25 21:48:08"];
+     
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSLog(@"%@",paths);
+    // Create NSString object, that holds our exact path to the documents directory
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    //NSLog(@"%@",documentsDirectory);
+    NSArray *pathContent = [[NSFileManager defaultManager]contentsOfDirectoryAtPath:documentsDirectory error:nil];
+    //NSLog(@"%@",pathContent);
+    for (NSString *fileName in pathContent){
+        if([fileName containsString:@".csv"]){
+            [fileList addObject:fileName];
         }
-    }];
-    
+    }
+    //NSLog(@"fileList:  %@",fileList);
     
 }
 
@@ -76,25 +50,22 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return fileList.count;
 }
 
-/*
+
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExportCell" forIndexPath:indexPath];
- 
  // Configure the cell...
- 
- 
+     cell.textLabel.text = fileList[indexPath.row];
+     NSLog(@"%@",cell.textLabel.text);
  return cell;
  }
- */
+
 
 /*
  // Override to support conditional editing of the table view.
