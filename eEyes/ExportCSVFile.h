@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTTPComm.h"
 
 @interface ExportCSVFile : NSObject
+
+- (BOOL) createCSVFile:(NSString*) fileName dataOfContent:(NSData*) data;
+
 
 @end

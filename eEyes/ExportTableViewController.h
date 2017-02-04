@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HTTPComm.h"
+#import "ExportCSVFile.h"
+#import "ConfigManager.h"
+#import "XMLParserDelegate.h"
+
 
 @interface ExportTableViewController : UITableViewController
+{
+    ConfigManager *config;
+    HTTPComm *httpComm;
+    ExportCSVFile *exportCSVFile;
+    NSMutableArray *objects;
+    NSMutableArray *values;
+    NSMutableArray *date;
+}
 
 @end
