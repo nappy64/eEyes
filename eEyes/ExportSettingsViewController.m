@@ -10,7 +10,6 @@
 
 @interface ExportSettingsViewController ()
 @property(nonatomic,strong) UIDatePicker *datePicker;
-
 @end
 
 @implementation ExportSettingsViewController
@@ -115,12 +114,30 @@
     _datePicker = datePicker;
     //监听datePicker的ValueChanged事件
     [datePicker addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
+    yIndex += 20;
+    
+    // Create UIButton
+    UIButton *generateCSV = [[UIButton alloc]initWithFrame:CGRectMake(150, yIndex, 100, 30)];
+    [generateCSV setTitle:@"SAVE File" forState:UIControlStateNormal];
+    [generateCSV setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [generateCSV setBackgroundColor:[UIColor whiteColor]];
+    [generateCSV sizeToFit];
+    [generateCSV addTarget:self action:@selector(saveBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:generateCSV];
+    
+
+    
+    
     
     
     
 }
 
+- (IBAction)saveBtnPressed:(id)sender{
+    exportCSV = [ExportCSVFile new];
+    [exportCSV prepareDataForGenerateCSV:@"1" startDate:startDateTextField.text endDate:endDateTextField.text];
 
+}
 
 - (void) handleButtonClicked:(id)sender {
     
@@ -187,10 +204,6 @@
 }
 
 - (void)pressConfirmButtonToGenerateCSV:(UIBarButtonItem *)sender {
-    
-    exportCSV = [ExportCSVFile new];
-    [exportCSV prepareDataForGenerateCSV:@"1" startDate:startDateTextField.text endDate:endDateTextField.text];
-    
     
     ExportTableViewController *exportTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ExportTableViewController"];
     [self showViewController:exportTableViewController sender:nil];
