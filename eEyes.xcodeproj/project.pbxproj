@@ -42,6 +42,7 @@
 		0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */; };
 		0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */; };
 		B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */; };
+		B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,8 @@
 		0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeChartViewController.m; sourceTree = "<group>"; };
 		0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChartView.h; sourceTree = "<group>"; };
 		0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealChartView.m; sourceTree = "<group>"; };
+		B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportSettingsViewController.h; sourceTree = "<group>"; };
+		B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportSettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,8 @@
 				0BB21FF51E25346500786F3A /* DrawRealChart.m */,
 				0BB21FFA1E2534AB00786F3A /* ExportCSVFile.h */,
 				0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */,
+				B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */,
+				B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */,
 				0BB220061E2535E200786F3A /* ExportTableViewController.h */,
 				0BB220071E2535E200786F3A /* ExportTableViewController.m */,
 				0BB21FF11E25344400786F3A /* HTTPComm.h */,
@@ -322,6 +327,7 @@
 				B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */,
 				0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */,
 				0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */,
+				B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */,
 				0BB21FF91E25347F00786F3A /* DrawHitoryChart.m in Sources */,
 				0BB21FD91E2533E600786F3A /* main.m in Sources */,
 				0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */,

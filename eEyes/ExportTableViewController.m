@@ -23,9 +23,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-     exportCSVFile = [ExportCSVFile new];
-    [exportCSVFile prepareDataForGenerateCSV:@"1" startDate:@"2017-01-25 21:46:04" endDate:@"2017-01-25 21:48:08"];
-     
+     //exportCSVFile = [ExportCSVFile new];
+    //[exportCSVFile prepareDataForGenerateCSV:@"1" startDate:@"2017-01-25 21:46:04" endDate:@"2017-01-25 21:48:10"];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSLog(@"%@",paths);
     // Create NSString object, that holds our exact path to the documents directory

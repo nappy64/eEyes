@@ -21,7 +21,7 @@
         
         if (error) {
             NSLog(@"!!! ERROR1 !!!");
-            NSLog(@"HTTP Get Range Data Faile : %@", error.localizedDescription);
+            NSLog(@"HTTP Get Range Data Fail : %@", error.localizedDescription);
         }else {
             
             //NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
