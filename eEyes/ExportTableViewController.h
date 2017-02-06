@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExportCSVFile.h"
+
 
 @interface ExportTableViewController : UITableViewController
-
+{
+    ExportCSVFile *exportCSVFile;
+    NSMutableArray *fileList;
+}
 @end

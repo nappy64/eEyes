@@ -123,7 +123,7 @@
 
 - (IBAction)exportDataButtonPressed:(UIButton *)sender {
     // goto next page ExportTableViewController
-    ExportTableViewController *exportDataPage = [self.storyboard instantiateViewControllerWithIdentifier:@"ExportTableViewController"];
+    ExportTableViewController *exportDataPage = [self.storyboard instantiateViewControllerWithIdentifier:@"ExportSettingsViewController"];
     
     [self showViewController:exportDataPage sender:nil];
 }
