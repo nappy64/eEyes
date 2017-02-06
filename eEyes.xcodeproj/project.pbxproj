@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */; };
 		0B1E67861E3CDB2C00BFE8FC /* DrawChartSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */; };
+		0B1E67891E41B1D500BFE8FC /* HistoryChartValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */; };
 		0B4E40141E3237B300C07569 /* HistoryChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40131E3237B300C07569 /* HistoryChartViewController.m */; };
 		0B4E401E1E3237F600C07569 /* DVLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40171E3237F600C07569 /* DVLineChartView.m */; };
 		0B4E401F1E3237F600C07569 /* DVPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40191E3237F600C07569 /* DVPlot.m */; };
@@ -49,6 +50,8 @@
 		0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSensors.m; sourceTree = "<group>"; };
 		0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawChartSettingViewController.h; sourceTree = "<group>"; };
 		0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawChartSettingViewController.m; sourceTree = "<group>"; };
+		0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryChartValues.h; sourceTree = "<group>"; };
+		0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryChartValues.m; sourceTree = "<group>"; };
 		0B4E40121E3237B300C07569 /* HistoryChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryChartViewController.h; sourceTree = "<group>"; };
 		0B4E40131E3237B300C07569 /* HistoryChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryChartViewController.m; sourceTree = "<group>"; };
 		0B4E40161E3237F600C07569 /* DVLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVLineChartView.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				0BB21FDE1E2533E600786F3A /* ViewController.m */,
 				0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */,
 				0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */,
+				0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */,
+				0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */,
 				0B4E40121E3237B300C07569 /* HistoryChartViewController.h */,
 				0B4E40131E3237B300C07569 /* HistoryChartViewController.m */,
 				0BDE0D0D1E2DDD4C000C9EC6 /* RealtimeChartViewController.h */,
@@ -326,6 +331,7 @@
 				0BB21FD91E2533E600786F3A /* main.m in Sources */,
 				0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */,
 				0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */,
+				0B1E67891E41B1D500BFE8FC /* HistoryChartValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

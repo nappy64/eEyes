@@ -7,13 +7,17 @@
 //
 
 #import "ConfigTableViewController.h"
+#import "AllSensors.h"
+#import "Sensor.h"
 
 @interface ConfigTableViewController ()
 
 @end
 
 @implementation ConfigTableViewController
-
+{
+    AllSensors *allSensors;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     

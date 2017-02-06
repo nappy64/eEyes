@@ -24,7 +24,7 @@
 @property NSString *appUserName;            // User Name
 @property NSString *appPassword;            // Password
 @property bool isDisplayRealTimeChart;      // Display Ral Time Chart
-
+@property NSString *realChartSensorID;      // Realtime Chart Sensor ID
 
 + (instancetype) sharedInstance;
 
@@ -33,7 +33,7 @@
 - (void) getAllConfig;
 - (void) setAllConfig;
 - (NSDictionary*) getConfigDictionary;
-- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable;
-- (bool) getDisplayRealTimeChartEnable;
+//- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable;
+//- (bool) getDisplayRealTimeChartEnable;
 
 @end

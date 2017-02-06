@@ -61,6 +61,7 @@ static ConfigManager *_singletonConfigManager = nil;
     _endDate = [allConfigDictionary objectForKey:@"endDate"];
     _appUserName = [allConfigDictionary objectForKey:@"appUserName"];
     _appPassword = [allConfigDictionary objectForKey:@"appPassword"];
+    _realChartSensorID = [allConfigDictionary objectForKey:@"realChartSensorID"];
     _isDisplayRealTimeChart = [[allConfigDictionary objectForKey:@"isDisplayRealTimeChart"] boolValue];
 }
 
@@ -79,6 +80,7 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary setObject:_endDate forKey:@"endDate"];
     [allConfigDictionary setObject:_appUserName forKey:@"appUserName"];
     [allConfigDictionary setObject:_appPassword forKey:@"appPassword"];
+    [allConfigDictionary setObject:_realChartSensorID forKey:@"realChartSensorID"];
     [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"isDisplayRealTimeChart"];
     
     // save file Setting.plist
@@ -93,16 +95,16 @@ static ConfigManager *_singletonConfigManager = nil;
     return allConfigDictionary;
 }
 
-- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable {
-    
-    _isDisplayRealTimeChart = displayRealTimeChartEnable;
-    [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"displayRealTimeChart"];
-    [self setAllConfig];
-}
-
-- (bool) getDisplayRealTimeChartEnable {
-    
-    return _isDisplayRealTimeChart;
-}
+//- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable {
+//    
+//    _isDisplayRealTimeChart = displayRealTimeChartEnable;
+//    [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"displayRealTimeChart"];
+//    [self setAllConfig];
+//}
+//
+//- (bool) getDisplayRealTimeChartEnable {
+//    
+//    return _isDisplayRealTimeChart;
+//}
 
 @end

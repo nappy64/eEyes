@@ -10,4 +10,7 @@
 
 @interface HistoryChartValues : NSObject
 
+@property NSMutableArray *values;
+@property NSMutableArray *date;
+
 @end

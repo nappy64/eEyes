@@ -42,7 +42,8 @@
     
     allSensorsInfo = [allSensors getAllSensorsInfo];
     
-    isDisplayRealChart = [config getDisplayRealTimeChartEnable];
+//    isDisplayRealChart = [config getDisplayRealTimeChartEnable];
+    isDisplayRealChart = config.isDisplayRealTimeChart;
     
     sensorsButton = [NSMutableArray array];
     
@@ -52,26 +53,32 @@
     // 放上導覽列
     self.navigationItem.rightBarButtonItems = @[addItem];
     
-    if(isDisplayRealChart == true) {
+    Sensor *sensor = [Sensor new];
+    
+    CGFloat xIndex = 10;
+    CGFloat yIndex = 80;
+    CGFloat wIndex = self.view.bounds.size.width/2 - 20;
+    
+    for(int i = 0; i < [allSensors getSensorsCount]; i++) {
         
-    } else {
+        sensor = allSensorsInfo[i];
         
-        Sensor *sensor = [Sensor new];
+        // create UIButton
+        CGRect buttonFrame = CGRectMake( xIndex, yIndex, wIndex, 30 );
+        UIButton *button = [[UIButton alloc] initWithFrame: buttonFrame];
+        [button setTitle:sensor.name forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
-        CGFloat xIndex = 10;
-        CGFloat yIndex = 80;
-        CGFloat wIndex = self.view.bounds.size.width/2 - 20;
-        
-        for(int i = 0; i < [allSensors getSensorsCount]; i++) {
-            
-            sensor = allSensorsInfo[i];
-            
-            // create UIButton
-            CGRect buttonFrame = CGRectMake( xIndex, yIndex, wIndex, 30 );
-            UIButton *button = [[UIButton alloc] initWithFrame: buttonFrame];
-            [button setTitle:sensor.name forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
+        /*
+        if(isDisplayRealChart == true) {
+            if([[sensor.sensorID stringValue] isEqualToString:config.realChartSensorID]) {
+                button.selected = true;
+                button.backgroundColor = [UIColor greenColor];
+            } else {
+                button.selected = false;
+                button.backgroundColor = [UIColor grayColor];
+            }
+        } else {
             if(sensor.isSelected) {
                 button.selected = true;
                 button.backgroundColor = [UIColor greenColor];
@@ -79,21 +86,32 @@
                 button.selected = false;
                 button.backgroundColor = [UIColor grayColor];
             }
-            
-            [self.view addSubview:button];
-            
-            [button addTarget:self
-                       action:@selector(handleButtonClicked:)
-             forControlEvents:UIControlEventTouchUpInside
-            ];
-            
-            xIndex += self.view.bounds.size.width/2;
-            if(xIndex > self.view.bounds.size.width) {
-                xIndex = 10;
-                yIndex += 40;
-            }
+        }
+        */
+        
+        if(sensor.isSelected) {
+            button.selected = true;
+            button.backgroundColor = [UIColor greenColor];
+        } else {
+            button.selected = false;
+            button.backgroundColor = [UIColor grayColor];
         }
         
+        [self.view addSubview:button];
+        
+        [button addTarget:self
+                   action:@selector(handleButtonClicked:)
+         forControlEvents:UIControlEventTouchUpInside
+         ];
+        
+        xIndex += self.view.bounds.size.width/2;
+        if(xIndex > self.view.bounds.size.width) {
+            xIndex = 10;
+            yIndex += 40;
+        }
+    }
+    
+    if(isDisplayRealChart == false) {
         // create UILabel for start date
         UILabel *startDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, yIndex, 100, 30)];
         startDateLabel.text = @"開始時間";
@@ -130,20 +148,16 @@
         
         // set UIDatePicker field
         UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-        //设置本地语言
         datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
-        //设置日期显示的格式
         datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        //设置_birthdayField的inputView控件为datePicker
+        
         startDateTextField.inputView = datePicker;
         endDateTextField.inputView = datePicker;
         _datePicker = datePicker;
-        //监听datePicker的ValueChanged事件
+        
         [datePicker addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
-
     }
 }
-
 
 - (void) handleButtonClicked:(id)sender {
     
@@ -161,12 +175,10 @@
     } else {
         button.selected = true;
         sensor.isSelected = true;
-        NSLog(@"Selected...");
         [button setBackgroundColor:[UIColor greenColor]];
-    }
-    
-    if(sender == sensorsButton) {
+        NSLog(@"Selected...");
         
+        config.realChartSensorID = [sensor.sensorID stringValue];
     }
 }
 
@@ -211,7 +223,8 @@
 
 - (void)pressConfirmButtonToCreateInputContent:(UIBarButtonItem *)sender {
     
-    if([config getDisplayRealTimeChartEnable]) {
+//    if([config getDisplayRealTimeChartEnable]) {
+    if(config.isDisplayRealTimeChart) {
         RealtimeChartViewController *realChartPage = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeChartViewController"];
         [self showViewController:realChartPage sender:nil];
     } else {

@@ -55,7 +55,7 @@
     
     NSURL *url = [[NSURL alloc] initWithString:config.dbInfoAddress];
     
-    [httpComm sendHTTPPost:url timeout:1 sensorID:@"1" startDate:config.startDate endDate:config.endDate functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (error) {
             NSLog(@"!!! ERROR1 !!!");
@@ -88,14 +88,16 @@
     // real time chart
     UIAlertAction* realTimeChart = [UIAlertAction actionWithTitle:@"即時曲線" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"即時曲線...");
-        [config setDisplayRealTimeChartEnable:true];
+//        [config setDisplayRealTimeChartEnable:true];
+        config.isDisplayRealTimeChart = true;
         [self setToDrawChartTableViewController];
     }];
     
     // history chart
     UIAlertAction* historyChart = [UIAlertAction actionWithTitle:@"歷史曲線" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"歷史曲線...");
-        [config setDisplayRealTimeChartEnable:false];
+//        [config setDisplayRealTimeChartEnable:false];
+        config.isDisplayRealTimeChart = false;
         [self setToDrawChartTableViewController];
     }];
     

@@ -19,8 +19,6 @@
 
 #define GraphColor  [[UIColor greenColor] colorWithAlphaComponent:0.5]
 
-#define str(index)  [NSString stringWithFormat : @"%.f", [[self.values objectAtIndex:(index)] floatValue]]
-
 #define point(x, y) CGPointMake((x) * kXScale, yOffset + (y) * kYScale)
 
 
@@ -38,6 +36,7 @@ const CGFloat kXScale = 25.0; // 每个点的间隔
 const CGFloat kYScale = 3.0; // 每个图像的高度
 
 static inline CGAffineTransform
+
 CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat dy)
 {
     return CGAffineTransformMake(sx, 0.f, 0.f, sy, dx, dy);
@@ -60,7 +59,7 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
         _values = [NSMutableArray array];
     }
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor grayColor];
     
     return self;
 }
@@ -80,9 +79,9 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
 
 - (void)updateValues:(NSMutableArray *)values;
 {
-    
+
     _values = values;
-    
+/*
     // bounds：该 view 在本地坐标系统中的位置和大小。
     CGSize size = self.bounds.size;
     
@@ -97,7 +96,7 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
         // 從 values 移除掉超過顯示點數的數值
         [self.values removeObjectsInRange:NSMakeRange(0, [self.values count] - maxValues)];
     }
-    
+*/
     // 会重新调用 drawRect: 方法
     [self setNeedsDisplay];
 }
@@ -146,46 +145,84 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
     // 闭合路径
     CGContextStrokePath(ctxCenter);
     
+    NSMutableArray *oneChartValue = [NSMutableArray array];
+    
+    // bounds：该 view 在本地坐标系统中的位置和大小。
+    CGSize size = self.bounds.size;
+    
+    // view 的寬
+    CGFloat     maxDimension = size.width; // MAX(size.height, size.width);
+    // 每個 view 顯示的點數
+    NSUInteger  maxValues = (NSUInteger)floorl(maxDimension / kXScale);
+    
     // 趨勢線
-    // 获取当前的上下文
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    // 设置线条颜色
-//    CGContextSetStrokeColorWithColor(ctx, [GraphColor CGColor]);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
-    // 设置连接点样式
-    CGContextSetLineJoin(ctx, kCGLineJoinRound);
-    // 设置线条寬度
-    CGContextSetLineWidth(ctx, 5);
-    // 创建路径
-    CGMutablePathRef path = CGPathCreateMutable();
+    for(int i = 0; i < _values.count; i++) {
     
-    // 設定第一個點為起點的路徑
-    CGFloat y = 0 - [[self.values objectAtIndex:0] floatValue];
-    
-    // 设置起点
-    CGPathMoveToPoint(path, &transform, 0, y);
-    // 顯示該點的數值
-    [self drawAtPoint:point(0, y) withStr:str(0)];
-    // 將 values 裡的點數添加到路径里面
-    for (NSUInteger x = 1; x < [self.values count]; ++x) {
-        y = 0 - [[self.values objectAtIndex:x] floatValue];
+        oneChartValue = _values[i];
+        NSString *str;
         
-        // 将点添加到路径里面
-        CGPathAddLineToPoint(path, &transform, x, y);
-        [self drawAtPoint:point(x, y) withStr:str(x)];
+        NSLog(@"AAA array index:%d count:%lu, data:%@", i, (unsigned long)oneChartValue.count, oneChartValue[0]);
+        
+        if ([oneChartValue count] > maxValues) {
+            NSLog(@"Remove Value...self.bounds.size Width : %f, total count : %lu, maxValues : %lu", maxDimension, (unsigned long)oneChartValue.count, (unsigned long)maxValues);
+            [oneChartValue removeObjectsInRange:NSMakeRange(0, [oneChartValue count] - maxValues)];
+        }
+        
+        NSLog(@"BBB array index:%d count:%lu, data:%@", i, (unsigned long)oneChartValue.count, oneChartValue[0]);
+        
+        // 获取当前的上下文
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        // 设置线条颜色
+        CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
+        // 设置连接点样式
+        CGContextSetLineJoin(ctx, kCGLineJoinRound);
+        // 设置线条寬度
+        CGContextSetLineWidth(ctx, 5);
+        // 创建路径
+        CGMutablePathRef path = CGPathCreateMutable();
+        
+        // 設定第一個點為起點的路徑
+        CGFloat y = 0 - [[oneChartValue objectAtIndex:0] floatValue];
+        
+        // 设置起点
+        CGPathMoveToPoint(path, &transform, 0, y);
+        
+        // 顯示該點的數值
+        str = [NSString stringWithFormat : @"%.f", [[oneChartValue objectAtIndex:(0)] floatValue]];
+//        [self drawAtPoint:point(0, y) withStr:str];
+        if(i == 0) {
+            [str drawAtPoint:point(0, y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:[[UIColor greenColor] colorWithAlphaComponent:0.5]}];
+        } else if(i == 1) {
+            [str drawAtPoint:point(0, y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:[[UIColor yellowColor] colorWithAlphaComponent:0.5]}];
+        }
+        
+        // 將 values 裡的點數添加到路径里面
+        for (NSUInteger x = 1; x < oneChartValue.count; ++x) {
+            y = 0 - [[oneChartValue objectAtIndex:x] floatValue];
+            
+            // 将点添加到路径里面
+            CGPathAddLineToPoint(path, &transform, x, y);
+            str = [NSString stringWithFormat : @"%.f", [[oneChartValue objectAtIndex:(x)] floatValue]];
+//            [self drawAtPoint:point(x, y) withStr:str];
+            if(i == 0) {
+                [str drawAtPoint:point(x, y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:[[UIColor greenColor] colorWithAlphaComponent:0.5]}];
+            } else if(i == 1) {
+                [str drawAtPoint:point(x, y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:[[UIColor yellowColor] colorWithAlphaComponent:0.5]}];
+            }
+        }
+        // 进行绘制
+        CGContextAddPath(ctx, path);
+        // 释放路径
+        CGPathRelease(path);
+        // 闭合路径
+        CGContextStrokePath(ctx);
     }
-    // 进行绘制
-    CGContextAddPath(ctx, path);
-    // 释放路径
-    CGPathRelease(path);
-    // 闭合路径
-    CGContextStrokePath(ctx);
 }
 
 - (void)drawAtPoint:(CGPoint)point withStr:(NSString *)str
 {
     
-    [str drawAtPoint:point withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:GraphColor}];
+    [str drawAtPoint:point withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:8], NSStrokeColorAttributeName:[[UIColor greenColor] colorWithAlphaComponent:0.5]}];
 }
 
 @end
