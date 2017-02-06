@@ -17,7 +17,7 @@
     httpComm = [HTTPComm sharedInstance];
     NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
     
-    [httpComm sendHTTPPost:url timeout:1 sensorID:sensorID startDate:startDate endDate:endDate functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:sensorID startDate:startDate endDate:endDate functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (error) {
             NSLog(@"!!! ERROR1 !!!");
