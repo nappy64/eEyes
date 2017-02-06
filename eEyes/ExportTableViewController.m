@@ -9,7 +9,8 @@
 #import "ExportTableViewController.h"
 
 
-@interface ExportTableViewController ()
+@interface ExportTableViewController ()<MFMailComposeViewControllerDelegate>
+
 
 @end
 
@@ -67,6 +68,85 @@
  }
 
 
+#pragma mark - tableviewRowAction
+-(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *sendEmail = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Email" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+        // maybe show an action sheet with more options
+        NSString *fileName = fileList[indexPath.row];
+        [self sendEmailWithAttachment:fileName];
+    }];
+    sendEmail.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0.8 alpha:1];
+    
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+        // Delete the row from the data source
+        NSString *fileName = fileList[indexPath.row];
+        NSLog(@"%@",fileName);
+        [self deleteFile:fileName];
+        [fileList removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
+        
+        //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    return @[deleteAction, sendEmail];
+}
+-(void) sendEmailWithAttachment:(NSString*)fileName{
+    if (![MFMailComposeViewController canSendMail]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"不支援信件或未設定信件" message:@"此裝置不支援信件或未設定信件" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        NSLog(@"Mail services are not available.");
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+    composeVC.mailComposeDelegate = self;
+    
+    // Load attachment
+    // Find the path of file
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    NSData *csvData = [NSData dataWithContentsOfFile:fullPath];
+    
+    // Configure the fields of the interface.
+    [composeVC setToRecipients:@[@"denny80226@gmail.com"]];
+    [composeVC setSubject:@"My Sensor Record CSV File"];
+    [composeVC setMessageBody:@"Here is your file!" isHTML:NO];
+    [composeVC addAttachmentData:csvData
+                        mimeType:@"text/csv"
+                        fileName:[NSString stringWithFormat:@"%@",fileName]];
+    // Present the view controller modally.
+    [self presentViewController:composeVC animated:YES completion:nil];
+
+
+}
+#pragma mark - dismissMailViewController
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    // Check the result or perform other tasks.
+    
+    // Dismiss the mail compose view controller.
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+- (void)deleteFile:(NSString*)fileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    // Create NSString object, that holds our exact path to the documents directory
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    //NSLog(@"%@",fullPath);
+    BOOL result = [[NSFileManager defaultManager]removeItemAtPath:fullPath error:nil];
+    NSLog(@"Delete:%d",result);
+}
+
+
+
+/*
 #pragma mark - delete files
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,23 +162,15 @@
         [self deleteFile:fileName];
         [fileList removeObjectAtIndex:indexPath.row];
         [self.tableView reloadData];
-        /*
+ 
          [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         */
+ 
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
+*/
 
-- (void)deleteFile:(NSString*)fileName{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    // Create NSString object, that holds our exact path to the documents directory
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
-    //NSLog(@"%@",fullPath);
-    BOOL result = [[NSFileManager defaultManager]removeItemAtPath:fullPath error:nil];
-    NSLog(@"Delete:%d",result);
-}
 /*
  // Override to support rearranging the table view.
  - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
