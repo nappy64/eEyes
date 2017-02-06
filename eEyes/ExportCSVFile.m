@@ -10,6 +10,13 @@
 
 @implementation ExportCSVFile
 
+static ExportCSVFile *_singletonExportCSVFile = nil;
++ (instancetype) sharedInstance{
+    if(_singletonExportCSVFile == nil){
+        _singletonExportCSVFile = [ExportCSVFile new];
+    }
+    return _singletonExportCSVFile;
+}
 
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
                          startDate:(NSString*) startDate
@@ -81,6 +88,48 @@
     BOOL result = [[NSFileManager defaultManager] createFileAtPath:fullPath contents:data attributes:nil];
     NSLog(@"CreateOrNot:  %d",result);
     return result;
+}
+
+
+
+-(NSMutableArray *)transferCSVToArray:(NSString *)fileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    //NSLog(@"%@",fullPath);
+    NSData *csvData = [[NSFileManager defaultManager]contentsAtPath:fullPath];
+    NSString *csvToString = [[NSString alloc]initWithData:csvData encoding:NSUTF8StringEncoding];
+    //NSLog(@"data轉換回字串:%@",csvToString);
+    
+    NSMutableArray *valueColumn = [NSMutableArray array];
+    NSMutableArray *timeColumn = [NSMutableArray array];
+    // Remove Title
+    NSString *csvCutTitle = [csvToString substringFromIndex:18];
+    // Remove the last \n
+    NSString *csvCut = [csvCutTitle substringToIndex:csvCutTitle.length-2];
+    //NSLog(@"%@",csvCutTitle);
+    for (NSString *line in [csvCut componentsSeparatedByString:@"\n"]){
+        NSArray *row = [line componentsSeparatedByString:@","];
+        
+        [valueColumn addObject:row[2]];
+        //NSLog(@"%@",row[3]);
+        [timeColumn addObject:row[3]];
+    }
+    NSMutableArray *result = [NSMutableArray new];
+    [result insertObject:valueColumn atIndex:0];
+    [result insertObject:timeColumn atIndex:1];
+    
+    //NSMutableArray *result = [[valueColumn arrayByAddingObjectsFromArray:timeColumn] mutableCopy];
+//    NSArray* rows = [csvToString componentsSeparatedByString:@"\n"];
+//    for (NSString *row in rows){
+//        NSArray* columns = [row componentsSeparatedByString:@","];
+//        
+//        [valueColumn addObject:columns[2]];
+//        [timeColumn addObject:columns[3]];
+//    }
+
+return result;
+
 }
 
 

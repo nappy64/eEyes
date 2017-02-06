@@ -11,6 +11,7 @@
 #import "ConfigManager.h"
 #import "XMLParserDelegate.h"
 #import "Sensor.h"
+#import "HistoryChartValues.h"
 @interface ExportCSVFile : NSObject
 {
     Sensor *sensorInfo;
@@ -21,12 +22,16 @@
     NSMutableArray *date;
     NSMutableString *csvString;
 }
-
+@property NSString *fileNameSelected;
++ (instancetype) sharedInstance;
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate;
 
 - (BOOL) createCSVFile:(NSString*) fileName dataOfContent:(NSData*) data;
+
+- (NSMutableArray*) transferCSVToArray:(NSString*)fileName;
+
 
 
 @end
