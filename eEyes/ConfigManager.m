@@ -63,6 +63,7 @@ static ConfigManager *_singletonConfigManager = nil;
     _appPassword = [allConfigDictionary objectForKey:@"appPassword"];
     _realChartSensorID = [allConfigDictionary objectForKey:@"realChartSensorID"];
     _isDisplayRealTimeChart = [[allConfigDictionary objectForKey:@"isDisplayRealTimeChart"] boolValue];
+    _isDisplayValueInHistoryChart = [[allConfigDictionary objectForKey:@"isDisplayValueInHistoryChart"] boolValue];
 }
 
 - (void) setAllConfig {
@@ -82,6 +83,7 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary setObject:_appPassword forKey:@"appPassword"];
     [allConfigDictionary setObject:_realChartSensorID forKey:@"realChartSensorID"];
     [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"isDisplayRealTimeChart"];
+    [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayValueInHistoryChart] forKey:@"isDisplayValueInHistoryChart"];
     
     // save file Setting.plist
     NSString *SaveRootPath = [NSSearchPathForDirectoriesInDomains (NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];

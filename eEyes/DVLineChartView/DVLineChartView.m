@@ -125,6 +125,8 @@
 
 - (void)draw {
     
+    NSLog(@"start draw...");
+    
     if (self.plots.count == 0) return;
     
     // 设置y轴视图的尺寸

@@ -9,6 +9,7 @@
 #import "DVXAxisView.h"
 #import "DVPlot.h"
 #import "UIView+Extension.h"
+#import "ConfigManager.h"
 
 @interface DVXAxisView ()
 /**
@@ -44,7 +45,9 @@
 @end
 
 @implementation DVXAxisView
-
+{
+    ConfigManager *config;
+}
 - (NSMutableArray *)pointButtonArray {
     
     if (_pointButtonArray == nil) {
@@ -84,6 +87,8 @@
 }
 
 - (void)draw {
+    
+    config = [ConfigManager sharedInstance];
     
     self.backgroundColor = self.backColor;
     
@@ -247,12 +252,15 @@
 				center = CGPointMake((i+1)*self.pointGap, self.chartHeight + self.topMargin);
 			}
 			
-            // 添加point处的Label
-            if (self.isShowPointLabel) {
-                
-                [self addLabelWithTitle:title atLocation:center andTag:i];
-                
+            if(config.isDisplayValueInHistoryChart) {
+                // 添加point处的Label
+                if (self.isShowPointLabel) {
+                    
+                    [self addLabelWithTitle:title atLocation:center andTag:i];
+                    
+                }
             }
+            
             
 //            UIBezierPath* path = [UIBezierPath bezierPathWithArcCenter:center radius:3 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
 //            

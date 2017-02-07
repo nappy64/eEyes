@@ -25,6 +25,7 @@
 @property NSString *appPassword;            // Password
 @property bool isDisplayRealTimeChart;      // Display Ral Time Chart
 @property NSString *realChartSensorID;      // Realtime Chart Sensor ID
+@property bool isDisplayValueInHistoryChart;// Display Value in History Chart
 
 + (instancetype) sharedInstance;
 

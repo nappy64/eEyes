@@ -23,8 +23,6 @@
     allSensorsInfo = [allSensors getAllSensorsInfo];
     sensorsButton = [NSMutableArray array];
     
-    NSMutableArray *drawData = [exportCSV transferCSVToArray:@"5.csv"];
-    
     // 準備導覽列上按鈕
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressConfirmButtonToGenerateCSV:)];
     

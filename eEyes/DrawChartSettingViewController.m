@@ -214,10 +214,14 @@
     if ([startDateTextField isFirstResponder])
     {
         startDateTextField.text = dateStr;
+        [config setStartDate:dateStr];
+        [config setAllConfig];
     }
     else if ([endDateTextField isFirstResponder])
     {
         endDateTextField.text = dateStr;
+        [config setEndDate:dateStr];
+        [config setAllConfig];
     }
 }
 

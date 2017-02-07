@@ -18,7 +18,9 @@
 #import "AllSensors.h"
 
 @interface HistoryChartViewController () <DVLineChartViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *historyChartView;
+@property (weak, nonatomic) IBOutlet UIButton *isDisplayRemarkButton;
 
 @end
 
@@ -27,6 +29,7 @@
     HTTPComm *httpComm;
     ConfigManager *config;
     AllSensors *allSensors;
+    DVLineChartView *ccc;
     
     NSArray *allSensorsInfo;
     
@@ -52,9 +55,20 @@
     displayCount = 0;
     compareDisplayCount = 0;
     
+    if(config.isDisplayValueInHistoryChart) {
+        _isDisplayRemarkButton.backgroundColor = [UIColor greenColor];
+    } else {
+        _isDisplayRemarkButton.backgroundColor = [UIColor grayColor];
+    }
+    
     [self sendHTTPPostGetData];
     
     [self drawHistoryChart];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [config setAllConfig];
 }
 
 - (void) sendHTTPPostGetData {
@@ -131,7 +145,7 @@
     
     _historyChartView.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
     
-    DVLineChartView *ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
+    ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
 
     [_historyChartView addSubview:ccc];
     
@@ -210,6 +224,22 @@
 
 - (IBAction)yDecrementButtonTapped:(UIButton *)sender {
     
+}
+
+- (IBAction)displayRemarkButtonTapped:(UIButton *)sender {
+    
+    if(config.isDisplayValueInHistoryChart) {
+        [config setIsDisplayValueInHistoryChart:false];
+        _isDisplayRemarkButton.backgroundColor = [UIColor grayColor];
+
+    } else {
+        [config setIsDisplayValueInHistoryChart:true];
+        _isDisplayRemarkButton.backgroundColor = [UIColor greenColor];
+    }
+
+    [ccc removeFromSuperview];
+    
+    [self drawHistoryChart];
 }
 
 - (void)didReceiveMemoryWarning {
