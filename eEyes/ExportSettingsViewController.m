@@ -117,9 +117,10 @@
     yIndex += 20;
     
     // Create UIButton
-    UIButton *generateCSV = [[UIButton alloc]initWithFrame:CGRectMake(150, yIndex, 100, 30)];
+    UIButton *generateCSV = [UIButton buttonWithType:UIButtonTypeSystem];
+    generateCSV.frame = CGRectMake(100, yIndex, 100, 30);
     [generateCSV setTitle:@"SAVE File" forState:UIControlStateNormal];
-    [generateCSV setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [generateCSV setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [generateCSV setBackgroundColor:[UIColor whiteColor]];
     [generateCSV sizeToFit];
     [generateCSV addTarget:self action:@selector(saveBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
