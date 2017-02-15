@@ -28,7 +28,6 @@
 @implementation RealChartView
 {
     ConfigManager *config;
-    double drawValue;
     bool isWaitingResponse;
 }
 
@@ -50,8 +49,6 @@ CGAffineTransformMakeScaleTranslate(CGFloat sx, CGFloat sy, CGFloat dx, CGFloat 
     self = [super initWithFrame:frame];
     
     if (self) {
-        // Initialization code
-        drawValue = 0;
         
         // UIImageView 整体不拉伸，往右對齊
         [self setContentMode:UIViewContentModeRight];

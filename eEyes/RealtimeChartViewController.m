@@ -72,10 +72,12 @@
     
     displayCount = 0;
     compareDisplayCount = 0;
+
+    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-48);
     
-    ccc = [[RealChartView alloc] initWithFrame:_realChartView.bounds];
+    ccc = [[RealChartView alloc] initWithFrame:chartRect];
     
-    [_realChartView addSubview:ccc];
+    [self.view addSubview:ccc];
     
     // create timer
     double delayInSeconds = 1.0;  // 1 秒畫一點
@@ -91,6 +93,7 @@
     
     // start timer
     dispatch_resume(_timer);
+    
 }
 
 - (void) getSelectedSensorCount {
@@ -142,7 +145,7 @@
                 
                 dbTableName = sensor.dbRealValueTable;
                 
-                [httpComm sendHTTPPost:url timeout:1 dbTable:dbTableName sensorID:[sensor.sensorID stringValue] startDate:requestCurrentDate endDate:config.endDate functionType:@"getNew" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                [httpComm sendHTTPPost:url timeout:1 dbTable:dbTableName sensorID:[sensor.sensorID stringValue] startDate:requestCurrentDate endDate:config.endDate insertData:nil functionType:@"getNew" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
                     if (error) {
                         NSLog(@"!!! ERROR1 !!!");

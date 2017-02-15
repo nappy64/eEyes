@@ -24,6 +24,8 @@
     HTTPComm *httpComm;
     ConfigManager *config;
     AllSensors *allSensors;
+    
+//    BOOL isGetDBInfo;
 }
 
 - (void)viewDidLoad {
@@ -55,7 +57,9 @@
     
     NSURL *url = [[NSURL alloc] initWithString:config.dbInfoAddress];
     
-    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    isGetDBInfo = false;
+    
+    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (error) {
             NSLog(@"!!! ERROR1 !!!");
@@ -68,9 +72,44 @@
             NSMutableDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
             
             [allSensors transferJSONToSensorsInfo:dataDictionary];
+            
+//            isGetDBInfo = true;
         }
     }];
     
+    // for test insert data function
+    /*
+    while (!isGetDBInfo) {
+        
+    }
+    
+    // test for HTTP insert
+    NSArray *allSensorsInfo;
+    allSensorsInfo = [allSensors getAllSensorsInfo];
+    
+    NSString *insertValue = @"123.4";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateStr = [dateFormatter stringFromDate:[NSDate date]];
+    
+    int SensorIndex = 0;
+    
+    Sensor *sensor = allSensorsInfo[SensorIndex];
+    NSString *averageDBName = sensor.dbAverageValueTable;
+    
+    url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
+    
+    [httpComm sendHTTPPost:url timeout:1 dbTable:averageDBName sensorID:@"1" startDate:dateStr endDate:nil insertData:insertValue functionType:@"insert" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"!!! ERROR1 !!!");
+            NSLog(@"HTTP Get Sensor Info. Faile : %@", error.localizedDescription);
+        }else {
+            
+        }
+    }];
+    */
 }
 
 

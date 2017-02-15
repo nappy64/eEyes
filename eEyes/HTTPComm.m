@@ -35,7 +35,7 @@ static HTTPComm *_singletonHTTPComm = nil;
     [task resume];
 }
 
-- (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout dbTable:(NSString*)dbTable sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate functionType:(NSString*)functionType completion:(DoneHandler)doneHandler {
+- (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout dbTable:(NSString*)dbTable sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate insertData:(NSString*)insertData functionType:(NSString*)functionType completion:(DoneHandler)doneHandler {
     
     // initial ConfigManager singleton
     ConfigManager *config = [ConfigManager sharedInstance];
@@ -53,6 +53,8 @@ static HTTPComm *_singletonHTTPComm = nil;
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":@"SensorRawData", @"field":@"RawValue", @"sensorID":sensorID, @"datefield":@"StartDate", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
     } else if([functionType isEqualToString:@"getSensorByUser"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName,@"appUserName":config.appUserName, @"appPassword":config.appPassword, @"type":functionType};
+    } else if([functionType isEqualToString:@"insert"]) {
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"Value", @"datefield":@"Date", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
     }
     
     NSMutableString *parameterString = [NSMutableString string];

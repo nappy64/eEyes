@@ -15,6 +15,6 @@ typedef void (^DoneHandler)(NSData *data, NSURLResponse *response, NSError *erro
 + (instancetype) sharedInstance;
 
 - (void) sendHTTPGet:(NSURL*) url completion:(DoneHandler) doneHandler;
-- (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout dbTable:(NSString*)dbTable sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate functionType:(NSString*)functionType completion:(DoneHandler)doneHandler;
+- (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout dbTable:(NSString*)dbTable sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate insertData:(NSString*)insertData functionType:(NSString*)functionType completion:(DoneHandler)doneHandler;
 
 @end

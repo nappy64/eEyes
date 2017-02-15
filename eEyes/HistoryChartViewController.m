@@ -84,7 +84,7 @@
             
             displayCount += 1;
             
-            [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:[sensor.sensorID stringValue] startDate:config.startDate endDate:config.endDate functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+            [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:[sensor.sensorID stringValue] startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
                 if (error) {
                     NSLog(@"!!! ERROR1 !!!");
@@ -144,8 +144,12 @@
 - (void) drawHistoryChart {
     
     _historyChartView.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
+//    
+//    ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
     
-    ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
+    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, _historyChartView.bounds.size.height-48);
+    
+    ccc = [[DVLineChartView alloc] initWithFrame:chartRect];
 
     [_historyChartView addSubview:ccc];
     
