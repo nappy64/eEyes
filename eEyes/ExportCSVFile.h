@@ -25,6 +25,7 @@
 @property NSString *fileNameSelected;
 + (instancetype) sharedInstance;
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
+                          fileName:(NSString*)fileName
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate;
 

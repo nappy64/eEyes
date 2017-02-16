@@ -19,10 +19,11 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
 }
 
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
+                          fileName:(NSString*)fileName
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate{
     httpComm = [HTTPComm sharedInstance];
-    NSURL *url = [[NSURL alloc] initWithString:@"http://192.168.43.119/dbSensorValue.php"];
+    NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
     
     [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:sensorID startDate:startDate endDate:endDate insertData:nil functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -62,16 +63,17 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
                 // fail to parse
                 NSLog(@"!!! parser range data error !!!");
             }
-            [self generateCSVData:startDate];
+            [self generateCSVData:startDate fileName:fileName];
         }
     }];
     
 }
 
 
-- (void) generateCSVData:(NSString*)startDate{
+- (void) generateCSVData:(NSString*)startDate
+                fileName:(NSString*) fileName{
     NSData *contentData = [csvString dataUsingEncoding:NSUTF8StringEncoding];
-    BOOL pass = [self createCSVFile:startDate dataOfContent:contentData];
+    BOOL pass = [self createCSVFile:fileName dataOfContent:contentData];
     NSLog(@"%d",pass);
 
 }

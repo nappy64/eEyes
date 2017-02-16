@@ -87,17 +87,9 @@
         
         //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
-    
-    UITableViewRowAction *chartAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Chart"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        
-        NSString *fileName = fileList[indexPath.row];
-        NSLog(@"%@",fileName);
-        exportCSVFile.fileNameSelected = fileName;
-        DrawCSVFileViewController *drawFileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DrawCSVFileViewController"];
-        [self showViewController:drawFileVC sender:nil];
-    }];
-    chartAction.backgroundColor = [UIColor grayColor];
-    return @[deleteAction, sendEmail, chartAction];
+
+
+    return @[deleteAction, sendEmail];
 }
 -(void) sendEmailWithAttachment:(NSString*)fileName{
     if (![MFMailComposeViewController canSendMail]) {
@@ -152,6 +144,16 @@
     //NSLog(@"%@",fullPath);
     BOOL result = [[NSFileManager defaultManager]removeItemAtPath:fullPath error:nil];
     NSLog(@"Delete:%d",result);
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *fileName = fileList[indexPath.row];
+    NSLog(@"%@",fileName);
+    exportCSVFile.fileNameSelected = fileName;
+    DrawCSVFileViewController *drawFileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DrawCSVFileViewController"];
+    [self showViewController:drawFileVC sender:nil];
+
+
+
 }
 
 
