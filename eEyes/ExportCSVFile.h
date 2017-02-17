@@ -12,15 +12,23 @@
 #import "XMLParserDelegate.h"
 #import "Sensor.h"
 #import "HistoryChartValues.h"
+#import "AllSensors.h"
+#import "ExportSensorItem.h"
+
 @interface ExportCSVFile : NSObject
 {
+    ExportSensorItem *sensorItem;
     Sensor *sensorInfo;
+    AllSensors *allSensors;
+    NSArray *allSensorsInfo;
     ConfigManager *config;
     HTTPComm *httpComm;
     NSMutableArray *objects;
-    NSMutableArray *values;
-    NSMutableArray *date;
     NSMutableString *csvString;
+    NSInteger sensorType;
+    NSString *finalFileName;
+    int displayCount;           // http send count
+
 }
 @property NSString *fileNameSelected;
 + (instancetype) sharedInstance;
