@@ -114,6 +114,7 @@
 		0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeChartViewController.m; sourceTree = "<group>"; };
 		0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChartView.h; sourceTree = "<group>"; };
 		0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealChartView.m; sourceTree = "<group>"; };
+		B06752331E587BBD008373EB /* eEyes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eEyes.entitlements; sourceTree = "<group>"; };
 		B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCSVFileViewController.h; sourceTree = "<group>"; };
 		B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCSVFileViewController.m; sourceTree = "<group>"; };
 		B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportSettingsViewController.h; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 		0BB21FD61E2533E600786F3A /* eEyes */ = {
 			isa = PBXGroup;
 			children = (
+				B06752331E587BBD008373EB /* eEyes.entitlements */,
 				0B4E40151E3237F600C07569 /* DVLineChartView */,
 				0BB21FDD1E2533E600786F3A /* ViewController.h */,
 				0BB21FDE1E2533E600786F3A /* ViewController.m */,
@@ -275,6 +277,14 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = R4D8ALW54Z;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -469,11 +479,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
 				DEVELOPMENT_TEAM = R4D8ALW54Z;
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -482,11 +493,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
 				DEVELOPMENT_TEAM = R4D8ALW54Z;
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

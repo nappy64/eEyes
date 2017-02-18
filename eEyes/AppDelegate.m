@@ -17,8 +17,39 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Ask user's permission of notification.
+    UIUserNotificationType type = UIUserNotificationTypeAlert | UIUserNotificationTypeSound |UIUserNotificationTypeBadge;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
+    // Ask device token from APNS
+    [application registerForRemoteNotifications];
     return YES;
 }
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSLog(@"DeviceToken: %@",deviceToken.description);
+    
+    NSString *finalDeviceToken = deviceToken.description;
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"finalDeviceToken: %@",finalDeviceToken);
+
+}
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError: %@",error);
+}
+
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"didReceiveRemoteNotification: %@",userInfo);
+    
+    // Post a notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

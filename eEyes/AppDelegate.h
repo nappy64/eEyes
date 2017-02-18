@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define DID_RECEIVE_REMOTE_NOTIFICATION @"DID_RECEIVE_REMOTE_NOTIFICATION"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
