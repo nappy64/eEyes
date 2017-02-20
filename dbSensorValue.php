@@ -65,6 +65,30 @@ if($type == "getRange" || $type == "getNew") {
     $insertdate = $_POST[insertdate];                    // 動作
     $db->query("INSERT INTO `$dbtable` (`$dbfield`, `$dbdatefield`) VALUES ('$insertdata', '$insertdate')");
     echo "pass".$insertdata." ".$insertdate." ";
+}else if($type == "updateDeviceToken") {
+    //  Check if device is already exist.
+    $insertdata = $_POST[insertdata];    
+    $insertdate = $_POST[insertdate];
+    //select * from deviceTokenList where UserName='$userName' and GroupName='$groupName'
+    // $res = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'");
+    //$res = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'");
+    $row = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'") -> fetch();
+
+
+    
+
+    if($row['id'] != ''){
+                // $sql = "update DeviceTokenList set
+                // DeviceToken = '$deviceToken',
+                // UserName = '$userName',            
+                // LastUpdateDateTime = now()
+                // where UserName='$userName' and GroupName='$groupName'";
+                $db->query("UPDATE `$dbtable` SET `UserName` = '$dbuser',`$dbdatefield` = '$insertdate' WHERE `$dbfield`='$insertdata'"); 
+            }else{
+                //  Upload DeviceToken
+                $db->query("INSERT INTO `$dbtable` (`UserName`,`$dbfield`, `$dbdatefield`) VALUES ('$dbuser','$insertdata', '$insertdate')");
+                echo "pass".$insertdata." ".$insertdate." ";
+            }
 }
 
 //  创建XML单项
