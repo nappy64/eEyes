@@ -89,6 +89,24 @@ if($type == "getRange" || $type == "getNew") {
                 $db->query("INSERT INTO `$dbtable` (`UserName`,`$dbfield`, `$dbdatefield`) VALUES ('$dbuser','$insertdata', '$insertdate')");
                 echo "pass".$insertdata." ".$insertdate." ";
             }
+}   else if($type == "insertAverage") {
+
+        // get json in data
+        $json = $_POST[data];
+
+        // parse json to array
+        $jsonParsed = json_decode($json);
+
+        // get table name and setup value and date field
+        $dbTable = $jsonParsed->dbAverageValueTable;
+
+        // get value and date to insert DB
+        foreach($jsonParsed->data as $mydata) {
+            $insertData = $mydata->value;   // get value
+            $insertDate = $mydata->date;    // get date
+            // insert DB
+            $db->query("INSERT INTO `$dbTable` (`$dbfield`, `$dbdatefield`) VALUES ('$insertData', '$insertDate')");
+        }
 }
 
 //  创建XML单项
