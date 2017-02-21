@@ -25,7 +25,7 @@
     ConfigManager *config;
     AllSensors *allSensors;
     
-//    BOOL isGetDBInfo;
+    BOOL isGetDBInfo;
 }
 
 - (void)viewDidLoad {
@@ -57,7 +57,7 @@
     
     NSURL *url = [[NSURL alloc] initWithString:config.dbInfoAddress];
     
-//    isGetDBInfo = false;
+    isGetDBInfo = false;
     
     [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getSensorByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -73,7 +73,7 @@
             
             [allSensors transferJSONToSensorsInfo:dataDictionary];
             
-//            isGetDBInfo = true;
+            isGetDBInfo = true;
         }
     }];
     
@@ -110,6 +110,32 @@
         }
     }];
     */
+    
+    
+    // test for HTTP insertAverage
+    /*
+    while (!isGetDBInfo) {
+        
+    }
+    // test for HTTP insertAverage
+    NSArray *allSensorsInfo;
+    allSensorsInfo = [allSensors getAllSensorsInfo];
+    
+    NSString *insertValue = @"{\"dbAverageValueTable\":\"AverageID10001\",\"dataCount\":6,\"data\":[{\"date\":\"2017-02-21 10:00:00\",\"value\":23.4},{\"date\":\"2017-02-21 10:01:00\",\"value\":23.4},{\"date\":\"2017-02-21 10:02:00\",\"value\":23.4},{\"date\":\"2017-02-21 10:03:00\",\"value\":23.4},{\"date\":\"2017-02-21 10:04:00\",\"value\":23.4},{\"date\":\"2017-02-21 10:05:00\",\"value\":23.4}]}";
+    
+    url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
+    
+    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:nil endDate:nil insertData:insertValue functionType:@"insertAverage" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"!!! ERROR1 !!!");
+            NSLog(@"HTTP Get Sensor Info. Faile : %@", error.localizedDescription);
+        }else {
+            NSLog(@"insert Average pass~");
+        }
+    }];
+    */
+    
 }
 
 

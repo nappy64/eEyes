@@ -58,6 +58,8 @@ static HTTPComm *_singletonHTTPComm = nil;
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"Value", @"datefield":@"Date", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
     } else if([functionType isEqualToString:@"updateDeviceToken"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"DeviceToken", @"datefield":@"LastUpdateDateTime", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
+    } else if([functionType isEqualToString:@"insertAverage"]) {
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"field":@"Value", @"datefield":@"Date", @"data":insertData, @"type":functionType};
     }
     
     NSMutableString *parameterString = [NSMutableString string];
