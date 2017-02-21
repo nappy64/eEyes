@@ -78,30 +78,33 @@
     ccc.height = 300;
     
     DVPlot *plot = [[DVPlot alloc] init];
-    //DVPlot *plot1 = [[DVPlot alloc] init];
-    //HistoryChartValues *hcv = [HistoryChartValues new];
     
-//    for(int i = 0; i < chartList.count; i++) {
-//        hcv = chartList[i];
     
-//        if(i == 0) {
+    
+    DVPlot *plot1 = [[DVPlot alloc] init];
+    HistoryChartValues *hcv = [HistoryChartValues new];
+    
+    for(int i = 0; i < chartList.count; i++) {
+        hcv = chartList[i];
+    
+        if(i == 0) {
             plot.pointArray = chartList[0];
             plot.lineColor = [UIColor colorWithHexString:@"2f7184"];
             plot.pointColor = [UIColor colorWithHexString:@"14b9d6"];
             plot.chartViewFill = YES;
             plot.withPoint = YES;
             [ccc addPlot:plot];
-//        } else {
-//            plot1.pointArray = hcv.values;
-//            plot1.lineColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
-//            plot1.pointColor = [UIColor whiteColor];
-//            plot1.chartViewFill = YES;
-//            plot1.withPoint = YES;
-//            [ccc addPlot:plot1];
-//        }
+        } else if (i == 2){
+            plot1.pointArray = chartList[2];
+            plot1.lineColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+            plot1.pointColor = [UIColor whiteColor];
+            plot1.chartViewFill = YES;
+            plot1.withPoint = YES;
+            [ccc addPlot:plot1];
+        }
     
         //NSLog(@"plat data %@",hcv.values[0]);
-    //}
+    }
     
     ccc.xAxisTitleArray = chartList[1];
     

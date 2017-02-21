@@ -10,6 +10,7 @@
 #import "ConfigManager.h"
 #import "Sensor.h"
 
+
 @implementation HTTPComm
 
 static HTTPComm *_singletonHTTPComm = nil;
@@ -55,6 +56,8 @@ static HTTPComm *_singletonHTTPComm = nil;
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName,@"appUserName":config.appUserName, @"appPassword":config.appPassword, @"type":functionType};
     } else if([functionType isEqualToString:@"insert"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"Value", @"datefield":@"Date", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
+    } else if([functionType isEqualToString:@"updateDeviceToken"]) {
+        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"DeviceToken", @"datefield":@"LastUpdateDateTime", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
     }
     
     NSMutableString *parameterString = [NSMutableString string];
@@ -79,5 +82,10 @@ static HTTPComm *_singletonHTTPComm = nil;
     // 9、执行任务
     [task resume];
 }
+
+
+
+
+
 
 @end

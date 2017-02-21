@@ -131,8 +131,28 @@
 }
 
 - (IBAction)saveBtnPressed:(id)sender{
+    UIAlertController *giveFileName = [UIAlertController alertControllerWithTitle:@"檔案名稱" message:@"請輸入檔案名稱" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [giveFileName addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"在此輸入檔名";
+        }];
+    UIAlertAction *save = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // Save CSV File
+        exportCSV = [ExportCSVFile new];
+        [exportCSV prepareDataForGenerateCSV:@"1"
+                                    fileName:giveFileName.textFields[0].text
+                                    startDate:startDateTextField.text
+                                     endDate:endDateTextField.text];
+       
+    }];
+    [giveFileName addAction:save];
+    [self presentViewController:giveFileName animated:true completion:nil];
+    
+    
+    /*
     exportCSV = [ExportCSVFile new];
     [exportCSV prepareDataForGenerateCSV:@"1" startDate:startDateTextField.text endDate:endDateTextField.text];
+     */
 
 }
 

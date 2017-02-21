@@ -7,9 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import "HTTPComm.h"
+#import "ConfigManager.h"
+
+#define CONNECT_TYPE_UPDATE_DEVICETOKEN @"updateDeviceToken"
+#define DB_DEVICETOKEN @"deviceToken"
+#define CONNECT_FOR_MOBILE @"http://192.168.100.178/dbSensorValue.php"
+
 
 @interface AppDelegate ()
-
+{
+    ConfigManager *config;
+    HTTPComm *httpComm;
+}
 @end
 
 @implementation AppDelegate
@@ -17,7 +27,82 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Ask user's permission of notification.
+    UIUserNotificationType type = UIUserNotificationTypeAlert | UIUserNotificationTypeSound |UIUserNotificationTypeBadge;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
+    // Ask device token from APNS
+    [application registerForRemoteNotifications];
     return YES;
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSLog(@"DeviceToken: %@",deviceToken.description);
+    
+    NSString *finalDeviceToken = deviceToken.description;
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"finalDeviceToken: %@",finalDeviceToken);
+    
+    // Upload DeviceToken
+    httpComm = [HTTPComm sharedInstance];
+    config = [ConfigManager sharedInstance];
+    NSURL *url = [[NSURL alloc] initWithString:CONNECT_FOR_MOBILE];
+    
+    // Date Record
+    NSDate *currentDate=[NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    NSString *currentDateString = [formatter stringFromDate:currentDate];
+    NSLog(@"currentDate=%@", currentDateString);
+
+    [httpComm sendHTTPPost:url
+                   timeout:10
+                   dbTable:DB_DEVICETOKEN
+                  sensorID:nil
+                 startDate:currentDateString
+                   endDate:nil
+                insertData:finalDeviceToken
+              functionType:CONNECT_TYPE_UPDATE_DEVICETOKEN
+                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if(error){
+                        NSLog(@"%@",error);
+                    }else{
+                        NSLog(@"Response %@",response);
+                        //NSLog(@"Success %@",finalDeviceToken);
+                    }
+                }];
+    
+
+}
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError: %@",error);
+}
+
+/*
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"didReceiveRemoteNotification: %@",userInfo);
+    
+    // Post a notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
+}
+*/
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    NSDictionary *aps = userInfo[@"aps"];
+    
+    if(aps[@"content-available"]){
+        
+    } else {
+        // Post a notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
+    
+    }
+
 }
 
 
