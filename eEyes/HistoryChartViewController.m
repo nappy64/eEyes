@@ -17,6 +17,15 @@
 #import "HistoryChartValues.h"
 #import "AllSensors.h"
 
+#define X_AXIS_GAP_STEP 5
+#define X_AXIS_MAX_GAP  100
+#define X_AXIS_MID_GAP  1.0
+#define X_AXIS_MIN_GAP  0.1
+
+#define Y_AXIS_GAP_STEP 5
+#define Y_AXIS_MAX_GAP  500
+#define Y_AXIS_MIN_GAP  1
+
 @interface HistoryChartViewController () <DVLineChartViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *historyChartView;
@@ -39,6 +48,9 @@
     
     int displayCount;           // http send count
     int compareDisplayCount;    // http receive count
+    
+    CGFloat xAxisGap;
+    CGFloat yAxisGap;
 }
 
 - (void)viewDidLoad {
@@ -54,6 +66,9 @@
     
     displayCount = 0;
     compareDisplayCount = 0;
+    
+    xAxisGap = 30;
+    yAxisGap = 100;
     
     if(config.isDisplayValueInHistoryChart) {
         _isDisplayRemarkButton.backgroundColor = [UIColor greenColor];
@@ -147,13 +162,16 @@
 //    
 //    ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
     
-    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, _historyChartView.bounds.size.height-48);
+//    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, _historyChartView.bounds.size.height-48);
+//    ccc = [[DVLineChartView alloc] initWithFrame:chartRect];
+//    [_historyChartView addSubview:ccc];
+//    ccc.width = _historyChartView.width;
     
+    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-48);
     ccc = [[DVLineChartView alloc] initWithFrame:chartRect];
-
+//    [self.view addSubview:ccc];
     [_historyChartView addSubview:ccc];
-    
-    ccc.width = _historyChartView.width;
+    ccc.width = self.view.bounds.size.width;
     
     // Y 座標刻度與左方的間距
     ccc.yAxisViewWidth = 52;
@@ -165,10 +183,10 @@
     ccc.pointUserInteractionEnabled = YES;
     
     // Y 軸最大值
-    ccc.yAxisMaxValue = 100;
+    ccc.yAxisMaxValue = yAxisGap;
     
     // 兩點間的 X 軸間距
-    ccc.pointGap = 30;
+    ccc.pointGap = xAxisGap;
     
     ccc.showSeparate = YES;
     ccc.separateColor = [UIColor colorWithHexString:@"67707c"];
@@ -216,18 +234,85 @@
 
 - (IBAction)xIncrementButtonTapped:(UIButton *)sender {
     
+    [ccc removeFromSuperview];
+    
+    if(xAxisGap >= X_AXIS_MAX_GAP) {
+        xAxisGap = X_AXIS_MAX_GAP;
+    } else if(xAxisGap < X_AXIS_MID_GAP && xAxisGap >= X_AXIS_MIN_GAP) {
+        xAxisGap += X_AXIS_MIN_GAP;
+    } else {
+        xAxisGap += X_AXIS_GAP_STEP;
+        
+        if(xAxisGap > X_AXIS_MAX_GAP) {
+            xAxisGap = X_AXIS_MAX_GAP;
+        }
+    }
+    
+    NSLog(@"xAxisGap : %f",xAxisGap);
+    
+    [self drawHistoryChart];
 }
 
 - (IBAction)xDecrementButtonTapped:(UIButton *)sender {
     
+    [ccc removeFromSuperview];
+    
+    if(xAxisGap <= X_AXIS_MIN_GAP) {
+        xAxisGap = X_AXIS_MIN_GAP;
+    } else if (xAxisGap > X_AXIS_MIN_GAP && xAxisGap <= X_AXIS_MID_GAP) {
+        xAxisGap -= X_AXIS_MIN_GAP;
+        if(xAxisGap <= X_AXIS_MIN_GAP) {
+            xAxisGap = X_AXIS_MIN_GAP;
+        }
+    } else {
+        xAxisGap -= X_AXIS_GAP_STEP;
+        
+        if(xAxisGap < X_AXIS_MIN_GAP) {
+            xAxisGap = X_AXIS_MID_GAP;
+        }
+    }
+    
+    NSLog(@"xAxisGap : %f",xAxisGap);
+    
+    [self drawHistoryChart];
 }
 
 - (IBAction)yIncrementButtonTapped:(UIButton *)sender {
     
+    [ccc removeFromSuperview];
+    
+    if(yAxisGap >= Y_AXIS_MAX_GAP) {
+        yAxisGap = Y_AXIS_MAX_GAP;
+    } else {
+        yAxisGap += Y_AXIS_GAP_STEP;
+        
+        if(yAxisGap > Y_AXIS_MAX_GAP) {
+            yAxisGap = Y_AXIS_MAX_GAP;
+        }
+    }
+    
+    NSLog(@"yAxisGap : %f",yAxisGap);
+    
+    [self drawHistoryChart];
 }
 
 - (IBAction)yDecrementButtonTapped:(UIButton *)sender {
     
+    [ccc removeFromSuperview];
+    
+    if(yAxisGap <= Y_AXIS_MIN_GAP) {
+        yAxisGap = Y_AXIS_MIN_GAP;
+    } else {
+        yAxisGap -= Y_AXIS_GAP_STEP;
+        
+        if(yAxisGap < Y_AXIS_MIN_GAP) {
+            yAxisGap = Y_AXIS_MIN_GAP;
+        }
+    }
+    
+    NSLog(@"yAxisGap : %f",yAxisGap);
+    
+    [self drawHistoryChart];
 }
 
 - (IBAction)displayRemarkButtonTapped:(UIButton *)sender {
