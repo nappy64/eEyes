@@ -76,6 +76,7 @@
                         //NSLog(@"Success %@",finalDeviceToken);
                     }
                 }];
+    [self getDataToAverage];
     
 
 }
@@ -131,6 +132,32 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)getDataToAverage{
+    httpComm = [HTTPComm sharedInstance];
+    NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
+    //NSURL *url = [NSURL URLWithString:CONNECT_FOR_MOBILE];
+    [httpComm sendHTTPPost:url
+                   timeout:10
+                   dbTable:nil
+                  sensorID:@"1"
+                 startDate:@"2017-01-25 21:00:14"
+                   endDate:@"2017-01-25 01:59:14"
+                insertData:nil
+              functionType:@"getRange"
+                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    NSString *dataString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                    NSLog(@"%@",dataString);
+                }];
+
+
+}
+
+- (void)uploadAverageData{
+
+}
+
+
 
 
 @end

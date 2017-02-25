@@ -7,8 +7,13 @@
 //
 
 #import "AlarmTableViewController.h"
+#import "HTTPComm.h"
+#import "RegularAction.h"
 
 @interface AlarmTableViewController ()
+{
+    RegularAction *ra;
+}
 
 @end
 
@@ -16,7 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    ra= [RegularAction new];
+    [ra getDataToAverage:@"2017-01-25 21:00:14.111" withEndDate:@"2017-01-25 21:59:14.222"];
+    [ra dataToJSON];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -40,6 +47,9 @@
 #warning Incomplete implementation, return the number of rows
     return 0;
 }
+
+
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
