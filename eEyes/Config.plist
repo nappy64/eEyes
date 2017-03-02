@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>dbMainAddress</key>
-	<string>http://192.168.0.110</string>
+	<string>http://127.0.0.1</string>
 	<key>dbInfoAddress</key>
-	<string>http://192.168.0.110/dbInfo.php</string>
+	<string>http://127.0.0.1/dbInfo.php</string>
 	<key>dbSensorValueAddress</key>
-	<string>http://192.168.0.110/dbSensorValue.php</string>
+	<string>http://127.0.0.1/dbSensorValue.php</string>
 	<key>dbRegisterAddress</key>
-	<string>http://192.168.0.110/register.php</string>
+	<string>http://127.0.0.1/register.php</string>
 	<key>dbUserName</key>
 	<string>root</string>
 	<key>dbPassword</key>
