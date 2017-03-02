@@ -16,8 +16,8 @@
 #define DATAKEY @"data"
 #define AVERAGEID10001 @"AverageID10001"
 #define AVERAGEID10002 @"AverageID10002"
-#define CONNECTURL @"http://127.0.0.1/dbSensorValue.php"
-
+#define CONNECTURL @"http://192.168.0.110/dbSensorValue.php"
+#define INTERNET_TIMEOUT 30
 
 @implementation RegularAction
 {
@@ -70,7 +70,7 @@ static RegularAction *_singletonRegularAction = nil;
         displayCount += 1;
         
         [httpComm sendHTTPPost:url
-                       timeout:5
+                       timeout:INTERNET_TIMEOUT
                        dbTable:nil
                       sensorID:[sensor.sensorID stringValue]
                      startDate:startDate
@@ -260,14 +260,28 @@ static RegularAction *_singletonRegularAction = nil;
     
     NSURL *url = [[NSURL alloc] initWithString:CONNECTURL];
     
-    int SensorIndex = 0;
+    //int SensorIndex = 0;
     
-    Sensor *sensor = allSensorsInfo[SensorIndex];
-    NSString *averageDBName = sensor.dbAverageValueTable;
+    //Sensor *sensor = allSensorsInfo[SensorIndex];
+    //NSString *averageDBName = sensor.dbAverageValueTable;
     
+    [httpComm uploadAverageToServer:url
+                            timeout:INTERNET_TIMEOUT
+                         insertData:jsonString
+                       functionType:@"insertAverage"
+                         completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                             if (error) {
+                                 NSLog(@"!!! ERROR1 !!!");
+                                 NSLog(@"HTTP Get Sensor Info. Failed : %@", error.localizedDescription);
+                             }else {
+                                 NSLog(@"%@",response);
+                                 NSLog(@"insert Average pass~");
+                             }
+                         }];
     
+    /*
     [httpComm sendHTTPPost:url
-                   timeout:1
+                   timeout:INTERNET_TIMEOUT
                    dbTable:averageDBName
                   sensorID:@"1"
                  startDate:nil
@@ -281,14 +295,11 @@ static RegularAction *_singletonRegularAction = nil;
                     }else {
                         NSLog(@"%@",response);
                         NSLog(@"insert Average pass~");
-                    }
-                    
+                    } 
                 }];
-    
-    
-    
-    
+     */
 }
+
 
 
 

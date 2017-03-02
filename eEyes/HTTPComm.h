@@ -10,11 +10,17 @@
 
 typedef void (^DoneHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
-@interface HTTPComm : NSObject
+@interface HTTPComm : NSObject<NSURLSessionDelegate>
 
 + (instancetype) sharedInstance;
 
 - (void) sendHTTPGet:(NSURL*) url completion:(DoneHandler) doneHandler;
 - (void) sendHTTPPost:(NSURL*)url timeout:(NSTimeInterval)timeout dbTable:(NSString*)dbTable sensorID:(NSString*)sensorID startDate:(NSString*)startDate endDate:(NSString*)endDate insertData:(NSString*)insertData functionType:(NSString*)functionType completion:(DoneHandler)doneHandler;
+
+- (void)uploadAverageToServer:(NSURL*)url
+                      timeout:(NSTimeInterval)timeout
+                   insertData:(NSString*)insertData
+                 functionType:(NSString*)functionType
+                   completion:(DoneHandler)doneHandler;
 
 @end
