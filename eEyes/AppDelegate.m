@@ -9,16 +9,18 @@
 #import "AppDelegate.h"
 #import "HTTPComm.h"
 #import "ConfigManager.h"
+#import "RegularAction.h"
 
 #define CONNECT_TYPE_UPDATE_DEVICETOKEN @"updateDeviceToken"
 #define DB_DEVICETOKEN @"deviceToken"
-#define CONNECT_FOR_MOBILE @"http://192.168.100.178/dbSensorValue.php"
+#define CONNECT_FOR_MOBILE @"http://192.168.0.110/dbSensorValue.php"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<NSURLSessionDelegate>
 {
     ConfigManager *config;
     HTTPComm *httpComm;
+    RegularAction *ra;
 }
 @end
 
@@ -76,6 +78,7 @@
                         //NSLog(@"Success %@",finalDeviceToken);
                     }
                 }];
+    [self getDataToAverage];
     
 
 }
@@ -83,28 +86,27 @@
     NSLog(@"didFailToRegisterForRemoteNotificationsWithError: %@",error);
 }
 
-/*
-- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSLog(@"didReceiveRemoteNotification: %@",userInfo);
-    
-    // Post a notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
-}
-*/
 
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSDictionary *aps = userInfo[@"aps"];
     
     if(aps[@"content-available"]){
-        
+        ra= [RegularAction new];
+        [ra getDataToAverage:@"2017-01-25 21:00:14.111" withEndDate:@"2017-01-25 21:59:14.222"];
+        NSLog(@"HERE");
+        [ra dataToJSON];
     } else {
         // Post a notification
         [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
+        
+    }}
+
+/*
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
-    }
 
 }
-
+*/
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -131,6 +133,43 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)getDataToAverage{
+    httpComm = [HTTPComm sharedInstance];
+    NSURL *url = [[NSURL alloc] initWithString:CONNECT_FOR_MOBILE];
+    //NSURL *url = [NSURL URLWithString:CONNECT_FOR_MOBILE];
+    [httpComm sendHTTPPost:url
+                   timeout:10
+                   dbTable:nil
+                  sensorID:@"1"
+                 startDate:@"2017-01-25 21:00:14"
+                   endDate:@"2017-01-25 01:59:14"
+                insertData:nil
+              functionType:@"getRange"
+                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    NSString *dataString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                    NSLog(@"%@",dataString);
+                }];
+
+
+}
+
+    
+-(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler{
+
+}
+
+-(void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session{
+
+
+}
+
+
+- (void)uploadAverageData{
+
+}
+
+
 
 
 @end

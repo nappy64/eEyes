@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTTPComm.h"
+#import "AllSensors.h"
+#import "ConfigManager.h"
+#import "XMLParserDelegate.h"
+#import "Sensor.h"
 
 @interface RegularAction : NSObject
+
++ (instancetype) sharedInstance;
+
+- (void)getDataToAverage:(NSString*)startDate withEndDate:(NSString*)endDate;
+
+- (void)uploadAverageValue;
+
+-(void) dataToJSON;
+
 
 @end

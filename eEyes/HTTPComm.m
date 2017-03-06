@@ -10,6 +10,7 @@
 #import "ConfigManager.h"
 #import "Sensor.h"
 
+#define HTTPMAXIMUM_PER_HOST 5
 
 @implementation HTTPComm
 
@@ -84,6 +85,65 @@ static HTTPComm *_singletonHTTPComm = nil;
     // 9、执行任务
     [task resume];
 }
+- (void)uploadAverageToServer:(NSURL*)url
+                      timeout:(NSTimeInterval)timeout
+                   insertData:(NSString*)insertData
+                 functionType:(NSString*)functionType
+                   completion:(DoneHandler)doneHandler {
+    
+    // initial ConfigManager singleton
+    ConfigManager *config = [ConfigManager sharedInstance];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    request.timeoutInterval = timeout;
+    request.HTTPMethod = @"POST";
+    
+    NSDictionary *parametersDict;
+    if([functionType isEqualToString:@"insertAverage"]) {
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"field":@"Value",
+                           @"datefield":@"Date",
+                           @"data":insertData,
+                           @"type":functionType};
+    }
+    NSMutableString *parameterString = [NSMutableString string];
+    
+    for (NSString *key in parametersDict.allKeys) {
+        
+        [parameterString appendFormat:@"%@=%@&", key, parametersDict[key]];
+    }
+    // 4.3、截取参数字符串，去掉最后一个“&”，并且将其转成NSData数据类型。
+    NSData *parametersData = [[parameterString substringToIndex:parameterString.length - 1] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // 5、设置请求报文
+    request.HTTPBody = parametersData;
+    // 6、构造NSURLSessionConfiguration
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"uploadAverageValue"];
+    
+    //configuration.HTTPMaximumConnectionsPerHost = HTTPMAXIMUM_PER_HOST;
+    
+    // 7、创建网络会话
+    //NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    
+    // 8、创建会话任务
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:nil];
+    
+    
+//    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        doneHandler(data, response, error);
+//    }];
+    // 9、执行任务
+    [task resume];
+
+}
+
+
+
 
 
 

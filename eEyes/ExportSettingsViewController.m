@@ -9,6 +9,10 @@
 #import "ExportSettingsViewController.h"
 
 @interface ExportSettingsViewController ()
+{
+    HTTPComm *httpComm;
+
+}
 @property(nonatomic,strong) UIDatePicker *datePicker;
 @end
 
@@ -22,6 +26,7 @@
     allSensors = [AllSensors sharedInstance];
     allSensorsInfo = [allSensors getAllSensorsInfo];
     sensorsButton = [NSMutableArray array];
+    
     
     // 準備導覽列上按鈕
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressConfirmButtonToGenerateCSV:)];
@@ -225,6 +230,10 @@
     ExportTableViewController *exportTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ExportTableViewController"];
     [self showViewController:exportTableViewController sender:nil];
 }
+
+// FOR TEST
+
+
 /*
  #pragma mark - Navigation
  
