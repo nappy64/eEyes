@@ -12,6 +12,11 @@
 
 @property (nonatomic, readonly, strong) NSMutableArray *values;
 
+@property CGFloat xScale;
+@property CGFloat yScale;
+
+@property bool isDisplayValue;
+
 - (void)updateValues:(NSMutableArray*)values;
 //- (void)draw;
 

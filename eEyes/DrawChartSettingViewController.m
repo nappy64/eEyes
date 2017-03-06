@@ -53,6 +53,11 @@
     // 放上導覽列
     self.navigationItem.rightBarButtonItems = @[addItem];
     
+    [self placeSensorsAndDateSelectionOnView];
+}
+
+- (void) placeSensorsAndDateSelectionOnView {
+    
     Sensor *sensor = [Sensor new];
     
     CGFloat xIndex = 10;
@@ -70,24 +75,24 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         /*
-        if(isDisplayRealChart == true) {
-            if([[sensor.sensorID stringValue] isEqualToString:config.realChartSensorID]) {
-                button.selected = true;
-                button.backgroundColor = [UIColor greenColor];
-            } else {
-                button.selected = false;
-                button.backgroundColor = [UIColor grayColor];
-            }
-        } else {
-            if(sensor.isSelected) {
-                button.selected = true;
-                button.backgroundColor = [UIColor greenColor];
-            } else {
-                button.selected = false;
-                button.backgroundColor = [UIColor grayColor];
-            }
-        }
-        */
+         if(isDisplayRealChart == true) {
+         if([[sensor.sensorID stringValue] isEqualToString:config.realChartSensorID]) {
+         button.selected = true;
+         button.backgroundColor = [UIColor greenColor];
+         } else {
+         button.selected = false;
+         button.backgroundColor = [UIColor grayColor];
+         }
+         } else {
+         if(sensor.isSelected) {
+         button.selected = true;
+         button.backgroundColor = [UIColor greenColor];
+         } else {
+         button.selected = false;
+         button.backgroundColor = [UIColor grayColor];
+         }
+         }
+         */
         
         if(sensor.isSelected) {
             button.selected = true;
@@ -243,6 +248,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    [self.view.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    
+    [self placeSensorsAndDateSelectionOnView];
 }
 
 /*
