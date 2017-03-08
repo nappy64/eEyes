@@ -18,6 +18,10 @@
 {
     NSMutableArray *chartList;
     ExportCSVFile *exportCSV;
+    AllSensors *allSensors;
+    NSArray *allSensorsInfo;
+    ConfigManager *config;
+    
 }
 @property (weak, nonatomic) IBOutlet UIView *historyChartView;
 
@@ -28,9 +32,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     exportCSV = [ExportCSVFile sharedInstance];
     chartList = [NSMutableArray array];
     chartList = [exportCSV transferCSVToArray:exportCSV.fileNameSelected];
+    allSensors = [AllSensors sharedInstance];
+    allSensorsInfo = [allSensors getAllSensorsInfo];
+    
     [self drawHistoryChart];
     
     

@@ -13,9 +13,5 @@
 
 
 @interface ExportTableViewController : UITableViewController
-{
-    ExportCSVFile *exportCSVFile;
-    NSMutableArray *fileList;
-    MFMailComposeViewController *mailComposer;
-}
+
 @end

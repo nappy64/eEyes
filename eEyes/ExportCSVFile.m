@@ -9,6 +9,20 @@
 #import "ExportCSVFile.h"
 
 @implementation ExportCSVFile
+{
+    ExportSensorItem *sensorItem;
+    Sensor *sensorInfo;
+    AllSensors *allSensors;
+    NSArray *allSensorsInfo;
+    ConfigManager *config;
+    HTTPComm *httpComm;
+    NSMutableArray *objects;
+    NSMutableString *csvString;
+    NSInteger sensorType;
+    NSString *finalFileName;
+    int displayCount;           // http send count
+    
+}
 
 static ExportCSVFile *_singletonExportCSVFile = nil;
 + (instancetype) sharedInstance{
@@ -17,17 +31,24 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
     }
     return _singletonExportCSVFile;
 }
+- (instancetype) init{
+    config = [ConfigManager sharedInstance];
+    
+    httpComm = [HTTPComm sharedInstance];
+    allSensors = [AllSensors sharedInstance];
+    allSensorsInfo = [allSensors getAllSensorsInfo];
+    sensorItem = [ExportSensorItem shareInstance];
+    objects = [NSMutableArray new];
+
+    return self;
+}
+
 
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
                           fileName:(NSString*)fileName
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate{
     finalFileName = fileName;
-    httpComm = [HTTPComm sharedInstance];
-    allSensors = [AllSensors sharedInstance];
-    allSensorsInfo = [allSensors getAllSensorsInfo];
-    sensorItem = [ExportSensorItem shareInstance];
-    objects = [NSMutableArray new];
     NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
     sensorInfo = [Sensor new];
     displayCount = 0;
@@ -83,9 +104,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
                                     //NSLog(@"A: %@",objects);
                                     NSLog(@"get XML count : %lu", (unsigned long)objects.count);
                                     if(objects.count > 0) {
-                                        
-                                        [self dataHandler];
-                                        
+                                            [self dataHandler];
                                         //NSLog(@"%@",csvString);
                                     } else {
                                         NSLog(@"??? no data in range %@ to %@ ???", startDate, endDate);
@@ -122,8 +141,8 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
         }
     }else if (sensorType == onlyHumid){
         if(displayCount == 2){
-        [self lineCSVStringUp];
-    
+            [self lineCSVStringUp];
+            
         }
     }
 }
@@ -228,12 +247,12 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
             [timeColumn addObject:row[4]];
             [humidValueColumn addObject:row[3]];
         }
-
+        
         
         
     }else if (sensorType == onlyTemp){
         NSString *csvCutTitle = [csvToString substringFromIndex:24];
-    
+        
         for (NSString *line in [csvCutTitle componentsSeparatedByString:@"\n"]){
             NSArray *row = [line componentsSeparatedByString:@","];
             
@@ -241,7 +260,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
             NSLog(@"%@",row[3]);
             [timeColumn addObject:row[3]];
         }
-
+        
     }else if (sensorType == onlyHumid){
         NSString *csvCutTitle = [csvToString substringFromIndex:21];
         for (NSString *line in [csvCutTitle componentsSeparatedByString:@"\n"]){
@@ -251,7 +270,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
             NSLog(@"%@",row[3]);
             [timeColumn addObject:row[3]];
         }
-   
+        
     }
     
     NSMutableArray *result = [NSMutableArray new];
@@ -262,23 +281,23 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
     }
     
     return result;
-
+    
     
     
     /*
-    // Remove Title
-    NSString *csvCutTitle = [csvToString substringFromIndex:18];
-    // Remove the last \n
-    //NSString *csvCut = [csvCutTitle substringToIndex:csvCutTitle.length-2];
-    //NSLog(@"%@",csvCutTitle);
-    for (NSString *line in [csvCutTitle componentsSeparatedByString:@"\n"]){
-        NSArray *row = [line componentsSeparatedByString:@","];
-        
-        [valueColumn addObject:row[2]];
-        //NSLog(@"%@",row[3]);
-        [timeColumn addObject:row[3]];
-    }
-    */
+     // Remove Title
+     NSString *csvCutTitle = [csvToString substringFromIndex:18];
+     // Remove the last \n
+     //NSString *csvCut = [csvCutTitle substringToIndex:csvCutTitle.length-2];
+     //NSLog(@"%@",csvCutTitle);
+     for (NSString *line in [csvCutTitle componentsSeparatedByString:@"\n"]){
+     NSArray *row = [line componentsSeparatedByString:@","];
+     
+     [valueColumn addObject:row[2]];
+     //NSLog(@"%@",row[3]);
+     [timeColumn addObject:row[3]];
+     }
+     */
     
     
 }
