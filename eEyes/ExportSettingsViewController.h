@@ -14,16 +14,6 @@
 #import "ExportTableViewController.h"
 
 @interface ExportSettingsViewController : UIViewController
-{
-    ExportCSVFile *exportCSV;
-    ConfigManager *config;
-    NSArray *allSensorsInfo;
-    AllSensors *allSensors;
-    BOOL isDisplayRealChart;
-    NSMutableArray *sensorsButton;
-    UITextField *startDateTextField;
-    UITextField *endDateTextField;
 
-}
 
 @end

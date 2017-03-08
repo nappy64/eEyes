@@ -16,22 +16,10 @@
 #import "ExportSensorItem.h"
 
 @interface ExportCSVFile : NSObject
-{
-    ExportSensorItem *sensorItem;
-    Sensor *sensorInfo;
-    AllSensors *allSensors;
-    NSArray *allSensorsInfo;
-    ConfigManager *config;
-    HTTPComm *httpComm;
-    NSMutableArray *objects;
-    NSMutableString *csvString;
-    NSInteger sensorType;
-    NSString *finalFileName;
-    int displayCount;           // http send count
 
-}
 @property NSString *fileNameSelected;
 + (instancetype) sharedInstance;
+- (instancetype) init;
 - (void) prepareDataForGenerateCSV:(NSString*) sensorID
                           fileName:(NSString*)fileName
                          startDate:(NSString*) startDate

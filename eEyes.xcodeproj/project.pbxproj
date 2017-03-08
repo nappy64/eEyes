@@ -31,7 +31,6 @@
 		0BB21FFF1E25352700786F3A /* RegularAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFE1E25352700786F3A /* RegularAction.m */; };
 		0BB220021E25356400786F3A /* AlarmTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220011E25356400786F3A /* AlarmTableViewController.m */; };
 		0BB220051E2535AD00786F3A /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220041E2535AD00786F3A /* ConfigTableViewController.m */; };
-		0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220071E2535E200786F3A /* ExportTableViewController.m */; };
 		0BB2200B1E25362D00786F3A /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */; };
 		0BD14BEF1E25FA800009F6C2 /* DrawChartTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */; };
 		0BD14BF61E2601130009F6C2 /* red-growth-chart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */; };
@@ -42,7 +41,10 @@
 		0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */; };
 		0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */; };
 		0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */; };
-		B0F51C911E489CC2008D8F9F /* DrawCSVFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */; };
+		B0B5B30D1E6DAA220031EDB7 /* temperature.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B5B30B1E6DAA220031EDB7 /* temperature.png */; };
+		B0B5B30E1E6DAA220031EDB7 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B5B30C1E6DAA220031EDB7 /* water.png */; };
+		B0D4FB731E6FB21100068092 /* DrawCSVFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4FB721E6FB21100068092 /* DrawCSVFileViewController.m */; };
+		B0D4FB761E6FB24700068092 /* ExportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4FB751E6FB24700068092 /* ExportTableViewController.m */; };
 		B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */; };
 		B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */; };
 		B0FBC50B1E5695DD005EC174 /* ExportSensorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBC50A1E5695DD005EC174 /* ExportSensorItem.m */; };
@@ -96,8 +98,6 @@
 		0BB220011E25356400786F3A /* AlarmTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmTableViewController.m; sourceTree = "<group>"; };
 		0BB220031E2535AD00786F3A /* ConfigTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewController.h; sourceTree = "<group>"; };
 		0BB220041E2535AD00786F3A /* ConfigTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewController.m; sourceTree = "<group>"; };
-		0BB220061E2535E200786F3A /* ExportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportTableViewController.h; sourceTree = "<group>"; };
-		0BB220071E2535E200786F3A /* ExportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTableViewController.m; sourceTree = "<group>"; };
 		0BB220091E25362D00786F3A /* XMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserDelegate.h; sourceTree = "<group>"; };
 		0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
 		0BD14BED1E25FA800009F6C2 /* DrawChartTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawChartTableViewController.h; sourceTree = "<group>"; };
@@ -115,8 +115,12 @@
 		0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChartView.h; sourceTree = "<group>"; };
 		0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealChartView.m; sourceTree = "<group>"; };
 		B06752331E587BBD008373EB /* eEyes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eEyes.entitlements; sourceTree = "<group>"; };
-		B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCSVFileViewController.h; sourceTree = "<group>"; };
-		B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCSVFileViewController.m; sourceTree = "<group>"; };
+		B0B5B30B1E6DAA220031EDB7 /* temperature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temperature.png; sourceTree = "<group>"; };
+		B0B5B30C1E6DAA220031EDB7 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
+		B0D4FB711E6FB21100068092 /* DrawCSVFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCSVFileViewController.h; sourceTree = "<group>"; };
+		B0D4FB721E6FB21100068092 /* DrawCSVFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCSVFileViewController.m; sourceTree = "<group>"; };
+		B0D4FB741E6FB24700068092 /* ExportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportTableViewController.h; sourceTree = "<group>"; };
+		B0D4FB751E6FB24700068092 /* ExportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTableViewController.m; sourceTree = "<group>"; };
 		B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportSettingsViewController.h; sourceTree = "<group>"; };
 		B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportSettingsViewController.m; sourceTree = "<group>"; };
 		B0FBC5091E5695DD005EC174 /* ExportSensorItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportSensorItem.h; sourceTree = "<group>"; };
@@ -208,10 +212,10 @@
 				B0FBC50A1E5695DD005EC174 /* ExportSensorItem.m */,
 				B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */,
 				B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */,
-				B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */,
-				B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */,
-				0BB220061E2535E200786F3A /* ExportTableViewController.h */,
-				0BB220071E2535E200786F3A /* ExportTableViewController.m */,
+				B0D4FB711E6FB21100068092 /* DrawCSVFileViewController.h */,
+				B0D4FB721E6FB21100068092 /* DrawCSVFileViewController.m */,
+				B0D4FB741E6FB24700068092 /* ExportTableViewController.h */,
+				B0D4FB751E6FB24700068092 /* ExportTableViewController.m */,
 				0BB21FF11E25344400786F3A /* HTTPComm.h */,
 				0BB21FF21E25344400786F3A /* HTTPComm.m */,
 				0BD14BFF1E262AAD0009F6C2 /* ReceiveTrigProcess.h */,
@@ -224,6 +228,8 @@
 				0BD14BFD1E2606240009F6C2 /* Sensor.m */,
 				0BB220091E25362D00786F3A /* XMLParserDelegate.h */,
 				0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */,
+				B0B5B30B1E6DAA220031EDB7 /* temperature.png */,
+				B0B5B30C1E6DAA220031EDB7 /* water.png */,
 				0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */,
 				0BD14BFA1E2602520009F6C2 /* red folder.jpg */,
 				0BD14BF31E2601130009F6C2 /* alarm.jpg */,
@@ -315,10 +321,12 @@
 				0BD14BF91E2601D10009F6C2 /* red config.png in Resources */,
 				0BB21FE71E2533E600786F3A /* LaunchScreen.storyboard in Resources */,
 				0BD14BF71E2601130009F6C2 /* alarm.jpg in Resources */,
+				B0B5B30D1E6DAA220031EDB7 /* temperature.png in Resources */,
 				0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */,
 				0BD14BF61E2601130009F6C2 /* red-growth-chart.jpg in Resources */,
 				0BB21FE41E2533E600786F3A /* Assets.xcassets in Resources */,
 				0BB21FE21E2533E600786F3A /* Main.storyboard in Resources */,
+				B0B5B30E1E6DAA220031EDB7 /* water.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +351,10 @@
 				0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */,
 				B0FBC50B1E5695DD005EC174 /* ExportSensorItem.m in Sources */,
 				0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */,
-				B0F51C911E489CC2008D8F9F /* DrawCSVFileViewController.m in Sources */,
 				0BB21FF01E25341F00786F3A /* ConfigManager.m in Sources */,
 				0B1E67861E3CDB2C00BFE8FC /* DrawChartSettingViewController.m in Sources */,
 				0BB21FDC1E2533E600786F3A /* AppDelegate.m in Sources */,
+				B0D4FB731E6FB21100068092 /* DrawCSVFileViewController.m in Sources */,
 				0B4E40201E3237F600C07569 /* DVXAxisView.m in Sources */,
 				0BB220021E25356400786F3A /* AlarmTableViewController.m in Sources */,
 				0BB21FF61E25346500786F3A /* DrawRealChart.m in Sources */,
@@ -355,10 +363,10 @@
 				0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */,
 				0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */,
 				B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */,
+				B0D4FB761E6FB24700068092 /* ExportTableViewController.m in Sources */,
 				0BB21FF91E25347F00786F3A /* DrawHitoryChart.m in Sources */,
 				0BB21FD91E2533E600786F3A /* main.m in Sources */,
 				0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */,
-				0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */,
 				0B1E67891E41B1D500BFE8FC /* HistoryChartValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,12 +504,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = "";
+=======
+				DEVELOPMENT_TEAM = R4D8ALW54Z;
+>>>>>>> dc771bc2529f490c0ab05ee3ed8a38a2868d922c
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "400b2741-c471-4cb8-98a8-55513ef9c774";
+				PROVISIONING_PROFILE_SPECIFIER = eEyes;
 			};
 			name = Release;
 		};

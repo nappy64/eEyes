@@ -10,7 +10,11 @@
 
 
 @interface ExportTableViewController ()<MFMailComposeViewControllerDelegate>
-
+{
+    ExportCSVFile *exportCSVFile;
+    NSMutableArray *fileList;
+    MFMailComposeViewController *mailComposer;
+}
 
 @end
 
@@ -138,6 +142,7 @@
 
 - (void)deleteFile:(NSString*)fileName{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
     // Create NSString object, that holds our exact path to the documents directory
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
