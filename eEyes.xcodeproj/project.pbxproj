@@ -275,8 +275,8 @@
 				TargetAttributes = {
 					0BB21FD31E2533E600786F3A = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 73GVGE766F;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = R4D8ALW54Z;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -480,12 +480,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
-				DEVELOPMENT_TEAM = 73GVGE766F;
+				DEVELOPMENT_TEAM = R4D8ALW54Z;
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "400b2741-c471-4cb8-98a8-55513ef9c774";
+				PROVISIONING_PROFILE_SPECIFIER = eEyes;
 			};
 			name = Debug;
 		};
@@ -494,11 +496,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
-				DEVELOPMENT_TEAM = 73GVGE766F;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
