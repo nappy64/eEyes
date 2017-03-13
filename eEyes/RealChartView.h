@@ -14,6 +14,7 @@
 
 @property CGFloat xScale;
 @property CGFloat yScale;
+@property double maxValue;
 
 @property bool isDisplayValue;
 

@@ -14,6 +14,7 @@
 @property NSString *dbInfoAddress;          // DB Info. Address
 @property NSString *dbSensorValueAddress;   // DB Sensor Value Address
 @property NSString *dbRegisterAddress;      // DB Register Address
+@property NSString *dbAlarmAddress;         // DB Alarm Address
 @property NSString *dbUserName;             // DB Username
 @property NSString *dbPassword;             // DB Password
 @property NSString *dbName;                 // DB Name
@@ -33,7 +34,12 @@
 - (void) resetAllConfig;
 - (void) getAllConfig;
 - (void) setAllConfig;
+- (void) savePlist;
 - (NSDictionary*) getConfigDictionary;
+- (NSDictionary*) getConfigText;
+- (NSArray*) getConfigKeys;
+- (void) setValueByKey:(NSString*)key value:(NSString*)value;
+
 //- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable;
 //- (bool) getDisplayRealTimeChartEnable;
 

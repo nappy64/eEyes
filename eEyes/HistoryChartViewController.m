@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *sensor1ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensor2ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensorDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
+
 
 @end
 
@@ -167,6 +169,10 @@
                 if (error) {
                     NSLog(@"!!! ERROR1 !!!");
                     NSLog(@"HTTP Get Range Data Faile : %@", error.localizedDescription);
+                    
+                    compareDisplayCount = displayCount;
+                    
+                    [self popoutWarningMessage:@"網路傳輸失敗！"];
                 }else {
                     
 //                    NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -188,10 +194,18 @@
                             [self setupData];
                         } else {
                             NSLog(@"??? no data in range %@ to %@ ???", config.startDate, config.endDate);
+                            
+                            compareDisplayCount = displayCount;
+                            
+                            [self popoutWarningMessage:@"時間範圍內無資料！"];
                         }
                     } else {
                         // fail to parse
                         NSLog(@"!!! parser range data error !!!");
+                        
+                        compareDisplayCount = displayCount;
+                        
+                        [self popoutWarningMessage:@"資料解析錯誤！"];
                     }
                 }
             }];
@@ -222,7 +236,6 @@
 
 - (void) drawHistoryChart {
     
-//    _historyChartView.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
     _historyChartView.backgroundColor = [UIColor whiteColor];
     
     CGRect chartRect = CGRectMake(0, 0, _historyChartView.bounds.size.width, _historyChartView.bounds.size.height);
@@ -252,7 +265,6 @@
     ccc.separateColor = [UIColor colorWithHexString:@"67707c"];
     
     ccc.textColor = [UIColor colorWithHexString:@"9aafc1"];
-//    ccc.backColor = [UIColor colorWithHexString:@"3e4a59"];
     ccc.backColor = [UIColor whiteColor];
     ccc.axisColor = [UIColor colorWithHexString:@"67707c"];
     
@@ -270,18 +282,14 @@
         
         if(i == 0) {
             plot.pointArray = hcv.values;
-//            plot.lineColor = [UIColor colorWithHexString:@"2f7184"];
             plot.lineColor = [UIColor orangeColor];
-//            plot.pointColor = [UIColor colorWithHexString:@"14b9d6"];
             plot.pointColor = [UIColor orangeColor];
 //            plot.chartViewFill = YES;
             plot.withPoint = YES;
             [ccc addPlot:plot];
         } else {
             plot1.pointArray = hcv.values;
-//            plot1.lineColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
             plot1.lineColor = [UIColor blueColor];
-//            plot1.pointColor = [UIColor whiteColor];
             plot1.pointColor = [UIColor blueColor];
 //            plot1.chartViewFill = YES;
             plot1.withPoint = YES;
@@ -293,25 +301,39 @@
     
     ccc.xAxisTitleArray = hcv.date;
     
+    _totalPointsLabel.text = [NSString stringWithFormat:@"%lu Points",(unsigned long)hcv.date.count];
+    
     ccc.xAxisViewX = 0;
     ccc.xAxisViewY = 0;
     ccc.xAxisViewW = dataCount * ccc.pointGap + 200;
     ccc.xAxisViewH = ccc.height;
-    //    ccc.xAxisViewH = 3;
     
     ccc.yAxisViewX = 0;
     ccc.yAxisViewY = 0;
     ccc.yAxisViewW = ccc.yAxisViewWidth;
     ccc.yAxisViewH = ccc.height;
-    //    ccc.yAxisViewH = 3;
     
     ccc.scrollViewX = ccc.yAxisViewWidth;
     ccc.scrollViewY = 0;
     ccc.scrollViewW = _historyChartView.width - ccc.yAxisViewW;
     ccc.scrollViewH = ccc.height;
-    //    ccc.scrollViewH = 3;
     
     [ccc draw];
+}
+
+- (void) popoutWarningMessage:(NSString*)message {
+    
+    // alert title
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"注意" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // confirm button
+    UIAlertAction* confirm = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:confirm];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)xIncrementButtonTapped:(UIButton *)sender {

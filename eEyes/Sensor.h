@@ -16,6 +16,9 @@
 @property (nonatomic, strong) NSNumber *value;
 @property (nonatomic, strong) NSString *date;
 
+@property float hiAlarm;
+@property float loAlarm;
+
 @property float latitude;
 @property float longitude;
 @property (nonatomic, strong) NSString *type;
@@ -26,6 +29,9 @@
 
 @property (nonatomic, strong) NSString *dbRealValueTable;
 @property (nonatomic, strong) NSString *dbAverageValueTable;
+
+@property float alarmValue;
+@property (nonatomic, strong) NSString *alarmType;
 
 @property bool isSelected;
 

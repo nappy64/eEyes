@@ -65,35 +65,57 @@ const CGFloat kYScale = 3.0;    // y scale
         return;
     }
     
+    // remove some subview from a cell
+    for (UILabel *obj in [self subviews]) {
+        if ([obj isKindOfClass:[UILabel class]]) {
+            [obj removeFromSuperview];
+        }
+    }
+    
     // y axis
     CGFloat yOffset = self.bounds.size.height;
     // create an affine transformation matrix
     CGAffineTransform transform = CGAffineTransformMake(_xScale,0,0,_yScale,0,yOffset);
     
-    /*
-    // the base line
-    // get current context
-    CGContextRef ctxCenter = UIGraphicsGetCurrentContext();
-    // path color
-    CGContextSetStrokeColorWithColor(ctxCenter, [UIColor blackColor].CGColor);
-    // path style rounded
-    CGContextSetLineJoin(ctxCenter, kCGLineJoinRound);
-    // path width
-    CGContextSetLineWidth(ctxCenter, 3);
-    // create new path
-    CGMutablePathRef pathCenter = CGPathCreateMutable();
+    for(int i = 0; i < 11; i++) {
     
-    // add first value in values to this path
-    CGPathMoveToPoint(pathCenter, &transform, 0, 0);
-    // add next point to this path
-    CGPathAddLineToPoint(pathCenter, &transform, self.bounds.size.width, 0);
-    // add the path to this context
-    CGContextAddPath(ctxCenter, pathCenter);
-    // release this path
-    CGPathRelease(pathCenter);
-    // close this path
-    CGContextStrokePath(ctxCenter);
-    */
+        CGFloat yOffset = (_maxValue / 10) * i;
+        
+        // the base line
+        // get current context
+        CGContextRef ctxCenter = UIGraphicsGetCurrentContext();
+        // path color
+        CGContextSetStrokeColorWithColor(ctxCenter, [UIColor grayColor].CGColor);
+        // path style rounded
+        CGContextSetLineJoin(ctxCenter, kCGLineJoinRound);
+        // path width
+        CGContextSetLineWidth(ctxCenter, 0.3);
+        // create new path
+        CGMutablePathRef pathCenter = CGPathCreateMutable();
+        
+        CGFloat y = 0 - yOffset;
+        
+        // add first value in values to this path
+        CGPathMoveToPoint(pathCenter, &transform, 0, y);
+        // add next point to this path
+        CGPathAddLineToPoint(pathCenter, &transform, self.bounds.size.width, y);
+        // add the path to this context
+        CGContextAddPath(ctxCenter, pathCenter);
+        // release this path
+        CGPathRelease(pathCenter);
+        // close this path
+        CGContextStrokePath(ctxCenter);
+        
+        CGRect frame = CGRectMake(0, (self.bounds.size.height/10)*i, 100, 15);
+        UILabel *label = [[UILabel alloc] initWithFrame:frame];
+        label.text = [NSString stringWithFormat: @"%.1f", _maxValue - yOffset];
+        [self addSubview:label];
+    }
+    
+    
+    
+    
+    
     NSMutableArray *oneChartValue = [NSMutableArray array];
     
     // realtime chart width
@@ -168,6 +190,8 @@ const CGFloat kYScale = 3.0;    // y scale
         // close this path
         CGContextStrokePath(ctx);
     }
+    
+    
 }
 
 @end

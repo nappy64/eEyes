@@ -29,7 +29,7 @@ if($type == "getSensorByUser") {
 
     // if username not existed
     if($userID == "") {
-        echo '{"result" : false,"errorCode":"USER_NAME_NOT_EXIST"}';
+        echo '{"result" : "false","errorCode":"USER_NAME_NOT_EXIST"}';
     } else {
 
         // get UserID by password
@@ -42,14 +42,16 @@ if($type == "getSensorByUser") {
 
         // if password incorrect
         if($userID == "") {
-            echo '{"result" : false,"errorCode":"USER_PASSWORD_INCORRECT"}';
+            echo '{"result" : "false","errorCode":"USER_PASSWORD_INCORRECT"}';
         } else {
-            $json = '{"result":true,"sensors":[';
+            $json = '{"result":"true","sensors":[';
             $sqlString = "SELECT * FROM `SensorInfo` WHERE (`UserID` = '$userID')";
 
             foreach ($db->query($sqlString) as $key => $value) {
                 $sensorID = $value["SensorID"];
                 $sensorName = $value["SensorName"];
+                $hiAlarm = $value["HiAlarmValue"];
+                $loAlarm = $value["LoAlarmValue"];
                 $latitude = $value["Latitude"];
                 $longitude = $value["Longitude"];
                 $sensorTypeID = $value["SensorType"];
@@ -77,7 +79,8 @@ if($type == "getSensorByUser") {
                     }
 
                     // combine JSON string
-                    $json = $json.'{"sensorID":'.$sensorID.',"sensorName":"'.$sensorName.'","latitude":'.$latitude.',"longitude":'.$longitude.',"sensorType":"'.$sensorType.'","rangeHi":'.$rangeHi.',"rangeLo":'.$rangeLo.',"unit":"'.$unit.'","description":"'.$description.'","dbRealValueTable":"'.$dbRealValueTable.'","dbAverageValueTable":"'.$dbAverageValueTable.'"},';
+                    // $json = $json.'{"sensorID":'.$sensorID.',"sensorName":"'.$sensorName.'","latitude":'.$latitude.',"longitude":'.$longitude.',"sensorType":"'.$sensorType.'","rangeHi":'.$rangeHi.',"rangeLo":'.$rangeLo.',"unit":"'.$unit.'","description":"'.$description.'","dbRealValueTable":"'.$dbRealValueTable.'","dbAverageValueTable":"'.$dbAverageValueTable.'"},';
+                    $json = $json.'{"sensorID":'.$sensorID.',"sensorName":"'.$sensorName .'","hiAlarm":'.$hiAlarm.',"loAlarm":'.$loAlarm .',"latitude":'.$latitude.',"longitude":'.$longitude.',"sensorType":"'.$sensorType.'","rangeHi":'.$rangeHi.',"rangeLo":'.$rangeLo.',"unit":"'.$unit.'","description":"'.$description.'","dbRealValueTable":"'.$dbRealValueTable.'","dbAverageValueTable":"'.$dbAverageValueTable.'"},';
                 }
             }
             // remove ','

@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *isAutoYAxisButton;
 @property (weak, nonatomic) IBOutlet UILabel *sensor1ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensor2ValueLabel;
+@property (weak, nonatomic) IBOutlet UITextField *yMaxRangeTextField;
 
 @end
 
@@ -54,6 +55,8 @@
     int systemCounter;
     
     CGFloat xScale;
+    
+    CGFloat yMaxValue;
 }
 
 - (void)viewDidLoad {
@@ -82,16 +85,9 @@
     compareDisplayCount = 0;
     
     xScale = 25;
+    yMaxValue = [_yMaxRangeTextField.text doubleValue];
     
     isDisplayValue = true;
-    
-//    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-48);
-    
-//    CGRect chartRect = CGRectMake(0, 0, _realChartView.bounds.size.width, _realChartView.bounds.size.height);
-    
-//    ccc = [[RealChartView alloc] initWithFrame:chartRect];
-//    
-//    [_realChartView addSubview:ccc];
     
     // create timer
     double delayInSeconds = 1.0;  // 1 秒畫一點
@@ -108,6 +104,7 @@
     // start timer
     dispatch_resume(_timer);
     
+//    [_isAutoYAxisButton setHidden:true];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -118,9 +115,9 @@
     
     ccc.xScale = xScale;
     
-    if(isYAxisAutoDetecting == false) {
-        ccc.yScale = 3;
-    }
+//    if(isYAxisAutoDetecting == false) {
+//        ccc.yScale = 3;
+//    }
     
     [_realChartView addSubview:ccc];
 }
@@ -144,7 +141,7 @@
     
     isWaitingResponse = true;
     
-    NSURL *url = [[NSURL alloc] initWithString:config.dbMainAddress];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     
     if(isNeedToUpdateRequestDate == true) {
         isNeedToUpdateRequestDate = false;
@@ -185,6 +182,9 @@
                         compareDisplayCount += 1;
                         
                         isBypassThisTimeRequest = true;
+                        
+                        [self popoutWarningMessage:@"網路傳輸失敗！"];
+                        
                     }else {
                         
                         NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -215,6 +215,7 @@
                             }
                         } else {
                             // fail to parse
+                            [self popoutWarningMessage:@"資料解析錯誤！"];
                         }
                         
                         isWaitingResponse = false;
@@ -227,27 +228,10 @@
             } else {
                 NSLog(@"!!! has bypass HTTP request !!!");
             }
-            
-            
         }
     }
     
 //    NSLog(@"888 setup data...%lu", (unsigned long)chartList.count);
-    
-//    if(chartList.count > 0) {
-    
-//        if(chartList.count == 1) {
-//            NSArray *value = chartList[0];
-//            NSLog(@"997 array count:%lu, value #0:%@", (unsigned long)value.count, value[0]);
-//        } else if(chartList.count == 2) {
-//            NSArray *value = chartList[0];
-//            NSLog(@"997 array count:%lu, value #0:%@", (unsigned long)value.count, value[0]);
-//            NSArray *value1 = chartList[1];
-//            NSLog(@"998 array count:%lu, value #1:%@", (unsigned long)value1.count, value1[0]);
-//        }
-        
-//        NSLog(@"999 chartList %lu update values", chartList.count);
-//    }
     
     if(chartList.count == selectedSensorCount) {
         
@@ -270,7 +254,12 @@
                     ccc.yScale = _realChartView.bounds.size.height / maxValue * 0.9;
                 }
             }
+            ccc.maxValue = maxValue / 0.9;
+        } else {
+            ccc.yScale = _realChartView.bounds.size.height / yMaxValue;
+            ccc.maxValue = yMaxValue;
         }
+        
         
         ccc.isDisplayValue = isDisplayValue;
         [ccc updateValues:chartList];
@@ -282,6 +271,22 @@
     
 //    chartList = nil;
     chartList = [NSMutableArray array];
+}
+
+
+- (void) popoutWarningMessage:(NSString*)message {
+    
+    // alert title
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"注意" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // confirm button
+    UIAlertAction* confirm = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:confirm];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) setupData {
@@ -366,16 +371,6 @@
 
 - (IBAction)xIncrementButtonTapped:(UIButton *)sender {
     
-//    [ccc removeFromSuperview];
-//    
-//    CGRect chartRect = CGRectMake(0, 0, _realChartView.bounds.size.width, _realChartView.bounds.size.height);
-//    ccc = [[RealChartView alloc] initWithFrame:chartRect];
-//    
-//    ccc.xScale = xScale;
-//    ccc.yScale = 3;
-//    
-//    [_realChartView addSubview:ccc];
-    
     if(xScale >= 50) {
         xScale = 50;
     } else {
@@ -405,14 +400,11 @@
         isDisplayValue = false;
         ccc.isDisplayValue = false;
         _isDisplayRemarkButton.backgroundColor = [UIColor grayColor];
-//        _isDisplayRemarkButton.titleLabel.textColor = [UIColor greenColor];
-//        [_isDisplayRemarkButton setTitleColor:[UIColor greenColor] forState:UIControlStateDisabled];
 
     } else {
         isDisplayValue = true;
         ccc.isDisplayValue = true;
         _isDisplayRemarkButton.backgroundColor = [UIColor greenColor];
-//        _isDisplayRemarkButton.titleLabel.textColor = [UIColor blueColor];
     }
 }
 
@@ -420,15 +412,15 @@
     
     if(isYAxisAutoDetecting == true) {
         isYAxisAutoDetecting = false;
-        _isAutoYAxisButton.backgroundColor = [UIColor grayColor];
-//        _isAutoYAxisButton.titleLabel.textColor = [UIColor greenColor];
-        
-        ccc.yScale = 3;
-    } else {
+        _isAutoYAxisButton.backgroundColor = [UIColor grayColor];    } else {
         isYAxisAutoDetecting = true;
         _isAutoYAxisButton.backgroundColor = [UIColor greenColor];
-//        _isAutoYAxisButton.titleLabel.textColor = [UIColor blueColor];
     }
+}
+
+- (IBAction)yMaxRangeModified:(id)sender {
+    
+    yMaxValue = [_yMaxRangeTextField.text doubleValue];
 }
 
 /*

@@ -35,7 +35,7 @@ if($type == "getRange" || $type == "getNew") {
 
             for($i = 0; $i < 60; $i++) {
                 // echo $xml2->Data[i]->attributes()->time;
-                $xml .= createXMLItem($value["ID"], $xml2->Data[$i]->attributes()->value, $xml2->Data[$i]->attributes()->time);    
+                $xml .= createXMLItem($value["ID"], $xml2->Data[$i]->attributes()->value, $xml2->Data[$i]->attributes()->time, $type);    
             }
 
             $index++;
@@ -63,6 +63,7 @@ if($type == "getRange" || $type == "getNew") {
     } else if($type == "insertAverage") {
 // http://localhost/dbSensorValueGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=Value&sensorID=2&datefield=Date&startdate=2017-01-25%2021:50:00&enddate=2017-01-25%2021:59:00&type=insertAverage&data={%20%22dbAverageValueTable%22:%22AverageID10001%22,%20%22dataCount%22:6,%20%22data%22:%20[%20{%22date%22:%222017-02-21%2010:00:00%22,%22value%22:23.4},%20{%22date%22:%222017-02-21%2010:01:00%22,%22value%22:23.4},%20{%22date%22:%222017-02-21%2010:02:00%22,%22value%22:23.4},%20{%22date%22:%222017-02-21%2010:03:00%22,%22value%22:23.4},%20{%22date%22:%222017-02-21%2010:04:00%22,%22value%22:23.4},%20{%22date%22:%222017-02-21%2010:05:00%22,%22value%22:23.4}%20]%20}
     $json = $_GET[data]; 
+    // $json = 
     // '{
     //  "dbAverageValueTable":"AverageID10001",
     //  "dataCount":6,
@@ -97,10 +98,17 @@ if($type == "getRange" || $type == "getNew") {
             // echo $insertDate;
         }
 
+        echo '{"result" : "true"}';
 }
 
 //  创建XML单项
-function createXMLItem($title_data, $content_data, $pubdate_data) {
+function createXMLItem($title_data, $content_data, $pubdate_data, $type) {
+
+    if($type == "getRange") {
+        $pubdate_data = substr_replace($pubdate_data, '', strlen($json)-4, 4);
+        $pubdate_data = substr_replace($pubdate_data, '', 0, 11);
+    }
+
     $item = "<item>\n";
     $item .= "<id>" . $title_data . "</id>\n";
     $item .= "<value>" . $content_data . "</value>\n";

@@ -18,6 +18,14 @@
 		0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40231E32380600C07569 /* UIColor+Hex.m */; };
 		0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40251E32380600C07569 /* UIView+Extension.m */; };
 		0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B7FD53E1E27D13200C7F0B6 /* Config.plist */; };
+		0BAB37F51E705509001ADCDD /* button alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37ED1E705509001ADCDD /* button alarm.png */; };
+		0BAB37F61E705509001ADCDD /* button chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37EE1E705509001ADCDD /* button chart.png */; };
+		0BAB37F71E705509001ADCDD /* button export.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37EF1E705509001ADCDD /* button export.png */; };
+		0BAB37F81E705509001ADCDD /* button setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37F01E705509001ADCDD /* button setting.png */; };
+		0BAB37F91E705509001ADCDD /* ipad-.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37F11E705509001ADCDD /* ipad-.png */; };
+		0BAB37FA1E705509001ADCDD /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37F21E705509001ADCDD /* ipad.png */; };
+		0BAB37FB1E705509001ADCDD /* iphone-.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37F31E705509001ADCDD /* iphone-.png */; };
+		0BAB37FC1E705509001ADCDD /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37F41E705509001ADCDD /* iphone.png */; };
 		0BB21FD91E2533E600786F3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FD81E2533E600786F3A /* main.m */; };
 		0BB21FDC1E2533E600786F3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FDB1E2533E600786F3A /* AppDelegate.m */; };
 		0BB21FDF1E2533E600786F3A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FDE1E2533E600786F3A /* ViewController.m */; };
@@ -34,14 +42,12 @@
 		0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220071E2535E200786F3A /* ExportTableViewController.m */; };
 		0BB2200B1E25362D00786F3A /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */; };
 		0BD14BEF1E25FA800009F6C2 /* DrawChartTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */; };
-		0BD14BF61E2601130009F6C2 /* red-growth-chart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */; };
-		0BD14BF71E2601130009F6C2 /* alarm.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD14BF31E2601130009F6C2 /* alarm.jpg */; };
-		0BD14BF91E2601D10009F6C2 /* red config.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BD14BF81E2601D10009F6C2 /* red config.png */; };
-		0BD14BFB1E2602520009F6C2 /* red folder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD14BFA1E2602520009F6C2 /* red folder.jpg */; };
 		0BD14BFE1E2606240009F6C2 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BFD1E2606240009F6C2 /* Sensor.m */; };
 		0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */; };
 		0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */; };
 		0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */; };
+		0BF9F04C1E73BDE400FBB13E /* AlarmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */; };
+		0BF9F0521E74513100FBB13E /* ConfigTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */; };
 		B0F51C911E489CC2008D8F9F /* DrawCSVFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */; };
 		B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */; };
 		B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */; };
@@ -70,6 +76,14 @@
 		0B4E40241E32380600C07569 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		0B4E40251E32380600C07569 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		0B7FD53E1E27D13200C7F0B6 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		0BAB37ED1E705509001ADCDD /* button alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button alarm.png"; sourceTree = "<group>"; };
+		0BAB37EE1E705509001ADCDD /* button chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button chart.png"; sourceTree = "<group>"; };
+		0BAB37EF1E705509001ADCDD /* button export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button export.png"; sourceTree = "<group>"; };
+		0BAB37F01E705509001ADCDD /* button setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button setting.png"; sourceTree = "<group>"; };
+		0BAB37F11E705509001ADCDD /* ipad-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-.png"; sourceTree = "<group>"; };
+		0BAB37F21E705509001ADCDD /* ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad.png; sourceTree = "<group>"; };
+		0BAB37F31E705509001ADCDD /* iphone-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-.png"; sourceTree = "<group>"; };
+		0BAB37F41E705509001ADCDD /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
 		0BB21FD41E2533E600786F3A /* eEyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eEyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BB21FD81E2533E600786F3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0BB21FDA1E2533E600786F3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -102,10 +116,6 @@
 		0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
 		0BD14BED1E25FA800009F6C2 /* DrawChartTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawChartTableViewController.h; sourceTree = "<group>"; };
 		0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawChartTableViewController.m; sourceTree = "<group>"; };
-		0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "red-growth-chart.jpg"; sourceTree = "<group>"; };
-		0BD14BF31E2601130009F6C2 /* alarm.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alarm.jpg; sourceTree = "<group>"; };
-		0BD14BF81E2601D10009F6C2 /* red config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red config.png"; sourceTree = "<group>"; };
-		0BD14BFA1E2602520009F6C2 /* red folder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "red folder.jpg"; sourceTree = "<group>"; };
 		0BD14BFC1E2606240009F6C2 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
 		0BD14BFD1E2606240009F6C2 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
 		0BD14BFF1E262AAD0009F6C2 /* ReceiveTrigProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveTrigProcess.h; sourceTree = "<group>"; };
@@ -114,6 +124,10 @@
 		0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeChartViewController.m; sourceTree = "<group>"; };
 		0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChartView.h; sourceTree = "<group>"; };
 		0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealChartView.m; sourceTree = "<group>"; };
+		0BF9F04A1E73BDE400FBB13E /* AlarmTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmTableViewCell.h; sourceTree = "<group>"; };
+		0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmTableViewCell.m; sourceTree = "<group>"; };
+		0BF9F0501E74513100FBB13E /* ConfigTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewCell.h; sourceTree = "<group>"; };
+		0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewCell.m; sourceTree = "<group>"; };
 		B06752331E587BBD008373EB /* eEyes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eEyes.entitlements; sourceTree = "<group>"; };
 		B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCSVFileViewController.h; sourceTree = "<group>"; };
 		B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCSVFileViewController.m; sourceTree = "<group>"; };
@@ -172,10 +186,7 @@
 		0BB21FD61E2533E600786F3A /* eEyes */ = {
 			isa = PBXGroup;
 			children = (
-				B06752331E587BBD008373EB /* eEyes.entitlements */,
 				0B4E40151E3237F600C07569 /* DVLineChartView */,
-				0BB21FDD1E2533E600786F3A /* ViewController.h */,
-				0BB21FDE1E2533E600786F3A /* ViewController.m */,
 				0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */,
 				0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */,
 				0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */,
@@ -186,16 +197,23 @@
 				0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */,
 				0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */,
 				0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */,
+				B06752331E587BBD008373EB /* eEyes.entitlements */,
+				0BB21FDD1E2533E600786F3A /* ViewController.h */,
+				0BB21FDE1E2533E600786F3A /* ViewController.m */,
 				0BB21FE01E2533E600786F3A /* Main.storyboard */,
 				0BB21FDA1E2533E600786F3A /* AppDelegate.h */,
 				0BB21FDB1E2533E600786F3A /* AppDelegate.m */,
 				0BB220001E25356400786F3A /* AlarmTableViewController.h */,
 				0BB220011E25356400786F3A /* AlarmTableViewController.m */,
+				0BF9F04A1E73BDE400FBB13E /* AlarmTableViewCell.h */,
+				0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */,
+				0BB220031E2535AD00786F3A /* ConfigTableViewController.h */,
+				0BB220041E2535AD00786F3A /* ConfigTableViewController.m */,
+				0BF9F0501E74513100FBB13E /* ConfigTableViewCell.h */,
+				0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */,
 				0BB21FEE1E25341F00786F3A /* ConfigManager.h */,
 				0BB21FEF1E25341F00786F3A /* ConfigManager.m */,
 				0B7FD53E1E27D13200C7F0B6 /* Config.plist */,
-				0BB220031E2535AD00786F3A /* ConfigTableViewController.h */,
-				0BB220041E2535AD00786F3A /* ConfigTableViewController.m */,
 				0BD14BED1E25FA800009F6C2 /* DrawChartTableViewController.h */,
 				0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */,
 				0BB21FF71E25347F00786F3A /* DrawHitoryChart.h */,
@@ -224,13 +242,17 @@
 				0BD14BFD1E2606240009F6C2 /* Sensor.m */,
 				0BB220091E25362D00786F3A /* XMLParserDelegate.h */,
 				0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */,
-				0BD14BF21E2601130009F6C2 /* red-growth-chart.jpg */,
-				0BD14BFA1E2602520009F6C2 /* red folder.jpg */,
-				0BD14BF31E2601130009F6C2 /* alarm.jpg */,
-				0BD14BF81E2601D10009F6C2 /* red config.png */,
 				0BB21FE31E2533E600786F3A /* Assets.xcassets */,
 				0BB21FE51E2533E600786F3A /* LaunchScreen.storyboard */,
 				0BB21FE81E2533E600786F3A /* Info.plist */,
+				0BAB37ED1E705509001ADCDD /* button alarm.png */,
+				0BAB37EE1E705509001ADCDD /* button chart.png */,
+				0BAB37EF1E705509001ADCDD /* button export.png */,
+				0BAB37F01E705509001ADCDD /* button setting.png */,
+				0BAB37F11E705509001ADCDD /* ipad-.png */,
+				0BAB37F21E705509001ADCDD /* ipad.png */,
+				0BAB37F31E705509001ADCDD /* iphone-.png */,
+				0BAB37F41E705509001ADCDD /* iphone.png */,
 				0BB21FD71E2533E600786F3A /* Supporting Files */,
 			);
 			path = eEyes;
@@ -275,8 +297,8 @@
 				TargetAttributes = {
 					0BB21FD31E2533E600786F3A = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 73GVGE766F;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = R4D8ALW54Z;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -311,14 +333,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BD14BFB1E2602520009F6C2 /* red folder.jpg in Resources */,
-				0BD14BF91E2601D10009F6C2 /* red config.png in Resources */,
+				0BAB37FB1E705509001ADCDD /* iphone-.png in Resources */,
 				0BB21FE71E2533E600786F3A /* LaunchScreen.storyboard in Resources */,
-				0BD14BF71E2601130009F6C2 /* alarm.jpg in Resources */,
+				0BAB37FA1E705509001ADCDD /* ipad.png in Resources */,
+				0BAB37F61E705509001ADCDD /* button chart.png in Resources */,
+				0BAB37FC1E705509001ADCDD /* iphone.png in Resources */,
+				0BAB37F51E705509001ADCDD /* button alarm.png in Resources */,
+				0BAB37F71E705509001ADCDD /* button export.png in Resources */,
 				0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */,
-				0BD14BF61E2601130009F6C2 /* red-growth-chart.jpg in Resources */,
 				0BB21FE41E2533E600786F3A /* Assets.xcassets in Resources */,
 				0BB21FE21E2533E600786F3A /* Main.storyboard in Resources */,
+				0BAB37F81E705509001ADCDD /* button setting.png in Resources */,
+				0BAB37F91E705509001ADCDD /* ipad-.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +360,7 @@
 				0B4E401E1E3237F600C07569 /* DVLineChartView.m in Sources */,
 				0BB2200B1E25362D00786F3A /* XMLParserDelegate.m in Sources */,
 				0BB21FF31E25344400786F3A /* HTTPComm.m in Sources */,
+				0BF9F0521E74513100FBB13E /* ConfigTableViewCell.m in Sources */,
 				0B4E40211E3237F600C07569 /* DVYAxisView.m in Sources */,
 				0B4E401F1E3237F600C07569 /* DVPlot.m in Sources */,
 				0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */,
@@ -360,6 +387,7 @@
 				0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */,
 				0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */,
 				0B1E67891E41B1D500BFE8FC /* HistoryChartValues.m in Sources */,
+				0BF9F04C1E73BDE400FBB13E /* AlarmTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,12 +508,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
-				DEVELOPMENT_TEAM = 73GVGE766F;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = R4D8ALW54Z;
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ce085a9e-6b5e-4586-934a-12d4360f5e91";
+				PROVISIONING_PROFILE_SPECIFIER = eEyesProfile;
 			};
 			name = Debug;
 		};
@@ -494,11 +525,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = eEyes/eEyes.entitlements;
-				DEVELOPMENT_TEAM = 73GVGE766F;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = eEyes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiahungchen.eEyes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

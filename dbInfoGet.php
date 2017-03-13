@@ -2,8 +2,6 @@
 
 error_reporting(0);
 
-// http://localhost/dbinfoGet.php?username=root&password=root&database=eEyes&appName=user&appPassword=password&type=getSensorByUser
-
 $dbhost = "localhost";             // 資料庫位置
 $dbuser = $_GET[username];         // 帳戶名稱
 $dbpass = $_GET[password];         // 帳戶密碼
@@ -18,6 +16,7 @@ $db->query("set names 'utf8'");     // 1. 設定連接的編碼
 $db->query("use `$dbname`");        // 2. 使用資料庫
 
 if($type == "getSensorByUser") {
+// http://localhost/dbinfoGet.php?username=root&password=root&database=eEyes&appUserName=user&appPassword=password&type=getSensorByUser
 
     // get UserID by user name
     $userID = "";
@@ -29,7 +28,7 @@ if($type == "getSensorByUser") {
 
     // if username not existed
     if($userID == "") {
-        echo '{"result" : false,"errorCode":"USER_NAME_NOT_EXIST"}';
+        echo '{"result" : "false","errorCode":"USER_NAME_NOT_EXIST"}';
     } else {
 
         // get UserID by password
@@ -42,14 +41,16 @@ if($type == "getSensorByUser") {
 
         // if password incorrect
         if($userID == "") {
-            echo '{"result" : false,"errorCode":"USER_PASSWORD_INCORRECT"}';
+            echo '{"result" : "false","errorCode":"USER_PASSWORD_INCORRECT"}';
         } else {
-            $json = '{"result":true,"sensors":[';
+            $json = '{"result":"true","sensors":[';
             $sqlString = "SELECT * FROM `SensorInfo` WHERE (`UserID` = '$userID')";
 
             foreach ($db->query($sqlString) as $key => $value) {
                 $sensorID = $value["SensorID"];
                 $sensorName = $value["SensorName"];
+                $hiAlarm = $value["HiAlarmValue"];
+                $loAlarm = $value["LoAlarmValue"];
                 $latitude = $value["Latitude"];
                 $longitude = $value["Longitude"];
                 $sensorTypeID = $value["SensorType"];
@@ -77,7 +78,7 @@ if($type == "getSensorByUser") {
                     }
 
                     // combine JSON string
-                    $json = $json.'{"sensorID":'.$sensorID.',"sensorName":"'.$sensorName.'","latitude":'.$latitude.',"longitude":'.$longitude.',"sensorType":"'.$sensorType.'","rangeHi":'.$rangeHi.',"rangeLo":'.$rangeLo.',"unit":"'.$unit.'","description":"'.$description.'","dbRealValueTable":"'.$dbRealValueTable.'","dbAverageValueTable":"'.$dbAverageValueTable.'"},';
+                    $json = $json.'{"sensorID":'.$sensorID.',"sensorName":"'.$sensorName .'","hiAlarm":'.$hiAlarm.',"loAlarm":'.$loAlarm .',"latitude":'.$latitude.',"longitude":'.$longitude.',"sensorType":"'.$sensorType.'","rangeHi":'.$rangeHi.',"rangeLo":'.$rangeLo.',"unit":"'.$unit.'","description":"'.$description.'","dbRealValueTable":"'.$dbRealValueTable.'","dbAverageValueTable":"'.$dbAverageValueTable.'"},';
                 }
             }
             // remove ','
@@ -88,6 +89,32 @@ if($type == "getSensorByUser") {
         }
     }
     
+} else if($type == "setHiLoAlarm") {
+
+// http://localhost/dbInfoGet.php?username=root&password=root&database=eEyes&sensorID=2&type=setHiLoAlarm&data={"sensorID":1,"hiAlarm":56,"loAlarm":15}
+// http://localhost/dbInfoGet.php?username=root&password=root&database=eEyes&sensorID=2&type=setHiLoAlarm&data={"sensorID":2,"hiAlarm":90,"loAlarm":50}
+    $json = $_GET[data]; 
+    // '{
+    //  "sensorID":1,
+    //  "hiAlarm":56,
+    //  "loAlarm":15
+    // }'; 
+
+    // parse json to array
+    $jsonParsed = json_decode($json);
+
+    // get table name and setup value and date field
+    $sensorID = $jsonParsed->sensorID;
+    $hiAlarm = $jsonParsed->hiAlarm;
+    $loAlarm = $jsonParsed->loAlarm;
+    // update DB
+    $db->query("UPDATE `SensorInfo` SET `HiAlarmValue`='$hiAlarm', `LoAlarmValue`='$loAlarm' WHERE `SensorID`='$sensorID'");
+    // UPDATE `SensorInfo` SET `HiAlarmValue`='100',`LoAlarmValue`='0' WHERE `SensorID`='1'
+
+            // echo $json;
+            // echo $sensorID;
+            // echo $hiAlarm;
+            // echo $loAlarm;
 }
 
 ?>

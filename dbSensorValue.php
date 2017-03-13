@@ -40,7 +40,7 @@ if($type == "getRange" || $type == "getNew") {
 
             for($i = 0; $i < 60; $i++) {
                 // echo $xml2->Data[i]->attributes()->time;
-                $xml .= createXMLItem($value["ID"], $xml2->Data[$i]->attributes()->value, $xml2->Data[$i]->attributes()->time);    
+                $xml .= createXMLItem($value["ID"], $xml2->Data[$i]->attributes()->value, $xml2->Data[$i]->attributes()->time, $type);    
             }
 
             $index++;
@@ -107,10 +107,19 @@ if($type == "getRange" || $type == "getNew") {
             // insert DB
             $db->query("INSERT INTO `$dbTable` (`$dbfield`, `$dbdatefield`) VALUES ('$insertData', '$insertDate')");
         }
+        
+        // return result
+        echo '{"result" : "true"}';
 }
 
 //  创建XML单项
-function createXMLItem($title_data, $content_data, $pubdate_data) {
+function createXMLItem($title_data, $content_data, $pubdate_data, $type) {
+
+    if($type == "getRange") {
+        $pubdate_data = substr_replace($pubdate_data, '', strlen($json)-4, 4);
+        $pubdate_data = substr_replace($pubdate_data, '', 0, 11);
+    }
+    
     $item = "<item>\n";
     $item .= "<id>" . $title_data . "</id>\n";
     $item .= "<value>" . $content_data . "</value>\n";

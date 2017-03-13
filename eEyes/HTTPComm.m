@@ -53,7 +53,7 @@ static HTTPComm *_singletonHTTPComm = nil;
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"RealValue", @"sensorID":sensorID, @"datefield":@"Date", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
     } else if([functionType isEqualToString:@"getRange"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":@"SensorRawData", @"field":@"RawValue", @"sensorID":sensorID, @"datefield":@"StartDate", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
-    } else if([functionType isEqualToString:@"getSensorByUser"]) {
+    } else if([functionType isEqualToString:@"getSensorByUser"] || [functionType isEqualToString:@"getAlarmByUser"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName,@"appUserName":config.appUserName, @"appPassword":config.appPassword, @"type":functionType};
     } else if([functionType isEqualToString:@"insert"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"Value", @"datefield":@"Date", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};

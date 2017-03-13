@@ -37,6 +37,10 @@ static AllSensors *_singletonAllSensors = nil;
         // createa FriendsItem for the following need
         currentSensor.sensorID = sensorInfo[@"sensorID"];
         currentSensor.name = sensorInfo[@"sensorName"];
+        
+        currentSensor.hiAlarm = [sensorInfo[@"hiAlarm"] floatValue];
+        currentSensor.loAlarm = [sensorInfo[@"loAlarm"] floatValue];
+        
         currentSensor.latitude = [sensorInfo[@"latitude"] floatValue];
         currentSensor.longitude = [sensorInfo[@"longitude"] floatValue];
         currentSensor.type = sensorInfo[@"sensorType"];

@@ -9,10 +9,19 @@
 #import "AlarmTableViewController.h"
 #import "HTTPComm.h"
 #import "RegularAction.h"
+#import "AlarmTableViewCell.h"
 
 @interface AlarmTableViewController ()
 {
-    RegularAction *ra;
+    AllSensors *allSensors;
+    HTTPComm *httpComm;
+    ConfigManager *config;
+    
+    NSArray *allSensorsInfo;
+    
+    NSMutableArray *allAlarmsInfo;
+    
+    BOOL isGetDBInfo;
 }
 
 @end
@@ -21,14 +30,88 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ra= [RegularAction new];
-    [ra getDataToAverage:@"2017-01-25 21:00:14.111" withEndDate:@"2017-01-25 21:59:14.222"];
-    [ra dataToJSON];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+
+    allSensors = [AllSensors sharedInstance];
+    allSensorsInfo = [allSensors getAllSensorsInfo];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    httpComm = [HTTPComm sharedInstance];
+    config = [ConfigManager sharedInstance];
+    
+    [config initialConfigPlist];
+    //    [config resetAllConfig];
+    [config getAllConfig];
+    
+    NSURL *url = [[NSURL alloc] initWithString:config.dbAlarmAddress];
+    
+    self.tableView.rowHeight = 88;
+
+    isGetDBInfo = false;
+    
+    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getAlarmByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"!!! ERROR1 !!!");
+            NSLog(@"HTTP Get Alarm Info. Faile : %@", error.localizedDescription);
+            [self popoutWarningMessage:@"網路傳輸失敗！"];
+            isGetDBInfo = true;
+        }else {
+            
+            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"JSON : %@", jsonString);
+            
+            NSMutableDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
+            
+            NSString *result = jsonData[@"result"];
+            
+            if([result isEqualToString: @"true"]) {
+                
+                allAlarmsInfo = [NSMutableArray new];
+                NSMutableArray *allAlarms = jsonData[@"alarms"];
+                
+                for (int i = 0; i < (int)allAlarms.count; i++) {
+                    
+                    // get a alarm element
+                    NSMutableDictionary *sensorInfo = jsonData[@"alarms"][i];
+                    
+                    // save to a Sensor object
+                    Sensor *currentSensor = [Sensor new];
+                    
+                    currentSensor.sensorID = sensorInfo[@"sensorID"];
+                    currentSensor.date = sensorInfo[@"date"];
+                    
+                    currentSensor.alarmValue = [sensorInfo[@"alarmValue"] floatValue];
+                    currentSensor.alarmType = sensorInfo[@"alarmType"];
+                    
+                    // save a alarm element
+                    [allAlarmsInfo addObject:currentSensor];
+                }
+            } else {
+                NSString *errString = jsonData[@"errorCode"];
+                [self popoutWarningMessage:errString];
+            }
+            
+            isGetDBInfo = true;
+            
+        }
+    }];
+    
+    while (!isGetDBInfo) {
+    }
+}
+
+- (void) popoutWarningMessage:(NSString*)message {
+    
+    // alert title
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"注意" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // confirm button
+    UIAlertAction* confirm = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:confirm];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,29 +120,46 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return allAlarmsInfo.count;
 }
 
-
-
-
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+
+    // use custom table view cell
+    AlarmTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    // get alarm element
+    Sensor *alarm = allAlarmsInfo[indexPath.row];
+    
+    // set cell data
+    cell.sensorNameLabel.text = [self getSensorNameByID:alarm.sensorID];
+    cell.sensorAlarmValueLabel.text = [NSString stringWithFormat:@"%.1f", alarm.alarmValue];
+    cell.sensorAlarmDateLabel.text = alarm.date;
+    cell.sensorAlarmTypeLabel.text = alarm.alarmType;
     
     return cell;
 }
-*/
+
+- (NSString*) getSensorNameByID:(NSNumber*)sensorID {
+    
+    NSString *sensorName = @"";
+    
+    for (Sensor *sensor in allSensorsInfo) {
+        if(sensor.sensorID == sensorID) {
+            sensorName = sensor.name;
+        }
+    }
+    
+    return sensorName;
+}
+
 
 /*
 // Override to support conditional editing of the table view.

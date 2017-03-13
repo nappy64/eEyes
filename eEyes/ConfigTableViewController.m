@@ -9,6 +9,8 @@
 #import "ConfigTableViewController.h"
 #import "AllSensors.h"
 #import "Sensor.h"
+#import "ConfigManager.h"
+#import "ConfigTableViewCell.h"
 
 @interface ConfigTableViewController ()
 
@@ -16,16 +18,28 @@
 
 @implementation ConfigTableViewController
 {
-    AllSensors *allSensors;
+    ConfigManager *config;
+    
+    NSArray *allConfigKeys;
+    
+    NSDictionary *allConfigData;
+    NSDictionary *allConfigText;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    config = [ConfigManager sharedInstance];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    allConfigData = [config getConfigDictionary];
+    allConfigText = [config getConfigText];
+    allConfigKeys = [config getConfigKeys];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [config getAllConfig];
+    [config savePlist];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,24 +50,58 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return allConfigKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+//    allConfigKeys = allConfigText.allKeys;
+//    NSArray *sortedArray = [allConfigKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+//        return [obj1 compare:obj2 options:NSNumericSearch];
+//    }];//由于allKeys返回的是无序数组，这里我们要排列它们的顺序
+    return 1;
+    
+    
+//    NSArray *allKeys = allItems.allKeys;
+//    NSString *uuidKey = allKeys[indexPath.row];
+//    PeripheralItem *item = allItems[uuidKey];
+    
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    // Configure the cell...
+    NSString *key = allConfigKeys[section];
+//    NSString *str = [allConfigText objectForKey:key];
+    
+    return [allConfigText objectForKey:key];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    ConfigTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    NSString *key = allConfigKeys[indexPath.section];
+    cell.configTextField.text = [allConfigData objectForKey:key];
+    
+    if ([key containsString:@"Password"]) {
+//    if ([key isEqualToString: @"dbPassword"] || [key isEqualToString: @"appPassword"]) {
+        cell.configTextField.secureTextEntry = true;
+    }
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ConfigTableViewCell *customCell = (ConfigTableViewCell *)cell;
+    
+    NSString *key = allConfigKeys[indexPath.section];
+                    
+    customCell.block = ^(NSString *text){
+                        [config setValueByKey:key value:text];
+                    };
+}
 
 /*
 // Override to support conditional editing of the table view.

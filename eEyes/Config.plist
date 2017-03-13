@@ -10,6 +10,8 @@
 	<string>http://192.168.43.119/dbSensorValue.php</string>
 	<key>dbRegisterAddress</key>
 	<string>http://192.168.43.119/register.php</string>
+	<key>dbAlarmAddress</key>
+	<string>http://192.168.43.119/dbAlarmInfo.php</string>
 	<key>dbUserName</key>
 	<string>root</string>
 	<key>dbPassword</key>
@@ -21,9 +23,9 @@
 	<key>dbField</key>
 	<string>RawValue</string>
 	<key>startDate</key>
-	<string>2017-01-25 21:46:04</string>
+	<string>2017-01-25 21:55:00</string>
 	<key>endDate</key>
-	<string>2017-01-25 21:48:08</string>
+	<string>2017-01-25 21:59:00</string>
 	<key>appUserName</key>
 	<string>user</string>
 	<key>appPassword</key>

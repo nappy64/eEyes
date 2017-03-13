@@ -11,6 +11,8 @@
 @implementation ConfigManager
 {
     NSMutableDictionary *allConfigDictionary;
+    NSMutableDictionary *allConfigText;
+    NSMutableArray *allConfigKeys;
 }
 
 static ConfigManager *_singletonConfigManager = nil;
@@ -37,6 +39,8 @@ static ConfigManager *_singletonConfigManager = nil;
     
     // transfer plist to dictionary
     allConfigDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    [self setAllConfigTextKeys];
 }
 
 - (void) resetAllConfig{
@@ -52,6 +56,7 @@ static ConfigManager *_singletonConfigManager = nil;
     _dbInfoAddress = [allConfigDictionary objectForKey:@"dbInfoAddress"];
     _dbSensorValueAddress = [allConfigDictionary objectForKey:@"dbSensorValueAddress"];
     _dbRegisterAddress = [allConfigDictionary objectForKey:@"dbRegisterAddress"];
+    _dbAlarmAddress = [allConfigDictionary objectForKey:@"dbAlarmAddress"];
     _dbUserName = [allConfigDictionary objectForKey:@"dbUserName"];
     _dbPassword = [allConfigDictionary objectForKey:@"dbPassword"];
     _dbName = [allConfigDictionary objectForKey:@"dbName"];
@@ -72,6 +77,7 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary setObject:_dbInfoAddress forKey:@"dbInfoAddress"];
     [allConfigDictionary setObject:_dbSensorValueAddress forKey:@"dbSensorValueAddress"];
     [allConfigDictionary setObject:_dbRegisterAddress forKey:@"dbRegisterAddress"];
+    [allConfigDictionary setObject:_dbAlarmAddress forKey:@"dbAlarmAddress"];
     [allConfigDictionary setObject:_dbUserName forKey:@"dbUserName"];
     [allConfigDictionary setObject:_dbPassword forKey:@"dbPassword"];
     [allConfigDictionary setObject:_dbName forKey:@"dbName"];
@@ -85,6 +91,11 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayRealTimeChart] forKey:@"isDisplayRealTimeChart"];
     [allConfigDictionary setObject:[NSNumber numberWithBool:_isDisplayValueInHistoryChart] forKey:@"isDisplayValueInHistoryChart"];
     
+    [self savePlist];
+}
+
+- (void) savePlist {
+    
     // save file Setting.plist
     NSString *SaveRootPath = [NSSearchPathForDirectoriesInDomains (NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     NSString *SavePath = [SaveRootPath stringByAppendingPathComponent:@"Config.plist"];
@@ -92,11 +103,67 @@ static ConfigManager *_singletonConfigManager = nil;
     [allConfigDictionary writeToFile:SavePath atomically:YES];
 }
 
+- (void) setAllConfigTextKeys {
+    
+    allConfigText = [NSMutableDictionary new];
+    allConfigKeys = [NSMutableArray new];
+    
+    [allConfigText setObject:@"DB Main Address" forKey:@"dbMainAddress"];
+    [allConfigText setObject:@"DB Info Address" forKey:@"dbInfoAddress"];
+    [allConfigText setObject:@"DB Sensor Value Address" forKey:@"dbSensorValueAddress"];
+    [allConfigText setObject:@"DB Register Address" forKey:@"dbRegisterAddress"];
+    [allConfigText setObject:@"DB Alarm Address" forKey:@"dbAlarmAddress"];
+    [allConfigText setObject:@"DB User Name" forKey:@"dbUserName"];
+    [allConfigText setObject:@"DB Password" forKey:@"dbPassword"];
+    [allConfigText setObject:@"DB Name" forKey:@"dbName"];
+    [allConfigText setObject:@"DB Table" forKey:@"dbTable"];
+    [allConfigText setObject:@"DB Field" forKey:@"dbField"];
+    [allConfigText setObject:@"Start Date" forKey:@"startDate"];
+    [allConfigText setObject:@"End Date" forKey:@"endDate"];
+    [allConfigText setObject:@"User Name" forKey:@"appUserName"];
+    [allConfigText setObject:@"Password" forKey:@"appPassword"];
+    [allConfigText setObject:@"Realtime Chart Sensor ID" forKey:@"realChartSensorID"];
+//    [allConfigText setObject:@"Enable Realtime Chart" forKey:@"isDisplayRealTimeChart"];
+//    [allConfigText setObject:@"Disable Historical Chart" forKey:@"isDisplayValueInHistoryChart"];
+    
+    [allConfigKeys addObject:@"dbMainAddress"];
+    [allConfigKeys addObject:@"dbInfoAddress"];
+    [allConfigKeys addObject:@"dbSensorValueAddress"];
+    [allConfigKeys addObject:@"dbRegisterAddress"];
+    [allConfigKeys addObject:@"dbAlarmAddress"];
+    [allConfigKeys addObject:@"dbUserName"];
+    [allConfigKeys addObject:@"dbPassword"];
+    [allConfigKeys addObject:@"dbName"];
+//    [allConfigKeys addObject:@"dbTable"];
+//    [allConfigKeys addObject:@"dbField"];
+//    [allConfigKeys addObject:@"startDate"];
+//    [allConfigKeys addObject:@"endDate"];
+    [allConfigKeys addObject:@"appUserName"];
+    [allConfigKeys addObject:@"appPassword"];
+//    [allConfigKeys addObject:@"realChartSensorID"];
+//    [allConfigKeys addObject:@"isDisplayRealTimeChart"];
+//    [allConfigKeys addObject:@"isDisplayValueInHistoryChart"];
+}
+
 - (NSDictionary*) getConfigDictionary {
     
     return allConfigDictionary;
 }
 
+- (NSDictionary*) getConfigText {
+    
+    return allConfigText;
+}
+
+- (NSArray*) getConfigKeys {
+    
+    return allConfigKeys;
+}
+
+- (void) setValueByKey:(NSString*)key value:(NSString*)value {
+    
+    [allConfigDictionary setObject:value forKey:key];
+}
 //- (void) setDisplayRealTimeChartEnable:(bool)displayRealTimeChartEnable {
 //    
 //    _isDisplayRealTimeChart = displayRealTimeChartEnable;
