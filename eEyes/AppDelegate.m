@@ -13,7 +13,6 @@
 
 #define CONNECT_TYPE_UPDATE_DEVICETOKEN @"updateDeviceToken"
 #define DB_DEVICETOKEN @"deviceToken"
-#define CONNECT_FOR_MOBILE @"http://192.168.0.110/dbSensorValue.php"
 
 
 @interface AppDelegate ()<NSURLSessionDelegate>
@@ -43,6 +42,8 @@
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSLog(@"DeviceToken: %@",deviceToken.description);
     
+    config = [ConfigManager sharedInstance];
+    
     NSString *finalDeviceToken = deviceToken.description;
     finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
     finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
@@ -53,17 +54,18 @@
     // Upload DeviceToken
     httpComm = [HTTPComm sharedInstance];
     config = [ConfigManager sharedInstance];
-    NSURL *url = [[NSURL alloc] initWithString:CONNECT_FOR_MOBILE];
+    
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     
     // Date Record
     NSDate *currentDate=[NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *currentDateString = [formatter stringFromDate:currentDate];
     NSLog(@"currentDate=%@", currentDateString);
 
     [httpComm sendHTTPPost:url
-                   timeout:10
+                   timeout:2
                    dbTable:DB_DEVICETOKEN
                   sensorID:nil
                  startDate:currentDateString
@@ -78,7 +80,7 @@
                         //NSLog(@"Success %@",finalDeviceToken);
                     }
                 }];
-    [self getDataToAverage];
+    
     
 
 }
@@ -91,16 +93,25 @@
     NSDictionary *aps = userInfo[@"aps"];
     
     if(aps[@"content-available"]){
-        ra= [RegularAction new];
+        ra= [RegularAction sharedInstance];
+        NSString *newTime = [ra getTheTimeOfTheLastAverage:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"here:%@",result);
+        }];
+        NSLog(@"%@",newTime);
         [ra getDataToAverage:@"2017-01-25 21:00:14.111" withEndDate:@"2017-01-25 21:59:14.222"];
+        
         NSLog(@"HERE");
         [ra dataToJSON];
-    } else {
+        } else {
         // Post a notification
         [[NSNotificationCenter defaultCenter] postNotificationName:DID_RECEIVE_REMOTE_NOTIFICATION object:nil];
         
     }}
 
+-(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler{
+
+}
 /*
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
@@ -136,7 +147,7 @@
 
 - (void)getDataToAverage{
     httpComm = [HTTPComm sharedInstance];
-    NSURL *url = [[NSURL alloc] initWithString:CONNECT_FOR_MOBILE];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     //NSURL *url = [NSURL URLWithString:CONNECT_FOR_MOBILE];
     [httpComm sendHTTPPost:url
                    timeout:10
@@ -154,20 +165,6 @@
 
 }
 
-    
--(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler{
-
-}
-
--(void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session{
-
-
-}
-
-
-- (void)uploadAverageData{
-
-}
 
 
 

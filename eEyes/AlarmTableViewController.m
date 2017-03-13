@@ -21,9 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ra= [RegularAction new];
-    [ra getDataToAverage:@"2017-01-25 21:00:14.111" withEndDate:@"2017-01-25 21:59:14.222"];
-    [ra dataToJSON];
+    ra= [RegularAction sharedInstance];
+    [ra getTheTimeOfTheLastAverage:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"here:%@",result);
+    }];
+   
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

@@ -16,8 +16,7 @@
 #define DATAKEY @"data"
 #define AVERAGEID10001 @"AverageID10001"
 #define AVERAGEID10002 @"AverageID10002"
-#define CONNECTURL @"http://192.168.0.110/dbSensorValue.php"
-#define INTERNET_TIMEOUT 30
+#define INTERNET_TIMEOUT 1
 
 @implementation RegularAction
 {
@@ -34,6 +33,7 @@
     int displayCount;           // http send count
     int compareDisplayCount;    // http receive count
     NSString *jsonString;
+    NSString *status;
 }
 
 static RegularAction *_singletonRegularAction = nil;
@@ -46,6 +46,34 @@ static RegularAction *_singletonRegularAction = nil;
     return _singletonRegularAction;
 }
 
+- (NSString*)getTheTimeOfTheLastAverage:(DoneHandler)doneHandler{
+    httpComm = [HTTPComm sharedInstance];
+    config = [ConfigManager sharedInstance];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
+    
+    [httpComm sendHTTPPost:url
+                   timeout:INTERNET_TIMEOUT
+                   dbTable:nil
+                  sensorID:nil
+                 startDate:nil
+                   endDate:nil
+                insertData:nil
+              functionType:@"getNewestAverageTime"
+                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }else{
+                        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        NSLog(@"here:%@",result);
+                        _lastUpdateTime = result;
+                        NSLog(@"%@",_lastUpdateTime);
+                        doneHandler(data,response,error);
+                    }
+                }];
+    while (_lastUpdateTime == nil) {
+    }
+    return _lastUpdateTime;
+}
 
 
 - (void)getDataToAverage:(NSString*)startDate withEndDate:(NSString*)endDate{
@@ -59,7 +87,18 @@ static RegularAction *_singletonRegularAction = nil;
     displayCount = 0;
     compareDisplayCount = 0;
     
-    NSURL *url = [[NSURL alloc] initWithString:CONNECTURL];
+    // Get the time and add an hour
+    NSDateFormatter *updateTimeFormatter = [NSDateFormatter new];
+    //[updateTime setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Taipei"]];
+    [updateTimeFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *newestTime = [NSDate date];
+    newestTime = [updateTimeFormatter dateFromString:_lastUpdateTime];
+    newestTime = [newestTime dateByAddingTimeInterval:1800];
+    NSString *timeString = [updateTimeFormatter stringFromDate:newestTime];
+    
+    NSLog(@"TIME FROM %@ TO %@",_lastUpdateTime,timeString);
+    
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     //NSURL *url = [NSURL URLWithString:CONNECT_FOR_MOBILE];
     Sensor *sensor = [Sensor new];
     
@@ -73,8 +112,8 @@ static RegularAction *_singletonRegularAction = nil;
                        timeout:INTERNET_TIMEOUT
                        dbTable:nil
                       sensorID:[sensor.sensorID stringValue]
-                     startDate:startDate
-                       endDate:endDate
+                     startDate:_lastUpdateTime
+                       endDate:timeString
                     insertData:nil
                   functionType:@"getRange"
                     completion:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -101,7 +140,7 @@ static RegularAction *_singletonRegularAction = nil;
                                     //NSLog(@"HERE: %@",objects);
                                     [self allDataToAverage:startDate WithEndDate:endDate];
                                 } else {
-                                    NSLog(@"??? no data in range %@ to %@ ???", config.startDate, config.endDate);
+                                    NSLog(@"??? no data in range %@ to %@ ???", _lastUpdateTime, timeString);
                                 }
                             } else {
                                 // fail to parse
@@ -221,13 +260,16 @@ static RegularAction *_singletonRegularAction = nil;
     //NSMutableArray *jsonArray = [NSMutableArray new];
     NSDictionary *header;
     
+    // For loop to make data into JSON
     for (NSArray *eachValues in differentTypeValue) {
         
         for (Sensor *eachValue in eachValues) {
             if([eachValue.type isEqualToString:@"溫度"]){
+                status = @"溫度",
                 header = @{DBAVERAGE_VALUE_TABLE:AVERAGEID10001,
                            DATACOUNTKEY:@(eachValues.count)};
             } else if([eachValue.type isEqualToString:@"濕度"]){
+                status = @"濕度";
                 header = @{DBAVERAGE_VALUE_TABLE:AVERAGEID10002,
                            DATACOUNTKEY:@(eachValues.count)};
             }
@@ -241,44 +283,42 @@ static RegularAction *_singletonRegularAction = nil;
         
         NSError *error;
         // Encode JSON
-        
-        //NSArray *myArray;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:allValueToDictionary options:NSJSONWritingPrettyPrinted error:&error];
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSLog(@"%@",jsonString);
         NSLog(@"First time over!!!");
-        [self uploadAverageValue];
+        if ([status isEqualToString:@"溫度"]) {
+            [self uploadAverageValue:@"temperatureAverage"];
+        }else if([status isEqualToString:@"濕度"]){
+            [self uploadAverageValue:@"humidAverage"];
+        }
+        // reset JSON array in order to clear data
         toJsonArray = [NSMutableArray new];
+        
     }
 }
 
 
 
 
+
 #pragma mark - Upload Average Value
-- (void)uploadAverageValue{
+- (void)uploadAverageValue:(NSString*)identifier{
     
-    NSURL *url = [[NSURL alloc] initWithString:CONNECTURL];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     
     //int SensorIndex = 0;
     
     //Sensor *sensor = allSensorsInfo[SensorIndex];
     //NSString *averageDBName = sensor.dbAverageValueTable;
-    
+    // Upload Average
     [httpComm uploadAverageToServer:url
                             timeout:INTERNET_TIMEOUT
                          insertData:jsonString
-                       functionType:@"insertAverage"
-                         completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                             if (error) {
-                                 NSLog(@"!!! ERROR1 !!!");
-                                 NSLog(@"HTTP Get Sensor Info. Failed : %@", error.localizedDescription);
-                             }else {
-                                 NSLog(@"%@",response);
-                                 NSLog(@"insert Average pass~");
-                             }
-                         }];
-    
+                         identifier:identifier
+                       functionType:@"insertAverage"];
+                         //completion:nil];
+    _lastUpdateTime = nil;
     /*
     [httpComm sendHTTPPost:url
                    timeout:INTERNET_TIMEOUT
@@ -297,9 +337,20 @@ static RegularAction *_singletonRegularAction = nil;
                         NSLog(@"insert Average pass~");
                     } 
                 }];
+     ^(NSData *data, NSURLResponse *response, NSError *error) {
+     if (error) {
+     NSLog(@"!!! ERROR1 !!!");
+     NSLog(@"HTTP Get Sensor Info. Failed : %@", error.localizedDescription);
+     }else {
+     NSLog(@"%@",response);
+     NSLog(@"insert Average pass~");
+     }
+     }
      */
 }
-
+-(void)wait{
+    //...
+}
 
 
 

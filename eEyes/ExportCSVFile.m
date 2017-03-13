@@ -39,7 +39,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
     allSensorsInfo = [allSensors getAllSensorsInfo];
     sensorItem = [ExportSensorItem shareInstance];
     objects = [NSMutableArray new];
-
+    
     return self;
 }
 
@@ -49,7 +49,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate{
     finalFileName = fileName;
-    NSURL *url = [[NSURL alloc] initWithString:@"http://127.0.0.1/dbSensorValue.php"];
+    NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     sensorInfo = [Sensor new];
     displayCount = 0;
     // Check data type
@@ -77,7 +77,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
         if(sensorInfo.isSelected){
             //displayCount += 1;
             [httpComm sendHTTPPost:url
-                           timeout:1
+                           timeout:5
                            dbTable:nil
                           sensorID:sensorInfo.sensorID.stringValue
                          startDate:startDate
@@ -104,7 +104,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
                                     //NSLog(@"A: %@",objects);
                                     NSLog(@"get XML count : %lu", (unsigned long)objects.count);
                                     if(objects.count > 0) {
-                                            [self dataHandler];
+                                        [self dataHandler];
                                         //NSLog(@"%@",csvString);
                                     } else {
                                         NSLog(@"??? no data in range %@ to %@ ???", startDate, endDate);
@@ -172,7 +172,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
         // No selected data
     }
     
-    NSString *result = [csvString substringToIndex:csvString.length - 2];
+    NSString *result = [csvString substringToIndex:csvString.length - 1];
     csvString = [NSMutableString stringWithString:result];
     [self generateCSVData:nil fileName:@"zzz"];
     NSLog(@"%@",csvString);

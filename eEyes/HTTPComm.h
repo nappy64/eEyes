@@ -10,8 +10,10 @@
 
 typedef void (^DoneHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
-@interface HTTPComm : NSObject<NSURLSessionDelegate>
-
+@interface HTTPComm : NSObject<NSURLSessionDelegate,NSURLSessionTaskDelegate>
+@property(nonatomic,strong)NSURLSession *uploadAverageSession;
+@property(nonatomic,strong)NSURLSessionUploadTask *uploadTask;
+@property(nonatomic,strong)NSMutableURLRequest *mutableRequest;
 + (instancetype) sharedInstance;
 
 - (void) sendHTTPGet:(NSURL*) url completion:(DoneHandler) doneHandler;
@@ -20,7 +22,8 @@ typedef void (^DoneHandler)(NSData *data, NSURLResponse *response, NSError *erro
 - (void)uploadAverageToServer:(NSURL*)url
                       timeout:(NSTimeInterval)timeout
                    insertData:(NSString*)insertData
-                 functionType:(NSString*)functionType
-                   completion:(DoneHandler)doneHandler;
+                   identifier:(NSString*)identifier
+                 functionType:(NSString*)functionType;
+                  // completion:(DoneHandler)doneHandler;
 
 @end
