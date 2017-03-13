@@ -3,15 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>dbMainAddress</key>
-	<string>http://192.168.43.119</string>
+	<string>http://192.168.100.178</string>
 	<key>dbInfoAddress</key>
-	<string>http://192.168.43.119/dbInfo.php</string>
+	<string>http://192.168.100.178/dbInfo.php</string>
 	<key>dbSensorValueAddress</key>
-	<string>http://192.168.43.119/dbSensorValue.php</string>
+	<string>http://192.168.100.178/dbSensorValue.php</string>
 	<key>dbRegisterAddress</key>
+<<<<<<< HEAD
 	<string>http://192.168.43.119/register.php</string>
 	<key>dbAlarmAddress</key>
 	<string>http://192.168.43.119/dbAlarmInfo.php</string>
+=======
+	<string>http://192.168.100.178/register.php</string>
+>>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 	<key>dbUserName</key>
 	<string>root</string>
 	<key>dbPassword</key>

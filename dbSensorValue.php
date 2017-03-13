@@ -60,36 +60,30 @@ if($type == "getRange" || $type == "getNew") {
      
     echo $xml;
 
-} else if($type == "insert") {
-    $insertdata = $_POST[insertdata];    
-    $insertdate = $_POST[insertdate];                    // 動作
-    $db->query("INSERT INTO `$dbtable` (`$dbfield`, `$dbdatefield`) VALUES ('$insertdata', '$insertdate')");
-    echo "pass".$insertdata." ".$insertdate." ";
-}else if($type == "updateDeviceToken") {
-    //  Check if device is already exist.
-    $insertdata = $_POST[insertdata];    
-    $insertdate = $_POST[insertdate];
-    //select * from deviceTokenList where UserName='$userName' and GroupName='$groupName'
-    // $res = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'");
-    //$res = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'");
-    $row = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'") -> fetch();
+    } else if($type == "insert") {
+        $insertdata = $_POST[insertdata];    
+        $insertdate = $_POST[insertdate];                    // 動作
+        $db->query("INSERT INTO `$dbtable` (`$dbfield`, `$dbdatefield`) VALUES ('$insertdata', '$insertdate')");
+        echo "pass".$insertdata." ".$insertdate." ";
+    }else if($type == "updateDeviceToken") {
+        //  Check if device is already exist.
+        $insertdata = $_POST[insertdata];    
+        $insertdate = $_POST[insertdate];
+        $row = $db->query("SELECT * FROM deviceToken WHERE `DeviceToken`='$insertdata'") -> fetch();
 
-
-    
-
-    if($row['id'] != ''){
+        if($row['id'] != ''){
                 // $sql = "update DeviceTokenList set
                 // DeviceToken = '$deviceToken',
                 // UserName = '$userName',            
                 // LastUpdateDateTime = now()
                 // where UserName='$userName' and GroupName='$groupName'";
                 $db->query("UPDATE `$dbtable` SET `UserName` = '$dbuser',`$dbdatefield` = '$insertdate' WHERE `$dbfield`='$insertdata'"); 
-            }else{
+         }else{
                 //  Upload DeviceToken
                 $db->query("INSERT INTO `$dbtable` (`UserName`,`$dbfield`, `$dbdatefield`) VALUES ('$dbuser','$insertdata', '$insertdate')");
                 echo "pass".$insertdata." ".$insertdate." ";
-            }
-}   else if($type == "insertAverage") {
+        }
+    }else if($type == "insertAverage") {
 
         // get json in data
         $json = $_POST[data];
@@ -110,7 +104,17 @@ if($type == "getRange" || $type == "getNew") {
         
         // return result
         echo '{"result" : "true"}';
+<<<<<<< HEAD
 }
+=======
+    }else if($type == "getNewestAverageTime"){
+
+        $sqlGetNewAverageTime = "SELECT `Date` FROM `AverageID10001` ORDER BY ID DESC LIMIT 1";
+        $res = $db->query($sqlGetNewAverageTime)-> fetch();
+        echo $res['Date'];
+
+    }
+>>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 
 //  创建XML单项
 function createXMLItem($title_data, $content_data, $pubdate_data, $type) {

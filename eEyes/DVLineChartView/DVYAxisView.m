@@ -64,7 +64,7 @@
     
     // Label之间的间隙
     CGFloat labelMargin = (allLabelHeight + labelSize.height - (self.numberOfYAxisElements + 1) * labelSize.height) / self.numberOfYAxisElements;
-//CGFloat labelMargin = (allLabelHeight + labelSize.height - (self.numberOfYAxisElements + 1) * labelSize.height) / (self.numberOfYAxisElements+1);   // reserve one more element for space
+    
     
     
     // 移除所有的Label

@@ -14,12 +14,15 @@
 #import "Sensor.h"
 
 @interface RegularAction : NSObject
+@property (nonatomic,strong) NSString *lastUpdateTime;
 
 + (instancetype) sharedInstance;
 
+- (NSString*)getTheTimeOfTheLastAverage:(DoneHandler)doneHandler;
+
 - (void)getDataToAverage:(NSString*)startDate withEndDate:(NSString*)endDate;
 
-- (void)uploadAverageValue;
+- (void)uploadAverageValue:(NSString*)identifier;
 
 -(void) dataToJSON;
 

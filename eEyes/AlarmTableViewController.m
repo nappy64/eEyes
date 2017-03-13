@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+<<<<<<< HEAD
 
     allSensors = [AllSensors sharedInstance];
     allSensorsInfo = [allSensors getAllSensorsInfo];
@@ -112,6 +113,19 @@
     [alert addAction:confirm];
     
     [self presentViewController:alert animated:YES completion:nil];
+=======
+    ra= [RegularAction sharedInstance];
+    [ra getTheTimeOfTheLastAverage:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"here:%@",result);
+    }];
+   
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+>>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 }
 
 - (void)didReceiveMemoryWarning {

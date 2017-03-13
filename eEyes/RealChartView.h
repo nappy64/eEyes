@@ -12,12 +12,15 @@
 
 @property (nonatomic, readonly, strong) NSMutableArray *values;
 
+<<<<<<< HEAD
 @property CGFloat xScale;
 @property CGFloat yScale;
 @property double maxValue;
 
 @property bool isDisplayValue;
 
+=======
+>>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 - (void)updateValues:(NSMutableArray*)values;
 //- (void)draw;
 
