@@ -61,6 +61,11 @@ static HTTPComm *_singletonHTTPComm = nil;
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"DeviceToken", @"datefield":@"LastUpdateDateTime", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
     } else if([functionType isEqualToString:@"insertAverage"]) {
         parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"field":@"Value", @"datefield":@"Date", @"data":insertData, @"type":functionType};
+    } else if([functionType isEqualToString:@"getNewestAverageTime"]) {
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"type":functionType};
     }
     
     NSMutableString *parameterString = [NSMutableString string];
@@ -88,16 +93,17 @@ static HTTPComm *_singletonHTTPComm = nil;
 - (void)uploadAverageToServer:(NSURL*)url
                       timeout:(NSTimeInterval)timeout
                    insertData:(NSString*)insertData
-                 functionType:(NSString*)functionType
-                   completion:(DoneHandler)doneHandler {
+                   identifier:(NSString*)identifier
+                 functionType:(NSString*)functionType{
+    //completion:(DoneHandler)doneHandler {
     
     // initial ConfigManager singleton
     ConfigManager *config = [ConfigManager sharedInstance];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    request.timeoutInterval = timeout;
-    request.HTTPMethod = @"POST";
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    _mutableRequest = [NSMutableURLRequest requestWithURL:url];
+    _mutableRequest.timeoutInterval = timeout;
+    _mutableRequest.HTTPMethod = @"POST";
     
     NSDictionary *parametersDict;
     if([functionType isEqualToString:@"insertAverage"]) {
@@ -119,27 +125,46 @@ static HTTPComm *_singletonHTTPComm = nil;
     NSData *parametersData = [[parameterString substringToIndex:parameterString.length - 1] dataUsingEncoding:NSUTF8StringEncoding];
     
     // 5、设置请求报文
-    request.HTTPBody = parametersData;
+    _mutableRequest.HTTPBody = parametersData;
     // 6、构造NSURLSessionConfiguration
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"uploadAverageValue"];
+    //NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"uploadAverageValue"];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
     
-    //configuration.HTTPMaximumConnectionsPerHost = HTTPMAXIMUM_PER_HOST;
+    /*
+     configuration.timeoutIntervalForRequest = 10;
+     configuration.allowsCellularAccess = true;
+     configuration.sessionSendsLaunchEvents = true;
+     configuration.discretionary = false;
+     configuration.HTTPMaximumConnectionsPerHost = 1;
+     configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
+     */
+    
     
     // 7、创建网络会话
     //NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    _uploadAverageSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    //NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     
     // 8、创建会话任务
-    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:nil];
     
+    _uploadTask = [_uploadAverageSession uploadTaskWithStreamedRequest:_mutableRequest];
     
-//    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//        doneHandler(data, response, error);
-//    }];
+    //NSURLSessionTask * task = [session dataTaskWithRequest:request];
+    //NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    //doneHandler(data, response, error);
+    //}];
     // 9、执行任务
-    [task resume];
+    [_uploadTask resume];
+}
 
+
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
+    if(error){
+        NSLog(@"%@",error);
+    }else{
+        NSLog(@"背景執行成功");
+    }
+    
 }
 
 

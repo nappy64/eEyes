@@ -24,6 +24,5 @@ typedef void (^DoneHandler)(NSData *data, NSURLResponse *response, NSError *erro
                    insertData:(NSString*)insertData
                    identifier:(NSString*)identifier
                  functionType:(NSString*)functionType;
-                  // completion:(DoneHandler)doneHandler;
 
 @end

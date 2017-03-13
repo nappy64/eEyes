@@ -48,6 +48,8 @@
 		0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */; };
 		0BF9F04C1E73BDE400FBB13E /* AlarmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */; };
 		0BF9F0521E74513100FBB13E /* ConfigTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */; };
+		B0E444C21E767EAE0039343F /* temperature.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E444C11E767EAE0039343F /* temperature.png */; };
+		B0E444C41E767EBA0039343F /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B0E444C31E767EBA0039343F /* water.png */; };
 		B0F51C911E489CC2008D8F9F /* DrawCSVFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */; };
 		B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */; };
 		B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */; };
@@ -129,6 +131,8 @@
 		0BF9F0501E74513100FBB13E /* ConfigTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewCell.h; sourceTree = "<group>"; };
 		0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewCell.m; sourceTree = "<group>"; };
 		B06752331E587BBD008373EB /* eEyes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eEyes.entitlements; sourceTree = "<group>"; };
+		B0E444C11E767EAE0039343F /* temperature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temperature.png; sourceTree = "<group>"; };
+		B0E444C31E767EBA0039343F /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
 		B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCSVFileViewController.h; sourceTree = "<group>"; };
 		B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCSVFileViewController.m; sourceTree = "<group>"; };
 		B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportSettingsViewController.h; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 				0BB21FE31E2533E600786F3A /* Assets.xcassets */,
 				0BB21FE51E2533E600786F3A /* LaunchScreen.storyboard */,
 				0BB21FE81E2533E600786F3A /* Info.plist */,
+				B0E444C31E767EBA0039343F /* water.png */,
+				B0E444C11E767EAE0039343F /* temperature.png */,
 				0BAB37ED1E705509001ADCDD /* button alarm.png */,
 				0BAB37EE1E705509001ADCDD /* button chart.png */,
 				0BAB37EF1E705509001ADCDD /* button export.png */,
@@ -341,10 +347,12 @@
 				0BAB37F51E705509001ADCDD /* button alarm.png in Resources */,
 				0BAB37F71E705509001ADCDD /* button export.png in Resources */,
 				0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */,
+				B0E444C21E767EAE0039343F /* temperature.png in Resources */,
 				0BB21FE41E2533E600786F3A /* Assets.xcassets in Resources */,
 				0BB21FE21E2533E600786F3A /* Main.storyboard in Resources */,
 				0BAB37F81E705509001ADCDD /* button setting.png in Resources */,
 				0BAB37F91E705509001ADCDD /* ipad-.png in Resources */,
+				B0E444C41E767EBA0039343F /* water.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
