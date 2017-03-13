@@ -30,14 +30,11 @@
 
 @property (weak, nonatomic) IBOutlet UIView *historyChartView;
 @property (weak, nonatomic) IBOutlet UIButton *isDisplayRemarkButton;
-<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet UILabel *sensor1ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensor2ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensorDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
 
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 
 @end
 
@@ -56,9 +53,17 @@
     
     int displayCount;           // http send count
     int compareDisplayCount;    // http receive count
+    int dataCount;
     
     CGFloat xAxisGap;
     CGFloat yAxisGap;
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    // debug
+//    CGRect frame = CGRectMake(_historyChartView.x, _historyChartView.y, _historyChartView.size.width, _historyChartView.size.height);
+//    NSLog(@"viewWillLayoutSubviews origin X : %f1, Y : %f1, W : %f1, H : %f1", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
 - (void)viewDidLoad {
@@ -78,6 +83,21 @@
     xAxisGap = 30;
     yAxisGap = 100;
     
+    CGSize viewSize = [[UIScreen mainScreen] bounds].size;
+    
+    CGFloat STATUS_BAR_HEIGHT = 20;
+    UIInterfaceOrientation CURRENT_ORIENTATION = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if(UIInterfaceOrientationIsLandscape(CURRENT_ORIENTATION)){
+        viewSize = CGSizeMake(_historyChartView.height, _historyChartView.width - STATUS_BAR_HEIGHT);
+        
+    } else {
+        viewSize = CGSizeMake(_historyChartView.width, _historyChartView.height - STATUS_BAR_HEIGHT);
+    }
+    
+    // debug
+//    NSLog(@"initial origin W : %f1, H : %f1", viewSize.width, viewSize.height);
+    
     if(config.isDisplayValueInHistoryChart) {
         _isDisplayRemarkButton.backgroundColor = [UIColor greenColor];
     } else {
@@ -86,7 +106,44 @@
     
     [self sendHTTPPostGetData];
     
+    // move to viewDidAppear
+//    [self drawHistoryChart];
+    
+    
+    // debug
+//    [self listSubviewsOfView:self.view];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+//    NSLog(@"viewWillAppear H : %f1, H : %f1",_historyChartView.size.width, _historyChartView.size.height);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+//    NSLog(@"viewDidAppear H : %f1, H : %f1",_historyChartView.size.width, _historyChartView.size.height);
+    
     [self drawHistoryChart];
+}
+
+
+- (void)listSubviewsOfView:(UIView *)view {
+    
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+    
+    // Return if there are no subviews
+    if ([subviews count] == 0) return; // COUNT CHECK LINE
+    
+    for (UIView *subview in subviews) {
+        
+        // Do what you want to do with the subview
+        NSLog(@"%@", subview);
+        
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -133,7 +190,8 @@
                         NSLog(@"get XML count : %lu", (unsigned long)objects.count);
                         
                         if(objects.count > 0) {
-                                [self setupData];
+                            dataCount = (int)objects.count;
+                            [self setupData];
                         } else {
                             NSLog(@"??? no data in range %@ to %@ ???", config.startDate, config.endDate);
                             
@@ -178,30 +236,21 @@
 
 - (void) drawHistoryChart {
     
-<<<<<<< HEAD
     _historyChartView.backgroundColor = [UIColor whiteColor];
-=======
-    _historyChartView.backgroundColor = [UIColor colorWithHexString:@"3e4a59"];
-//    
-//    ccc = [[DVLineChartView alloc] initWithFrame:_historyChartView.bounds];
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
     
-//    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, _historyChartView.bounds.size.height-48);
-//    ccc = [[DVLineChartView alloc] initWithFrame:chartRect];
-//    [_historyChartView addSubview:ccc];
-//    ccc.width = _historyChartView.width;
-    
-    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-48);
+    CGRect chartRect = CGRectMake(0, 0, _historyChartView.bounds.size.width, _historyChartView.bounds.size.height);
+
     ccc = [[DVLineChartView alloc] initWithFrame:chartRect];
-//    [self.view addSubview:ccc];
+
     [_historyChartView addSubview:ccc];
+    
     ccc.width = self.view.bounds.size.width;
     
     // Y 座標刻度與左方的間距
     ccc.yAxisViewWidth = 52;
     
     // Y 軸分成幾格
-    ccc.numberOfYAxisElements = 20;
+    ccc.numberOfYAxisElements = 10;
     
     ccc.delegate = self;
     ccc.pointUserInteractionEnabled = YES;
@@ -216,17 +265,13 @@
     ccc.separateColor = [UIColor colorWithHexString:@"67707c"];
     
     ccc.textColor = [UIColor colorWithHexString:@"9aafc1"];
-<<<<<<< HEAD
     ccc.backColor = [UIColor whiteColor];
-=======
-    ccc.backColor = [UIColor colorWithHexString:@"3e4a59"];
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
     ccc.axisColor = [UIColor colorWithHexString:@"67707c"];
     
     ccc.x = 0;
-    ccc.y = 100;
+    ccc.y = 0;
     ccc.width = _historyChartView.width;
-    ccc.height = 300;
+    ccc.height = _historyChartView.height;
 
     DVPlot *plot = [[DVPlot alloc] init];
     DVPlot *plot1 = [[DVPlot alloc] init];
@@ -237,28 +282,16 @@
         
         if(i == 0) {
             plot.pointArray = hcv.values;
-<<<<<<< HEAD
             plot.lineColor = [UIColor orangeColor];
             plot.pointColor = [UIColor orangeColor];
 //            plot.chartViewFill = YES;
-=======
-            plot.lineColor = [UIColor colorWithHexString:@"2f7184"];
-            plot.pointColor = [UIColor colorWithHexString:@"14b9d6"];
-            plot.chartViewFill = YES;
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
             plot.withPoint = YES;
             [ccc addPlot:plot];
         } else {
             plot1.pointArray = hcv.values;
-<<<<<<< HEAD
             plot1.lineColor = [UIColor blueColor];
             plot1.pointColor = [UIColor blueColor];
 //            plot1.chartViewFill = YES;
-=======
-            plot1.lineColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
-            plot1.pointColor = [UIColor whiteColor];
-            plot1.chartViewFill = YES;
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
             plot1.withPoint = YES;
             [ccc addPlot:plot1];
         }
@@ -268,7 +301,6 @@
     
     ccc.xAxisTitleArray = hcv.date;
     
-<<<<<<< HEAD
     _totalPointsLabel.text = [NSString stringWithFormat:@"%lu Points",(unsigned long)hcv.date.count];
     
     ccc.xAxisViewX = 0;
@@ -286,10 +318,7 @@
     ccc.scrollViewW = _historyChartView.width - ccc.yAxisViewW;
     ccc.scrollViewH = ccc.height;
     
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
     [ccc draw];
-    
 }
 
 - (void) popoutWarningMessage:(NSString*)message {
@@ -413,8 +442,26 @@
 
 - (void)lineChartView:(DVLineChartView *)lineChartView DidClickPointAtIndex:(NSInteger)index {
     
-    NSLog(@"%ld", index);
+    NSLog(@"press at index : %ld", index);
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        HistoryChartValues *hcv = chartList[0];
+        double value = [hcv.values[index] doubleValue];
+        _sensor1ValueLabel.text = [NSString stringWithFormat : @"%.1f", value];
+
+        hcv = chartList[1];
+        value = [hcv.values[index] doubleValue];
+        _sensor2ValueLabel.text = [NSString stringWithFormat : @"%.1f", value];
+
+        _sensorDateLabel.text = hcv.date[index];
+    });
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    [ccc removeFromSuperview];
+    
+    [self drawHistoryChart];
 }
 
 @end

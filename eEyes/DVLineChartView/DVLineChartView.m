@@ -34,11 +34,13 @@
     
     // 初始化某些属性值
     self.xAxisTextGap = 10;
+
     self.yAxisTextGap = 10;
     self.pointGap = 60;
     self.axisColor = [UIColor blackColor];
     self.textColor = [UIColor blackColor];
     self.textFont = [UIFont systemFontOfSize:12];
+//    self.numberOfYAxisElements = 5;
     self.numberOfYAxisElements = 5;
     self.percent = NO;
     self.showSeparate = NO;
@@ -58,6 +60,8 @@
     DVXAxisView *xAxisView = [[DVXAxisView alloc] init];
     
     [scrollView addSubview:xAxisView];
+    
+//    scrollView.backgroundColor = [UIColor greenColor];
     
     [self addSubview:scrollView];
     
@@ -129,11 +133,14 @@
     
     if (self.plots.count == 0) return;
     
+    /*
     // 设置y轴视图的尺寸
-    self.yAxisView.width = self.yAxisViewWidth;
     self.yAxisView.x = 0;
-    self.yAxisView.height = self.height;
     self.yAxisView.y = 0;
+    self.yAxisView.width = self.yAxisViewWidth;
+    self.yAxisView.height = self.height;
+    
+    NSLog(@"Y x : %f1, y : %f1, width : %f1, height : %f1 ",self.yAxisView.x, self.yAxisView.y, self.yAxisView.width,self.yAxisView.height);
     
     // 设置scrollView的尺寸
     self.scrollView.x = self.yAxisView.width;
@@ -141,11 +148,41 @@
     self.scrollView.width = self.width - self.scrollView.x;
     self.scrollView.height = self.height;
     
+    NSLog(@"S x : %f1, y : %f1, width : %f1, height : %f1 ",self.scrollView.x, self.scrollView.y, self.scrollView.width,self.scrollView.height);
+    
     // 设置x轴视图的尺寸
     self.xAxisView.x = 0;
     self.xAxisView.y = 0;
-    self.xAxisView.height = self.scrollView.height;
     self.xAxisView.width = self.xAxisTitleArray.count * self.pointGap + 200;
+    self.xAxisView.height = self.scrollView.height;
+    
+    NSLog(@"X x : %f1, y : %f1, width : %f1, height : %f1 ",self.xAxisView.x, self.xAxisView.y, self.xAxisView.width,self.xAxisView.height);
+    */
+    
+    // 设置y轴视图的尺寸
+    self.yAxisView.x = _yAxisViewX;
+    self.yAxisView.y = _yAxisViewY;
+    self.yAxisView.width = _yAxisViewW;
+    self.yAxisView.height = _yAxisViewH;
+    
+//    NSLog(@"Y x : %f1, y : %f1, width : %f1, height : %f1 ",self.yAxisView.x, self.yAxisView.y, self.yAxisView.width,self.yAxisView.height);
+    
+    // 设置scrollView的尺寸
+    self.scrollView.x = _scrollViewX;
+    self.scrollView.y = _scrollViewY;
+    self.scrollView.width = _scrollViewW;
+    self.scrollView.height = _scrollViewH;
+    
+//    NSLog(@"S x : %f1, y : %f1, width : %f1, height : %f1 ",self.scrollView.x, self.scrollView.y, self.scrollView.width,self.scrollView.height);
+    
+    // 设置x轴视图的尺寸
+    self.xAxisView.x = _xAxisViewX;
+    self.xAxisView.y = _xAxisViewY;
+    self.xAxisView.width = _xAxisViewW;
+    self.xAxisView.height = _xAxisViewH;
+    
+//    NSLog(@"X x : %f1, y : %f1, width : %f1, height : %f1 ",self.xAxisView.x, self.xAxisView.y, self.xAxisView.width,self.xAxisView.height);
+    
     
     self.scrollView.contentSize = self.xAxisView.frame.size;
     
@@ -161,6 +198,7 @@
     self.yAxisView.numberOfYAxisElements = self.numberOfYAxisElements;
     self.yAxisView.yAxisMaxValue = self.yAxisMaxValue;
     self.yAxisView.backColor = self.backColor;
+//    self.yAxisView.backColor = [UIColor brownColor];
     [self.yAxisView draw];
     
     self.xAxisView.xAxisTitleArray = self.xAxisTitleArray;
@@ -289,4 +327,5 @@
     }
     
 }
+
 @end

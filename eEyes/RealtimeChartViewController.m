@@ -16,16 +16,14 @@
 #import "HistoryChartValues.h"
 
 @interface RealtimeChartViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *isDisplayRemarkButton;
 
 @property (nonatomic, strong)   dispatch_source_t timer;
 @property (weak, nonatomic) IBOutlet UIView *realChartView;
-<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet UIButton *isAutoYAxisButton;
 @property (weak, nonatomic) IBOutlet UILabel *sensor1ValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sensor2ValueLabel;
 @property (weak, nonatomic) IBOutlet UITextField *yMaxRangeTextField;
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 
 @end
 
@@ -39,12 +37,13 @@
     
     NSArray *allSensorsInfo;
     
-    double drawValue;
     bool isWaitingResponse;
     NSMutableArray *objects;
     NSString *requestCurrentDate;
     bool isNeedToUpdateRequestDate;
     bool isBypassThisTimeRequest;
+    bool isDisplayValue;
+    bool isYAxisAutoDetecting;
     NSMutableArray *values;
     NSMutableArray *values1;
     
@@ -54,13 +53,10 @@
     int displayCount;           // http send count
     int compareDisplayCount;    // http receive count
     int systemCounter;
-<<<<<<< HEAD
     
     CGFloat xScale;
     
     CGFloat yMaxValue;
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 }
 
 - (void)viewDidLoad {
@@ -76,6 +72,7 @@
     isWaitingResponse = false;
     isNeedToUpdateRequestDate = true;
     isBypassThisTimeRequest = false;
+    isYAxisAutoDetecting = true;
     
     values = [NSMutableArray array];
     values1 = [NSMutableArray array];
@@ -86,19 +83,11 @@
     
     displayCount = 0;
     compareDisplayCount = 0;
-
-    CGRect chartRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-48);
     
-<<<<<<< HEAD
     xScale = 25;
     yMaxValue = [_yMaxRangeTextField.text doubleValue];
     
     isDisplayValue = true;
-=======
-    ccc = [[RealChartView alloc] initWithFrame:chartRect];
-    
-    [self.view addSubview:ccc];
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
     
     // create timer
     double delayInSeconds = 1.0;  // 1 秒畫一點
@@ -118,7 +107,6 @@
 //    [_isAutoYAxisButton setHidden:true];
 }
 
-<<<<<<< HEAD
 - (void)viewDidAppear:(BOOL)animated {
     
     CGRect chartRect = CGRectMake(0, 0, _realChartView.bounds.size.width, _realChartView.bounds.size.height);
@@ -134,8 +122,6 @@
     [_realChartView addSubview:ccc];
 }
 
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 - (void) getSelectedSensorCount {
     
     selectedSensorCount = 0;
@@ -170,7 +156,7 @@
     
     for(int i = 0; i < allSensorsInfo.count; i++) {
         
-        NSLog(@"111 HTTP reuest...%d", i);
+//        NSLog(@"111 HTTP reuest...%d", i);
         
         NSString *dbTableName = @"";
         sensor = allSensorsInfo[i];
@@ -179,17 +165,19 @@
         
             if(isBypassThisTimeRequest == false) {
                 
-                NSLog(@"222 start date : %@", requestCurrentDate);
+//                NSLog(@"222 start date : %@", requestCurrentDate);
                 
                 displayCount += 1;
                 
                 dbTableName = sensor.dbRealValueTable;
                 
+                NSLog(@"~ send HTTP Get Newest Data : %@, start date : %@", [sensor.sensorID stringValue], requestCurrentDate);
+                
                 [httpComm sendHTTPPost:url timeout:1 dbTable:dbTableName sensorID:[sensor.sensorID stringValue] startDate:requestCurrentDate endDate:config.endDate insertData:nil functionType:@"getNew" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
                     if (error) {
-                        NSLog(@"!!! ERROR1 !!!");
-                        NSLog(@"HTTP Get Newest Data Faile : %@", error.localizedDescription);
+//                        NSLog(@"!!! ERROR1 !!!");
+                        NSLog(@"!!! HTTP Get Newest Data Faile : %@ !!!", error.localizedDescription);
                         
                         compareDisplayCount += 1;
                         
@@ -219,7 +207,7 @@
                             } else {
                                 compareDisplayCount += 1;
                                 
-                                NSLog(@"!!! no data received !!! #1:%d #2:%d", compareDisplayCount, displayCount );
+//                                NSLog(@"!!! no data received !!! #1:%d #2:%d", compareDisplayCount, displayCount );
                                 
                                 isBypassThisTimeRequest = true;
                                 
@@ -233,7 +221,7 @@
                         isWaitingResponse = false;
                     }
                 }];
-                NSLog(@"counter #1:%d #2:%d", compareDisplayCount, displayCount);
+//                NSLog(@"counter #1:%d #2:%d", compareDisplayCount, displayCount);
                 while (compareDisplayCount != displayCount) {
 //                    NSLog(@"000 counter #1:%d #2:%d", compareDisplayCount, displayCount);
                 }
@@ -243,9 +231,8 @@
         }
     }
     
-    NSLog(@"888 setup data...%lu", (unsigned long)chartList.count);
+//    NSLog(@"888 setup data...%lu", (unsigned long)chartList.count);
     
-<<<<<<< HEAD
     if(chartList.count == selectedSensorCount) {
         
         if(isYAxisAutoDetecting == true) {
@@ -275,24 +262,6 @@
         
         
         ccc.isDisplayValue = isDisplayValue;
-=======
-    if(chartList.count > 0) {
-    
-        if(chartList.count == 1) {
-            NSArray *value = chartList[0];
-            NSLog(@"997 array count:%lu, value #0:%@", (unsigned long)value.count, value[0]);
-        } else if(chartList.count == 2) {
-            NSArray *value = chartList[0];
-            NSLog(@"997 array count:%lu, value #0:%@", (unsigned long)value.count, value[0]);
-            NSArray *value1 = chartList[1];
-            NSLog(@"998 array count:%lu, value #1:%@", (unsigned long)value1.count, value1[0]);
-        }
-        
-        NSLog(@"999 chartList %lu update values", chartList.count);
-    }
-    
-    if(chartList.count == selectedSensorCount) {
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
         [ccc updateValues:chartList];
     }
     
@@ -324,16 +293,41 @@
     
     for(Sensor *sensor in objects) {
         
-        NSLog(@"555 setup data...%@", sensor.value);
+//        NSLog(@"555 setup data...%@", sensor.value);
+        double value = [sensor.value doubleValue];
         
         if(displayCount == 1) {
-            [values addObject:[NSNumber numberWithDouble:[sensor.value doubleValue]]];
-            NSLog(@"666 sensor#1 data:%@, count:%lu", sensor.value, (unsigned long)values.count);
+            [values addObject:[NSNumber numberWithDouble:value]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _sensor1ValueLabel.text = [sensor.value stringValue];
+            });
+            
+            NSLog(@"666 sensor#1 count:%lu", (unsigned long)values.count);
+            
+            if (values.count > (int)_realChartView.bounds.size.width) {
+                // over max display points
+                [values removeObjectsInRange:NSMakeRange(0, values.count - (int)_realChartView.bounds.size.width)];
+                NSLog(@"667 sensor#1 exceed...");
+            }
+            
         } else if(displayCount == 2) {
             if(values1.count < values.count) {
-                [values1 addObject:[NSNumber numberWithDouble:[sensor.value doubleValue]]];
+                [values1 addObject:[NSNumber numberWithDouble:value]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _sensor2ValueLabel.text = [sensor.value stringValue];
+                });
+                
                 requestCurrentDate = sensor.date;
-                NSLog(@"777 sensor#2 data:%@, count:%lu", sensor.value, (unsigned long)values1.count);
+                
+                NSLog(@"777 sensor#2 count:%lu", (unsigned long)values1.count);
+                
+                if (values1.count > (int)_realChartView.bounds.size.width) {
+                    // over max display points
+                    [values1 removeObjectsInRange:NSMakeRange(0, values1.count - (int)_realChartView.bounds.size.width)];
+                    NSLog(@"778 sensor#1 exceed...");
+                }
             } else {
                 NSLog(@"!!! sensor#2 values array larger than sensor#1 !!!");
             }
@@ -362,7 +356,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-<<<<<<< HEAD
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     
     [ccc removeFromSuperview];
@@ -430,8 +423,6 @@
     yMaxValue = [_yMaxRangeTextField.text doubleValue];
 }
 
-=======
->>>>>>> 3ca030c15e80467b2723038f44fd85332274e1fa
 /*
 #pragma mark - Navigation
 

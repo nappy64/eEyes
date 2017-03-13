@@ -22,6 +22,21 @@
 
 @property (weak, nonatomic) id<DVLineChartViewDelegate> delegate;
 
+@property (assign, nonatomic) CGFloat xAxisViewX;
+@property (assign, nonatomic) CGFloat xAxisViewY;
+@property (assign, nonatomic) CGFloat xAxisViewW;
+@property (assign, nonatomic) CGFloat xAxisViewH;
+
+@property (assign, nonatomic) CGFloat yAxisViewX;
+@property (assign, nonatomic) CGFloat yAxisViewY;
+@property (assign, nonatomic) CGFloat yAxisViewW;
+@property (assign, nonatomic) CGFloat yAxisViewH;
+
+@property (assign, nonatomic) CGFloat scrollViewX;
+@property (assign, nonatomic) CGFloat scrollViewY;
+@property (assign, nonatomic) CGFloat scrollViewW;
+@property (assign, nonatomic) CGFloat scrollViewH;
+
 /**
  *  文字大小
  */
