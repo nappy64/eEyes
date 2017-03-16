@@ -566,7 +566,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeD-jA-EO2">
-                                <rect key="frame" x="179" y="617" width="48" height="30"/>
+                                <rect key="frame" x="159" y="617" width="48" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="remark"/>
                                 <connections>
@@ -575,24 +575,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y Axis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLx-zy-ciV">
-                                <rect key="frame" x="46" y="617" width="47" height="30"/>
+                                <rect key="frame" x="36" y="617" width="47" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNv-yj-WXW">
-                                <rect key="frame" x="16" y="617" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="+"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNv-yj-WXW">
+                                <rect key="frame" x="16" y="617" width="20" height="30"/>
+                                <color key="backgroundColor" red="0.71764705880000002" green="0.98431372549999996" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="contentStretch" x="0.050000000000000003" y="0.0" width="1" height="1"/>
+                                <state key="normal" image="plus.png"/>
                                 <connections>
                                     <action selector="yIncrementButtonTapped:" destination="cJy-g2-Bnk" eventType="touchUpInside" id="2pV-pm-o2L"/>
                                     <action selector="yIncrementButtonTapped:" destination="n2Q-mw-O9f" eventType="touchUpInside" id="GE6-NV-36t"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZr-bT-4si">
-                                <rect key="frame" x="93" y="617" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="-"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZr-bT-4si">
+                                <rect key="frame" x="88" y="617" width="20" height="30"/>
+                                <color key="backgroundColor" red="0.71764705882352942" green="0.98431372549019602" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="minus.png"/>
                                 <connections>
                                     <action selector="yDecrementButtonTapped:" destination="cJy-g2-Bnk" eventType="touchUpInside" id="3z2-gB-a2r"/>
                                     <action selector="yDecrementButtonTapped:" destination="n2Q-mw-O9f" eventType="touchUpInside" id="i1Q-gR-cyn"/>
@@ -606,8 +607,8 @@
                             <constraint firstItem="wLx-zy-ciV" firstAttribute="height" secondItem="gNv-yj-WXW" secondAttribute="height" id="31v-Ij-JPd"/>
                             <constraint firstItem="wLx-zy-ciV" firstAttribute="top" secondItem="gNv-yj-WXW" secondAttribute="top" id="5RV-kQ-8XU"/>
                             <constraint firstItem="wLx-zy-ciV" firstAttribute="leading" secondItem="gNv-yj-WXW" secondAttribute="trailing" id="5hj-5S-qC2"/>
-                            <constraint firstItem="IeD-jA-EO2" firstAttribute="leading" secondItem="BZr-bT-4si" secondAttribute="trailing" constant="56" id="B35-lm-L15"/>
-                            <constraint firstItem="BZr-bT-4si" firstAttribute="leading" secondItem="wLx-zy-ciV" secondAttribute="trailing" id="DAs-Yu-qeK"/>
+                            <constraint firstItem="IeD-jA-EO2" firstAttribute="leading" secondItem="BZr-bT-4si" secondAttribute="trailing" constant="51" id="B35-lm-L15"/>
+                            <constraint firstItem="BZr-bT-4si" firstAttribute="leading" secondItem="wLx-zy-ciV" secondAttribute="trailing" constant="5" id="DAs-Yu-qeK"/>
                             <constraint firstItem="IeD-jA-EO2" firstAttribute="bottom" secondItem="gNv-yj-WXW" secondAttribute="bottom" id="HhI-2R-m4w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KRr-Dw-EfQ" secondAttribute="trailing" id="JNi-zj-KYM"/>
                             <constraint firstItem="wLx-zy-ciV" firstAttribute="bottom" secondItem="gNv-yj-WXW" secondAttribute="bottom" id="NfN-59-c7V"/>
@@ -701,5 +702,7 @@
         <image name="button export.png" width="2137" height="1940"/>
         <image name="button setting.png" width="1833" height="1833"/>
         <image name="iphone.png" width="1242" height="2208"/>
+        <image name="minus.png" width="20" height="2"/>
+        <image name="plus.png" width="20" height="20"/>
     </resources>
 </document>

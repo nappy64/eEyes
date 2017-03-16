@@ -52,7 +52,7 @@
     
     Sensor *sensor = [Sensor new];
     
-    CGFloat xIndex = 40;
+    CGFloat xIndex = 50;
     CGFloat yIndex = 80;
     CGFloat wIndex = self.view.bounds.size.width/2 - 100;
     
@@ -61,7 +61,7 @@
         sensor = allSensorsInfo[i];
         
         // create UIButton
-        CGRect buttonFrame = CGRectMake( xIndex, yIndex, wIndex, 90 );
+        CGRect buttonFrame = CGRectMake( xIndex, yIndex, wIndex, 125 );
         UIButton *button = [[UIButton alloc] initWithFrame: buttonFrame];
         //[button setTitle:sensor.name forState:UIControlStateNormal];
         config = [ConfigManager sharedInstance];
@@ -103,7 +103,7 @@
         xIndex += self.view.bounds.size.width/2;
         if(xIndex > self.view.bounds.size.width) {
             xIndex = 10;
-            yIndex += 100;
+            yIndex += 150;
         }
     }
     
@@ -154,12 +154,13 @@
     _datePicker = datePicker;
     //监听datePicker的ValueChanged事件
     [datePicker addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
-    yIndex += 20;
+    yIndex += 10;
     
     // Create UIButton
     UIButton *generateCSV = [UIButton buttonWithType:UIButtonTypeSystem];
-    generateCSV.frame = CGRectMake(100, yIndex, 100, 30);
-    [generateCSV setTitle:@"SAVE File" forState:UIControlStateNormal];
+    generateCSV.frame = CGRectMake(wIndex+60, yIndex, 100, 30);
+    [generateCSV setImage:[UIImage imageNamed:@"Download.png"] forState:UIControlStateNormal];
+    //[generateCSV setTitle:@"SAVE File" forState:UIControlStateNormal];
     [generateCSV setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [generateCSV setBackgroundColor:[UIColor whiteColor]];
     [generateCSV sizeToFit];
