@@ -76,8 +76,8 @@
                     if(error){
                         NSLog(@"%@",error);
                     }else{
-                        NSLog(@"Response %@",response);
-                        //NSLog(@"Success %@",finalDeviceToken);
+                        //NSLog(@"Response %@",response);
+                        NSLog(@"Success %@",finalDeviceToken);
                     }
                 }];
     
