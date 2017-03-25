@@ -21,6 +21,7 @@
     NSInteger sensorType;
     NSString *finalFileName;
     int displayCount;           // http send count
+    int compareDisplayCount;
     
 }
 
@@ -48,9 +49,11 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
                           fileName:(NSString*)fileName
                          startDate:(NSString*) startDate
                            endDate:(NSString*) endDate{
+    csvString = [NSMutableString new];
     finalFileName = fileName;
     NSURL *url = [[NSURL alloc] initWithString:config.dbSensorValueAddress];
     sensorInfo = [Sensor new];
+    compareDisplayCount = 0;
     displayCount = 0;
     // Check data type
     
@@ -66,56 +69,70 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
         sensorInfo = allSensorsInfo[1];
         if (sensorInfo.isSelected == true) {
             sensorType = onlyHumid;
+            compareDisplayCount = 1;
             displayCount = 1;
         }else{
             sensorType = noData;
         }
         
     }
-    for (int i = 0 ; i < allSensorsInfo.count; i++) {
+    for(int i = 0; i < allSensorsInfo.count; i++) {
+        
         sensorInfo = allSensorsInfo[i];
-        if(sensorInfo.isSelected){
-            //displayCount += 1;
-            [httpComm sendHTTPPost:url
-                           timeout:5
-                           dbTable:nil
-                          sensorID:sensorInfo.sensorID.stringValue
-                         startDate:startDate
-                           endDate:endDate
-                        insertData:nil
-                      functionType:@"getRange"
-                        completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if(sensorInfo.isSelected) {
+            
+            displayCount += 1;
+            
+            [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:[sensorInfo.sensorID stringValue] startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getRange" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"!!! ERROR1 !!!");
+                    NSLog(@"HTTP Get Range Data Faile : %@", error.localizedDescription);
+                    
+                    compareDisplayCount = displayCount;
+                    
+                    NSLog( @"網路傳輸失敗！");
+                }else {
+                    
+                    //                    NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    //                    NSLog(@"XML : %@", xmlString);
+                    
+                    // assign delegate to parse the XML data
+                    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+                    XMLParserDelegate *parserDelegate = [XMLParserDelegate new];
+                    
+                    parser.delegate = parserDelegate;
+                    
+                    if([parser parse]) {
+                        objects = [parserDelegate getParserResults];
+                        
+                        NSLog(@"get XML count : %lu", (unsigned long)objects.count);
+                        
+                        if(objects.count > 0) {
+                            [self dataHandler];
+                        } else {
+                            NSLog(@"??? no data in range %@ to %@ ???", config.startDate, config.endDate);
                             
-                            if (error) {
-                                NSLog(@"!!! ERROR1 !!!");
-                                NSLog(@"HTTP Get Range Data Fail : %@", error.localizedDescription);
-                            }else {
-                                // 创建解析器
-                                NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-                                XMLParserDelegate *parserDelegate = [XMLParserDelegate new];
-                                // 设置代理
-                                parser.delegate = parserDelegate;
-                                
-                                // called to start the event-driven parse.
-                                // 開始使用 delegate 的 parse 動作
-                                if([parser parse]) {
-                                    // success
-                                    objects = [parserDelegate getParserResults];
-                                    //NSLog(@"A: %@",objects);
-                                    NSLog(@"get XML count : %lu", (unsigned long)objects.count);
-                                    if(objects.count > 0) {
-                                        [self dataHandler];
-                                        //NSLog(@"%@",csvString);
-                                    } else {
-                                        NSLog(@"??? no data in range %@ to %@ ???", startDate, endDate);
-                                    }
-                                } else {
-                                    // fail to parse
-                                    NSLog(@"!!! parser range data error !!!");
-                                }
-                            }
-                        }];
-        }// 檢查是否有開啟溫濕度的結尾
+                            compareDisplayCount = displayCount;
+                            
+                            NSLog( @"時間範圍內無資料！");
+                        }
+                    } else {
+                        // fail to parse
+                        NSLog(@"!!! parser range data error !!!");
+                        
+                        compareDisplayCount = displayCount;
+                        
+                        NSLog( @"資料解析錯誤！");
+                    }
+                }
+            }];
+        }
+        
+        // wait for data received
+        while (compareDisplayCount != displayCount) {
+        }
     }
     
 }
@@ -123,14 +140,14 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
 - (void) dataHandler{
     for (Sensor *sensor in objects) {
         [sensorItem.sensorID addObject:sensor.id];
-        if (displayCount == 0) {
+        if (displayCount == 1) {
             [sensorItem.temperatureValue addObject:sensor.value];
-        }else if (displayCount == 1){
+        }else if (displayCount == 2){
             [sensorItem.humidityValue addObject:sensor.value];
         }
         [sensorItem.time addObject:sensor.date];
     }
-    displayCount += 1;
+//    displayCount += 1;
     if (sensorType == bothTempAndHumid) {
         if(displayCount == 2 && sensorType != onlyHumid){
             [self lineCSVStringUp];
@@ -145,6 +162,7 @@ static ExportCSVFile *_singletonExportCSVFile = nil;
             
         }
     }
+    compareDisplayCount += 1;
 }
 
 - (void) lineCSVStringUp{
