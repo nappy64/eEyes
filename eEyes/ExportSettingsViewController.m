@@ -172,6 +172,7 @@
 }
 
 
+
 - (IBAction)saveBtnPressed:(id)sender{
     UIAlertController *giveFileName = [UIAlertController alertControllerWithTitle:@"檔案名稱" message:@"請輸入檔案名稱" preferredStyle:UIAlertControllerStyleAlert];
     
@@ -265,12 +266,25 @@
     if ([startDateTextField isFirstResponder])
     {
         startDateTextField.text = dateStr;
+        [config setStartDate:dateStr];
+        [config setAllConfig];
     }
     else if ([endDateTextField isFirstResponder])
     {
         endDateTextField.text = dateStr;
+        [config setEndDate:dateStr];
+        [config setAllConfig];
     }
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if([startDateTextField isFirstResponder]){
+        [startDateTextField resignFirstResponder];
+    }else if ([endDateTextField isFirstResponder]){
+        [endDateTextField resignFirstResponder];
+    }
+    
+}
+
 
 - (void)pressConfirmButtonToGenerateCSV:(UIBarButtonItem *)sender {
     
