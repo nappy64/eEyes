@@ -449,9 +449,11 @@
         double value = [hcv.values[index] doubleValue];
         _sensor1ValueLabel.text = [NSString stringWithFormat : @"%.1f", value];
 
-        hcv = chartList[1];
-        value = [hcv.values[index] doubleValue];
-        _sensor2ValueLabel.text = [NSString stringWithFormat : @"%.1f", value];
+        if(chartList.count > 1) {
+            hcv = chartList[1];
+            value = [hcv.values[index] doubleValue];
+            _sensor2ValueLabel.text = [NSString stringWithFormat : @"%.1f", value];
+        }
 
         _sensorDateLabel.text = hcv.date[index];
     });
