@@ -183,7 +183,7 @@
                         
                         isBypassThisTimeRequest = true;
                         
-                        [self popoutWarningMessage:@"網路傳輸失敗！"];
+//                        [self popoutWarningMessage:@"網路傳輸失敗！"];
                         
                     }else {
                         
