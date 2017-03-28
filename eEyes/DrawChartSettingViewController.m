@@ -59,7 +59,11 @@
     sensorsButton = [NSMutableArray array];
     
     // 準備導覽列上按鈕
-    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressConfirmButtonToCreateInputContent:)];
+//    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressConfirmButtonToCreateInputContent:)];
+    
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithTitle:@"Draw Chart"
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self action:@selector(pressConfirmButtonToCreateInputContent:)];
     
     // 放上導覽列
     self.navigationItem.rightBarButtonItems = @[addItem];

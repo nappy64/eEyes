@@ -15,6 +15,8 @@
 
 - (void) transferJSONToSensorsInfo:(NSDictionary*) jsonData;
 - (NSArray*) getAllSensorsInfo;
+- (NSMutableArray*) getAllSensorsInfoMutable;
+- (void) setAllSensorsInfo:(NSMutableArray*) allSensors;
 - (NSUInteger) getSensorsCount;
     
 @end

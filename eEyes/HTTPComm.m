@@ -50,23 +50,84 @@ static HTTPComm *_singletonHTTPComm = nil;
     NSDictionary *parametersDict;
     
     if([functionType isEqualToString:@"getNew"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"RealValue", @"sensorID":sensorID, @"datefield":@"Date", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"table":dbTable,
+                           @"field":@"RealValue",
+                           @"sensorID":sensorID,
+                           @"datefield":@"Date",
+                           @"startdate":startDate,
+                           @"enddate":endDate,
+                           @"type":functionType};
     } else if([functionType isEqualToString:@"getRange"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":@"SensorRawData", @"field":@"RawValue", @"sensorID":sensorID, @"datefield":@"StartDate", @"startdate":startDate, @"enddate":endDate, @"type":functionType};
-    } else if([functionType isEqualToString:@"getSensorByUser"] || [functionType isEqualToString:@"getAlarmByUser"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName,@"appUserName":config.appUserName, @"appPassword":config.appPassword, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"table":@"SensorRawData",
+                           @"field":@"RawValue",
+                           @"sensorID":sensorID,
+                           @"datefield":@"StartDate",
+                           @"startdate":startDate,
+                           @"enddate":endDate,
+                           @"type":functionType};
+    } else if([functionType isEqualToString:@"getSensorByUser"] || [functionType isEqualToString:@"getAlarmByUser"] || [functionType isEqualToString:@"getAlarmStatus"] || [functionType isEqualToString:@"clearAlarmStatus"] || [functionType isEqualToString:@"stopAlarmChecking"] || [functionType isEqualToString:@"getCheckingAlarmStatus"]) {
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"appUserName":config.appUserName,
+                           @"appPassword":config.appPassword,
+                           @"type":functionType};
     } else if([functionType isEqualToString:@"insert"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"Value", @"datefield":@"Date", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"table":dbTable,
+                           @"field":@"Value",
+                           @"datefield":@"Date",
+                           @"insertdate":startDate,
+                           @"insertdata":insertData,
+                           @"type":functionType};
     } else if([functionType isEqualToString:@"updateDeviceToken"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"table":dbTable, @"field":@"DeviceToken", @"datefield":@"LastUpdateDateTime", @"insertdate":startDate, @"insertdata":insertData, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"table":dbTable,
+                           @"field":@"DeviceToken",
+                           @"datefield":@"LastUpdateDateTime",
+                           @"insertdate":startDate,
+                           @"insertdata":insertData,
+                           @"type":functionType};
     } else if([functionType isEqualToString:@"insertAverage"]) {
-        parametersDict = @{@"username":config.dbUserName, @"password":config.dbPassword, @"database":config.dbName, @"field":@"Value", @"datefield":@"Date", @"data":insertData, @"type":functionType};
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"field":@"Value",
+                           @"datefield":@"Date",
+                           @"data":insertData,
+                           @"type":functionType};
     } else if([functionType isEqualToString:@"getNewestAverageTime"]) {
         parametersDict = @{@"username":config.dbUserName,
                            @"password":config.dbPassword,
                            @"database":config.dbName,
                            @"type":functionType};
+    } else if([functionType isEqualToString:@"setHiLoAlarm"]) {
+// dbInfoGet.php?username=root&password=root&database=eEyes&type=setHiLoAlarm&data={"sensorID":2,"hiAlarm":90,"loAlarm":50}
+        parametersDict = @{@"username":config.dbUserName,
+                           @"password":config.dbPassword,
+                           @"database":config.dbName,
+                           @"data":insertData,
+                           @"type":functionType};
     }
+//    else if([functionType isEqualToString:@"checkAlarm"]) {
+//        // /SendAllAlarm/checkAlarmGet.php?username=root&password=root&database=eEyes&appUserName=user&type=checkAlarm&sec=10
+//        parametersDict = @{@"username":config.dbUserName,
+//                           @"password":config.dbPassword,
+//                           @"database":config.dbName,
+//                           @"appUserName":config.appUserName,
+//                           @"sec":@"1",
+//                           @"type":functionType};
+//    }
     
     NSMutableString *parameterString = [NSMutableString string];
     

@@ -363,7 +363,9 @@
 
 - (IBAction)alarmListButtonPressed:(UIButton *)sender {
     // goto next page AlarmTableViewController
-    AlarmTableViewController *alarmListPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AlarmTableViewController"];
+//    AlarmTableViewController *alarmListPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AlarmTableViewController"];
+    
+    AlarmTableViewController *alarmListPage = [self.storyboard instantiateViewControllerWithIdentifier:@"AlarmListViewController"];
     
     [self showViewController:alarmListPage sender:nil];
 }

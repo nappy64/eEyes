@@ -17,6 +17,7 @@
 		0B4E40211E3237F600C07569 /* DVYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E401D1E3237F600C07569 /* DVYAxisView.m */; };
 		0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40231E32380600C07569 /* UIColor+Hex.m */; };
 		0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40251E32380600C07569 /* UIView+Extension.m */; };
+		0B58A0871E8A17BE009EECA2 /* AlarmListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58A0861E8A17BE009EECA2 /* AlarmListViewController.m */; };
 		0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B7FD53E1E27D13200C7F0B6 /* Config.plist */; };
 		0BAB37F51E705509001ADCDD /* button alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37ED1E705509001ADCDD /* button alarm.png */; };
 		0BAB37F61E705509001ADCDD /* button chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37EE1E705509001ADCDD /* button chart.png */; };
@@ -34,16 +35,12 @@
 		0BB21FE71E2533E600786F3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB21FE51E2533E600786F3A /* LaunchScreen.storyboard */; };
 		0BB21FF01E25341F00786F3A /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FEF1E25341F00786F3A /* ConfigManager.m */; };
 		0BB21FF31E25344400786F3A /* HTTPComm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FF21E25344400786F3A /* HTTPComm.m */; };
-		0BB21FF61E25346500786F3A /* DrawRealChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FF51E25346500786F3A /* DrawRealChart.m */; };
-		0BB21FF91E25347F00786F3A /* DrawHitoryChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FF81E25347F00786F3A /* DrawHitoryChart.m */; };
 		0BB21FFF1E25352700786F3A /* RegularAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FFE1E25352700786F3A /* RegularAction.m */; };
 		0BB220021E25356400786F3A /* AlarmTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220011E25356400786F3A /* AlarmTableViewController.m */; };
 		0BB220051E2535AD00786F3A /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220041E2535AD00786F3A /* ConfigTableViewController.m */; };
 		0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB220071E2535E200786F3A /* ExportTableViewController.m */; };
 		0BB2200B1E25362D00786F3A /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */; };
-		0BD14BEF1E25FA800009F6C2 /* DrawChartTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */; };
 		0BD14BFE1E2606240009F6C2 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BFD1E2606240009F6C2 /* Sensor.m */; };
-		0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */; };
 		0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */; };
 		0BDE0D121E2DE01F000C9EC6 /* RealChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */; };
 		0BF9F04C1E73BDE400FBB13E /* AlarmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */; };
@@ -80,6 +77,8 @@
 		0B4E40231E32380600C07569 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		0B4E40241E32380600C07569 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		0B4E40251E32380600C07569 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		0B58A0851E8A17BE009EECA2 /* AlarmListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmListViewController.h; sourceTree = "<group>"; };
+		0B58A0861E8A17BE009EECA2 /* AlarmListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmListViewController.m; sourceTree = "<group>"; };
 		0B7FD53E1E27D13200C7F0B6 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0BAB37ED1E705509001ADCDD /* button alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button alarm.png"; sourceTree = "<group>"; };
 		0BAB37EE1E705509001ADCDD /* button chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button chart.png"; sourceTree = "<group>"; };
@@ -103,10 +102,6 @@
 		0BB21FEF1E25341F00786F3A /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		0BB21FF11E25344400786F3A /* HTTPComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPComm.h; sourceTree = "<group>"; };
 		0BB21FF21E25344400786F3A /* HTTPComm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPComm.m; sourceTree = "<group>"; };
-		0BB21FF41E25346500786F3A /* DrawRealChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRealChart.h; sourceTree = "<group>"; };
-		0BB21FF51E25346500786F3A /* DrawRealChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawRealChart.m; sourceTree = "<group>"; };
-		0BB21FF71E25347F00786F3A /* DrawHitoryChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawHitoryChart.h; sourceTree = "<group>"; };
-		0BB21FF81E25347F00786F3A /* DrawHitoryChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawHitoryChart.m; sourceTree = "<group>"; };
 		0BB21FFA1E2534AB00786F3A /* ExportCSVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportCSVFile.h; sourceTree = "<group>"; };
 		0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportCSVFile.m; sourceTree = "<group>"; };
 		0BB21FFD1E25352700786F3A /* RegularAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegularAction.h; sourceTree = "<group>"; };
@@ -119,12 +114,8 @@
 		0BB220071E2535E200786F3A /* ExportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTableViewController.m; sourceTree = "<group>"; };
 		0BB220091E25362D00786F3A /* XMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserDelegate.h; sourceTree = "<group>"; };
 		0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
-		0BD14BED1E25FA800009F6C2 /* DrawChartTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawChartTableViewController.h; sourceTree = "<group>"; };
-		0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawChartTableViewController.m; sourceTree = "<group>"; };
 		0BD14BFC1E2606240009F6C2 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
 		0BD14BFD1E2606240009F6C2 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
-		0BD14BFF1E262AAD0009F6C2 /* ReceiveTrigProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveTrigProcess.h; sourceTree = "<group>"; };
-		0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveTrigProcess.m; sourceTree = "<group>"; };
 		0BDE0D0D1E2DDD4C000C9EC6 /* RealtimeChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealtimeChartViewController.h; sourceTree = "<group>"; };
 		0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeChartViewController.m; sourceTree = "<group>"; };
 		0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealChartView.h; sourceTree = "<group>"; };
@@ -158,7 +149,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B4E40151E3237F600C07569 /* DVLineChartView */ = {
+		0B4E40151E3237F600C07569 /* HistoryChart */ = {
 			isa = PBXGroup;
 			children = (
 				0B4E40161E3237F600C07569 /* DVLineChartView.h */,
@@ -174,7 +165,106 @@
 				0B4E40241E32380600C07569 /* UIView+Extension.h */,
 				0B4E40251E32380600C07569 /* UIView+Extension.m */,
 			);
+			name = HistoryChart;
 			path = DVLineChartView;
+			sourceTree = "<group>";
+		};
+		0B58A07E1E8A0C00009EECA2 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				0BB220001E25356400786F3A /* AlarmTableViewController.h */,
+				0BB220011E25356400786F3A /* AlarmTableViewController.m */,
+				0BF9F04A1E73BDE400FBB13E /* AlarmTableViewCell.h */,
+				0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */,
+				0B58A0851E8A17BE009EECA2 /* AlarmListViewController.h */,
+				0B58A0861E8A17BE009EECA2 /* AlarmListViewController.m */,
+			);
+			name = Alarm;
+			sourceTree = "<group>";
+		};
+		0B58A07F1E8A0C44009EECA2 /* DrawChart */ = {
+			isa = PBXGroup;
+			children = (
+				0B4E40151E3237F600C07569 /* HistoryChart */,
+				0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */,
+				0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */,
+				0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */,
+				0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */,
+				0B4E40121E3237B300C07569 /* HistoryChartViewController.h */,
+				0B4E40131E3237B300C07569 /* HistoryChartViewController.m */,
+				0BDE0D0D1E2DDD4C000C9EC6 /* RealtimeChartViewController.h */,
+				0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */,
+				0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */,
+				0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */,
+			);
+			name = DrawChart;
+			sourceTree = "<group>";
+		};
+		0B58A0801E8A0C72009EECA2 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				0BB220031E2535AD00786F3A /* ConfigTableViewController.h */,
+				0BB220041E2535AD00786F3A /* ConfigTableViewController.m */,
+				0BF9F0501E74513100FBB13E /* ConfigTableViewCell.h */,
+				0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */,
+				0BB21FEE1E25341F00786F3A /* ConfigManager.h */,
+				0BB21FEF1E25341F00786F3A /* ConfigManager.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		0B58A0811E8A0CC4009EECA2 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				0BB21FFA1E2534AB00786F3A /* ExportCSVFile.h */,
+				0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */,
+				B0FBC5091E5695DD005EC174 /* ExportSensorItem.h */,
+				B0FBC50A1E5695DD005EC174 /* ExportSensorItem.m */,
+				B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */,
+				B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */,
+				B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */,
+				B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */,
+				0BB220061E2535E200786F3A /* ExportTableViewController.h */,
+				0BB220071E2535E200786F3A /* ExportTableViewController.m */,
+			);
+			name = Export;
+			sourceTree = "<group>";
+		};
+		0B58A0831E8A0F02009EECA2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0BB21FF11E25344400786F3A /* HTTPComm.h */,
+				0BB21FF21E25344400786F3A /* HTTPComm.m */,
+				0BB21FFD1E25352700786F3A /* RegularAction.h */,
+				0BB21FFE1E25352700786F3A /* RegularAction.m */,
+				0B1E677E1E3B3B7500BFE8FC /* AllSensors.h */,
+				0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */,
+				0BD14BFC1E2606240009F6C2 /* Sensor.h */,
+				0BD14BFD1E2606240009F6C2 /* Sensor.m */,
+				0BB220091E25362D00786F3A /* XMLParserDelegate.h */,
+				0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0B58A0841E8A0F38009EECA2 /* pix */ = {
+			isa = PBXGroup;
+			children = (
+				B003FE3D1E76F10300084F16 /* Download.png */,
+				B003FE391E76EA2500084F16 /* minus.png */,
+				B003FE3A1E76EA2500084F16 /* plus.png */,
+				B0E444C31E767EBA0039343F /* water.png */,
+				B0E444C11E767EAE0039343F /* temperature.png */,
+				0BAB37ED1E705509001ADCDD /* button alarm.png */,
+				0BAB37EE1E705509001ADCDD /* button chart.png */,
+				0BAB37EF1E705509001ADCDD /* button export.png */,
+				0BAB37F01E705509001ADCDD /* button setting.png */,
+				0BAB37F11E705509001ADCDD /* ipad-.png */,
+				0BAB37F21E705509001ADCDD /* ipad.png */,
+				0BAB37F31E705509001ADCDD /* iphone-.png */,
+				0BAB37F41E705509001ADCDD /* iphone.png */,
+			);
+			name = pix;
 			sourceTree = "<group>";
 		};
 		0BB21FCB1E2533E600786F3A = {
@@ -196,78 +286,22 @@
 		0BB21FD61E2533E600786F3A /* eEyes */ = {
 			isa = PBXGroup;
 			children = (
-				0B4E40151E3237F600C07569 /* DVLineChartView */,
-				0B1E67841E3CDB2C00BFE8FC /* DrawChartSettingViewController.h */,
-				0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */,
-				0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */,
-				0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */,
-				0B4E40121E3237B300C07569 /* HistoryChartViewController.h */,
-				0B4E40131E3237B300C07569 /* HistoryChartViewController.m */,
-				0BDE0D0D1E2DDD4C000C9EC6 /* RealtimeChartViewController.h */,
-				0BDE0D0E1E2DDD4C000C9EC6 /* RealtimeChartViewController.m */,
-				0BDE0D101E2DE01F000C9EC6 /* RealChartView.h */,
-				0BDE0D111E2DE01F000C9EC6 /* RealChartView.m */,
+				0B58A07F1E8A0C44009EECA2 /* DrawChart */,
+				0B58A0841E8A0F38009EECA2 /* pix */,
+				0B58A0831E8A0F02009EECA2 /* Common */,
+				0B58A0811E8A0CC4009EECA2 /* Export */,
+				0B58A0801E8A0C72009EECA2 /* Config */,
+				0B58A07E1E8A0C00009EECA2 /* Alarm */,
 				B06752331E587BBD008373EB /* eEyes.entitlements */,
 				0BB21FDD1E2533E600786F3A /* ViewController.h */,
 				0BB21FDE1E2533E600786F3A /* ViewController.m */,
 				0BB21FE01E2533E600786F3A /* Main.storyboard */,
 				0BB21FDA1E2533E600786F3A /* AppDelegate.h */,
 				0BB21FDB1E2533E600786F3A /* AppDelegate.m */,
-				0BB220001E25356400786F3A /* AlarmTableViewController.h */,
-				0BB220011E25356400786F3A /* AlarmTableViewController.m */,
-				0BF9F04A1E73BDE400FBB13E /* AlarmTableViewCell.h */,
-				0BF9F04B1E73BDE400FBB13E /* AlarmTableViewCell.m */,
-				0BB220031E2535AD00786F3A /* ConfigTableViewController.h */,
-				0BB220041E2535AD00786F3A /* ConfigTableViewController.m */,
-				0BF9F0501E74513100FBB13E /* ConfigTableViewCell.h */,
-				0BF9F0511E74513100FBB13E /* ConfigTableViewCell.m */,
-				0BB21FEE1E25341F00786F3A /* ConfigManager.h */,
-				0BB21FEF1E25341F00786F3A /* ConfigManager.m */,
 				0B7FD53E1E27D13200C7F0B6 /* Config.plist */,
-				0BD14BED1E25FA800009F6C2 /* DrawChartTableViewController.h */,
-				0BD14BEE1E25FA800009F6C2 /* DrawChartTableViewController.m */,
-				0BB21FF71E25347F00786F3A /* DrawHitoryChart.h */,
-				0BB21FF81E25347F00786F3A /* DrawHitoryChart.m */,
-				0BB21FF41E25346500786F3A /* DrawRealChart.h */,
-				0BB21FF51E25346500786F3A /* DrawRealChart.m */,
-				0BB21FFA1E2534AB00786F3A /* ExportCSVFile.h */,
-				0BB21FFB1E2534AB00786F3A /* ExportCSVFile.m */,
-				B0FBC5091E5695DD005EC174 /* ExportSensorItem.h */,
-				B0FBC50A1E5695DD005EC174 /* ExportSensorItem.m */,
-				B0F7AB701E460C3D00165758 /* ExportSettingsViewController.h */,
-				B0F7AB711E460C3D00165758 /* ExportSettingsViewController.m */,
-				B0F51C8F1E489CC2008D8F9F /* DrawCSVFileViewController.h */,
-				B0F51C901E489CC2008D8F9F /* DrawCSVFileViewController.m */,
-				0BB220061E2535E200786F3A /* ExportTableViewController.h */,
-				0BB220071E2535E200786F3A /* ExportTableViewController.m */,
-				0BB21FF11E25344400786F3A /* HTTPComm.h */,
-				0BB21FF21E25344400786F3A /* HTTPComm.m */,
-				0BD14BFF1E262AAD0009F6C2 /* ReceiveTrigProcess.h */,
-				0BD14C001E262AAD0009F6C2 /* ReceiveTrigProcess.m */,
-				0BB21FFD1E25352700786F3A /* RegularAction.h */,
-				0BB21FFE1E25352700786F3A /* RegularAction.m */,
-				0B1E677E1E3B3B7500BFE8FC /* AllSensors.h */,
-				0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */,
-				0BD14BFC1E2606240009F6C2 /* Sensor.h */,
-				0BD14BFD1E2606240009F6C2 /* Sensor.m */,
-				0BB220091E25362D00786F3A /* XMLParserDelegate.h */,
-				0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */,
 				0BB21FE31E2533E600786F3A /* Assets.xcassets */,
 				0BB21FE51E2533E600786F3A /* LaunchScreen.storyboard */,
 				0BB21FE81E2533E600786F3A /* Info.plist */,
-				B003FE3D1E76F10300084F16 /* Download.png */,
-				B003FE391E76EA2500084F16 /* minus.png */,
-				B003FE3A1E76EA2500084F16 /* plus.png */,
-				B0E444C31E767EBA0039343F /* water.png */,
-				B0E444C11E767EAE0039343F /* temperature.png */,
-				0BAB37ED1E705509001ADCDD /* button alarm.png */,
-				0BAB37EE1E705509001ADCDD /* button chart.png */,
-				0BAB37EF1E705509001ADCDD /* button export.png */,
-				0BAB37F01E705509001ADCDD /* button setting.png */,
-				0BAB37F11E705509001ADCDD /* ipad-.png */,
-				0BAB37F21E705509001ADCDD /* ipad.png */,
-				0BAB37F31E705509001ADCDD /* iphone-.png */,
-				0BAB37F41E705509001ADCDD /* iphone.png */,
 				0BB21FD71E2533E600786F3A /* Supporting Files */,
 			);
 			path = eEyes;
@@ -375,7 +409,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BD14BEF1E25FA800009F6C2 /* DrawChartTableViewController.m in Sources */,
 				0BB220051E2535AD00786F3A /* ConfigTableViewController.m in Sources */,
 				0B4E401E1E3237F600C07569 /* DVLineChartView.m in Sources */,
 				0BB2200B1E25362D00786F3A /* XMLParserDelegate.m in Sources */,
@@ -387,7 +420,6 @@
 				0BD14BFE1E2606240009F6C2 /* Sensor.m in Sources */,
 				0B4E40141E3237B300C07569 /* HistoryChartViewController.m in Sources */,
 				0BB21FDF1E2533E600786F3A /* ViewController.m in Sources */,
-				0BD14C011E262AAD0009F6C2 /* ReceiveTrigProcess.m in Sources */,
 				B0FBC50B1E5695DD005EC174 /* ExportSensorItem.m in Sources */,
 				0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */,
 				B0F51C911E489CC2008D8F9F /* DrawCSVFileViewController.m in Sources */,
@@ -396,13 +428,12 @@
 				0BB21FDC1E2533E600786F3A /* AppDelegate.m in Sources */,
 				0B4E40201E3237F600C07569 /* DVXAxisView.m in Sources */,
 				0BB220021E25356400786F3A /* AlarmTableViewController.m in Sources */,
-				0BB21FF61E25346500786F3A /* DrawRealChart.m in Sources */,
 				0BB21FFF1E25352700786F3A /* RegularAction.m in Sources */,
 				B0F7AB6F1E456CAE00165758 /* ExportCSVFile.m in Sources */,
 				0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */,
+				0B58A0871E8A17BE009EECA2 /* AlarmListViewController.m in Sources */,
 				0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */,
 				B0F7AB721E460C3D00165758 /* ExportSettingsViewController.m in Sources */,
-				0BB21FF91E25347F00786F3A /* DrawHitoryChart.m in Sources */,
 				0BB21FD91E2533E600786F3A /* main.m in Sources */,
 				0BDE0D0F1E2DDD4C000C9EC6 /* RealtimeChartViewController.m in Sources */,
 				0BB220081E2535E200786F3A /* ExportTableViewController.m in Sources */,

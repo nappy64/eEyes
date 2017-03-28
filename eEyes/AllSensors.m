@@ -61,6 +61,16 @@ static AllSensors *_singletonAllSensors = nil;
     return allSensorsInfo;
 }
 
+- (NSMutableArray*) getAllSensorsInfoMutable {
+    
+    return allSensorsInfo;
+}
+
+- (void) setAllSensorsInfo:(NSMutableArray*) allSensors {
+    
+    allSensorsInfo = allSensors;
+}
+
 - (NSUInteger) getSensorsCount {
     
     return allSensorsInfo.count;

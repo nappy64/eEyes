@@ -10,6 +10,7 @@
 #import "HTTPComm.h"
 #import "RegularAction.h"
 #import "AlarmTableViewCell.h"
+#import "Sensor.h"
 
 @interface AlarmTableViewController ()
 {
@@ -17,9 +18,10 @@
     HTTPComm *httpComm;
     ConfigManager *config;
     
-    NSArray *allSensorsInfo;
+    NSMutableArray *allSensorsInfo;
     
-    NSMutableArray *allAlarmsInfo;
+    NSInteger sensorIndex;
+    NSString *SensorIDStr;
     
     BOOL isGetDBInfo;
 }
@@ -32,71 +34,17 @@
     [super viewDidLoad];
 
     allSensors = [AllSensors sharedInstance];
-    allSensorsInfo = [allSensors getAllSensorsInfo];
+    
+    allSensorsInfo = [NSMutableArray new];
+    allSensorsInfo = [allSensors getAllSensorsInfoMutable];
     
     httpComm = [HTTPComm sharedInstance];
     config = [ConfigManager sharedInstance];
     
     [config initialConfigPlist];
-    //    [config resetAllConfig];
     [config getAllConfig];
     
-    NSURL *url = [[NSURL alloc] initWithString:config.dbAlarmAddress];
-    
-    self.tableView.rowHeight = 88;
-
-    isGetDBInfo = false;
-    
-    [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate insertData:nil functionType:@"getAlarmByUser" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        if (error) {
-            NSLog(@"!!! ERROR1 !!!");
-            NSLog(@"HTTP Get Alarm Info. Faile : %@", error.localizedDescription);
-            [self popoutWarningMessage:@"網路傳輸失敗！"];
-            isGetDBInfo = true;
-        }else {
-            
-            NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"JSON : %@", jsonString);
-            
-            NSMutableDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
-            
-            NSString *result = jsonData[@"result"];
-            
-            if([result isEqualToString: @"true"]) {
-                
-                allAlarmsInfo = [NSMutableArray new];
-                NSMutableArray *allAlarms = jsonData[@"alarms"];
-                
-                for (int i = 0; i < (int)allAlarms.count; i++) {
-                    
-                    // get a alarm element
-                    NSMutableDictionary *sensorInfo = jsonData[@"alarms"][i];
-                    
-                    // save to a Sensor object
-                    Sensor *currentSensor = [Sensor new];
-                    
-                    currentSensor.sensorID = sensorInfo[@"sensorID"];
-                    currentSensor.date = sensorInfo[@"date"];
-                    
-                    currentSensor.alarmValue = [sensorInfo[@"alarmValue"] floatValue];
-                    currentSensor.alarmType = sensorInfo[@"alarmType"];
-                    
-                    // save a alarm element
-                    [allAlarmsInfo addObject:currentSensor];
-                }
-            } else {
-                NSString *errString = jsonData[@"errorCode"];
-                [self popoutWarningMessage:errString];
-            }
-            
-            isGetDBInfo = true;
-            
-        }
-    }];
-    
-    while (!isGetDBInfo) {
-    }
+    self.tableView.rowHeight = 66;
 }
 
 - (void) popoutWarningMessage:(NSString*)message {
@@ -127,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return allAlarmsInfo.count;
+    return allSensorsInfo.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,14 +84,13 @@
     AlarmTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // get alarm element
-    Sensor *alarm = allAlarmsInfo[indexPath.row];
+    Sensor *sensor = allSensorsInfo[indexPath.row];
     
     // set cell data
-    cell.sensorNameLabel.text = [self getSensorNameByID:alarm.sensorID];
-    cell.sensorAlarmValueLabel.text = [NSString stringWithFormat:@"%.1f", alarm.alarmValue];
-    cell.sensorAlarmDateLabel.text = alarm.date;
-    cell.sensorAlarmTypeLabel.text = alarm.alarmType;
-    
+    cell.sensorNameLabel.text = [self getSensorNameByID:sensor.sensorID];
+    cell.sensorAlarmValueLabel.text = [NSString stringWithFormat:@"%.1f", sensor.hiAlarm];
+    cell.sensorAlarmTypeLabel.text = [NSString stringWithFormat:@"%.1f", sensor.loAlarm];
+
     return cell;
 }
 
@@ -158,6 +105,80 @@
     }
     
     return sensorName;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Sensor *sensor = allSensorsInfo[indexPath.row];
+    
+    sensorIndex = indexPath.row;
+    SensorIDStr = [sensor.sensorID stringValue];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:sensor.name message:@"請輸入高低警報值" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull hiAlarmTextField) {
+        hiAlarmTextField.text = [NSString stringWithFormat:@"%.1f", sensor.hiAlarm];
+        [hiAlarmTextField setKeyboardType:UIKeyboardTypeDecimalPad];
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull loAlarmTextField) {
+        loAlarmTextField.text = [NSString stringWithFormat:@"%.1f", sensor.loAlarm];
+        [loAlarmTextField setKeyboardType:UIKeyboardTypeDecimalPad];
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    UIAlertAction* confirm = [UIAlertAction actionWithTitle:@"確認" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        // get input string
+        UITextField* hiAlarmTextField = alert.textFields[0];
+        UITextField* loAlarmTextField = alert.textFields[1];
+        
+        NSString *hiAlarmStr = hiAlarmTextField.text;
+        NSString *loAlarmStr = loAlarmTextField.text;
+        
+        NSLog(@"id : %@, hi：%@, lo：%@", SensorIDStr, hiAlarmStr, loAlarmStr);
+        
+        // update AllSensors singleton
+        Sensor *sensor = allSensorsInfo[sensorIndex];
+        sensor.hiAlarm = [hiAlarmStr doubleValue];
+        sensor.loAlarm = [loAlarmStr doubleValue];
+        allSensorsInfo[sensorIndex] = sensor;
+        
+        // update table view
+        [tableView reloadData];
+        
+        // write hi lo alarm to DB
+        NSURL *url = [[NSURL alloc] initWithString:config.dbInfoAddress];
+        
+        isGetDBInfo = false;
+        
+        NSString *insertData = [NSString stringWithFormat:@"{\"sensorID\":%@,\"hiAlarm\":%@,\"loAlarm\":%@}", SensorIDStr, hiAlarmStr, loAlarmStr];
+        
+        NSLog(@"url : %@", insertData);
+        
+        [httpComm sendHTTPPost:url timeout:1 dbTable:nil sensorID:@"1" startDate:config.startDate endDate:config.endDate insertData:insertData functionType:@"setHiLoAlarm" completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+            if (error) {
+                NSLog(@"!!! getAlarmStatus ERROR !!!");
+                NSLog(@"HTTP getAlarmStatus Faile : %@", error.localizedDescription);
+                [self popoutWarningMessage:@"網路傳輸失敗！"];
+            }
+            
+            isGetDBInfo = true;
+        }];
+        
+        while (!isGetDBInfo) {
+        }
+    }];
+    
+    // 將按鍵加到警告視窗上
+    [alert addAction:cancel];
+    [alert addAction:confirm];
+    
+    // 顯示警告視窗
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
