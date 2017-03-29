@@ -118,16 +118,16 @@ static HTTPComm *_singletonHTTPComm = nil;
                            @"database":config.dbName,
                            @"data":insertData,
                            @"type":functionType};
+    } else if([functionType isEqualToString:@"getNewest"]) {
+        parametersDict = @{@"username":@"root",
+                           @"password":@"root",
+                           @"database":@"eEyes",
+                           @"table":dbTable,
+                           @"field":@"RealValue",
+                           @"sensorID":sensorID,
+                           @"datefield":@"Date",
+                           @"type":functionType};
     }
-//    else if([functionType isEqualToString:@"checkAlarm"]) {
-//        // /SendAllAlarm/checkAlarmGet.php?username=root&password=root&database=eEyes&appUserName=user&type=checkAlarm&sec=10
-//        parametersDict = @{@"username":config.dbUserName,
-//                           @"password":config.dbPassword,
-//                           @"database":config.dbName,
-//                           @"appUserName":config.appUserName,
-//                           @"sec":@"1",
-//                           @"type":functionType};
-//    }
     
     NSMutableString *parameterString = [NSMutableString string];
     

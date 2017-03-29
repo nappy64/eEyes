@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房間溫度" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42" userLabel="eEyes">
+                                <rect key="frame" x="16" y="0.0" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="WUo-E8-hsx" userLabel="eEyes">
+                                <rect key="frame" x="16" y="30" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="pos-eA-wlY" userLabel="eEyes">
+                                <rect key="frame" x="160" y="30" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房間濕度" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="76g-IS-bDh" userLabel="eEyes">
+                                <rect key="frame" x="160" y="0.0" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="1P9-1a-FIa"/>
+                            <constraint firstItem="WUo-E8-hsx" firstAttribute="width" secondItem="GcN-lo-r42" secondAttribute="width" id="7IB-Sq-YN0"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="pos-eA-wlY" secondAttribute="bottom" id="7eA-gl-hgz"/>
+                            <constraint firstItem="pos-eA-wlY" firstAttribute="width" secondItem="GcN-lo-r42" secondAttribute="width" id="Cbf-Pw-mdL"/>
+                            <constraint firstItem="76g-IS-bDh" firstAttribute="height" secondItem="GcN-lo-r42" secondAttribute="height" id="Gbj-Eh-UDH"/>
+                            <constraint firstItem="WUo-E8-hsx" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="HDV-fe-k3X"/>
+                            <constraint firstItem="76g-IS-bDh" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="Is5-gX-Y0j"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="WUo-E8-hsx" secondAttribute="bottom" id="JO5-IM-fVj"/>
+                            <constraint firstItem="WUo-E8-hsx" firstAttribute="height" secondItem="GcN-lo-r42" secondAttribute="height" id="MpB-SG-lsL"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="TBa-kB-Iez"/>
+                            <constraint firstItem="WUo-E8-hsx" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" id="eJ3-8Z-wR6"/>
+                            <constraint firstItem="76g-IS-bDh" firstAttribute="width" secondItem="GcN-lo-r42" secondAttribute="width" id="eN1-JW-wm2"/>
+                            <constraint firstItem="76g-IS-bDh" firstAttribute="leading" secondItem="GcN-lo-r42" secondAttribute="trailing" id="eUp-ff-d8g"/>
+                            <constraint firstItem="pos-eA-wlY" firstAttribute="leading" secondItem="WUo-E8-hsx" secondAttribute="trailing" id="ij5-4v-4hG"/>
+                            <constraint firstItem="pos-eA-wlY" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="kC9-Lj-pfW"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="kRo-1d-1ix"/>
+                            <constraint firstItem="pos-eA-wlY" firstAttribute="top" secondItem="76g-IS-bDh" secondAttribute="bottom" id="nfF-qw-uda"/>
+                            <constraint firstItem="76g-IS-bDh" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="nhn-qi-iEG"/>
+                            <constraint firstItem="pos-eA-wlY" firstAttribute="height" secondItem="GcN-lo-r42" secondAttribute="height" id="r6z-EN-nJN"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="rPX-Hq-ggT"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="r6I-UG-nbc" appends="YES" id="fg1-2a-Vdn"/>
+                        </connections>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="60"/>
+                    <connections>
+                        <outlet property="toAppTapGesture" destination="r6I-UG-nbc" id="7uK-Lj-TU0"/>
+                        <outlet property="value1Label" destination="WUo-E8-hsx" id="9j6-Fw-BPT"/>
+                        <outlet property="value2Label" destination="pos-eA-wlY" id="evZ-cQ-tyL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="r6I-UG-nbc">
+                    <connections>
+                        <action selector="toAppGestureTapped:" destination="M4Y-Lb-cyx" id="1RP-eN-4ri"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="137.59999999999999" y="129.53523238380811"/>
+        </scene>
+    </scenes>
+</document>

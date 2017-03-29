@@ -10,6 +10,11 @@
 		0B1E67801E3B3B7500BFE8FC /* AllSensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */; };
 		0B1E67861E3CDB2C00BFE8FC /* DrawChartSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */; };
 		0B1E67891E41B1D500BFE8FC /* HistoryChartValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */; };
+		0B3EC8E51E8B6796007CDC24 /* HTTPComm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FF21E25344400786F3A /* HTTPComm.m */; };
+		0B3EC8E61E8B67A2007CDC24 /* AllSensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */; };
+		0B3EC8E71E8B67A5007CDC24 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD14BFD1E2606240009F6C2 /* Sensor.m */; };
+		0B3EC8E81E8B67A8007CDC24 /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB2200A1E25362D00786F3A /* XMLParserDelegate.m */; };
+		0B3EC8E91E8B67C0007CDC24 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB21FEF1E25341F00786F3A /* ConfigManager.m */; };
 		0B4E40141E3237B300C07569 /* HistoryChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40131E3237B300C07569 /* HistoryChartViewController.m */; };
 		0B4E401E1E3237F600C07569 /* DVLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40171E3237F600C07569 /* DVLineChartView.m */; };
 		0B4E401F1E3237F600C07569 /* DVPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40191E3237F600C07569 /* DVPlot.m */; };
@@ -18,6 +23,10 @@
 		0B4E40261E32380600C07569 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40231E32380600C07569 /* UIColor+Hex.m */; };
 		0B4E40271E32380600C07569 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E40251E32380600C07569 /* UIView+Extension.m */; };
 		0B58A0871E8A17BE009EECA2 /* AlarmListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58A0861E8A17BE009EECA2 /* AlarmListViewController.m */; };
+		0B5EA9881E8B48780057C000 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5EA9871E8B48780057C000 /* NotificationCenter.framework */; };
+		0B5EA98C1E8B48780057C000 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EA98B1E8B48780057C000 /* TodayViewController.m */; };
+		0B5EA98F1E8B48780057C000 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B5EA98D1E8B48780057C000 /* MainInterface.storyboard */; };
+		0B5EA9931E8B48780057C000 /* eEyesWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0B5EA9851E8B48780057C000 /* eEyesWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0B7FD53F1E27D13200C7F0B6 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B7FD53E1E27D13200C7F0B6 /* Config.plist */; };
 		0BAB37F51E705509001ADCDD /* button alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37ED1E705509001ADCDD /* button alarm.png */; };
 		0BAB37F61E705509001ADCDD /* button chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB37EE1E705509001ADCDD /* button chart.png */; };
@@ -56,6 +65,30 @@
 		B0FBC50B1E5695DD005EC174 /* ExportSensorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FBC50A1E5695DD005EC174 /* ExportSensorItem.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0B5EA9911E8B48780057C000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BB21FCC1E2533E600786F3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B5EA9841E8B48780057C000;
+			remoteInfo = eEyesWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0B5EA9971E8B48780057C000 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0B5EA9931E8B48780057C000 /* eEyesWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0B1E677E1E3B3B7500BFE8FC /* AllSensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSensors.h; sourceTree = "<group>"; };
 		0B1E677F1E3B3B7500BFE8FC /* AllSensors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSensors.m; sourceTree = "<group>"; };
@@ -63,6 +96,7 @@
 		0B1E67851E3CDB2C00BFE8FC /* DrawChartSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawChartSettingViewController.m; sourceTree = "<group>"; };
 		0B1E67871E41B1D500BFE8FC /* HistoryChartValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryChartValues.h; sourceTree = "<group>"; };
 		0B1E67881E41B1D500BFE8FC /* HistoryChartValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryChartValues.m; sourceTree = "<group>"; };
+		0B3EC8E41E8B63F8007CDC24 /* eEyesWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eEyesWidget.entitlements; sourceTree = "<group>"; };
 		0B4E40121E3237B300C07569 /* HistoryChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryChartViewController.h; sourceTree = "<group>"; };
 		0B4E40131E3237B300C07569 /* HistoryChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryChartViewController.m; sourceTree = "<group>"; };
 		0B4E40161E3237F600C07569 /* DVLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVLineChartView.h; sourceTree = "<group>"; };
@@ -79,6 +113,12 @@
 		0B4E40251E32380600C07569 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		0B58A0851E8A17BE009EECA2 /* AlarmListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmListViewController.h; sourceTree = "<group>"; };
 		0B58A0861E8A17BE009EECA2 /* AlarmListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmListViewController.m; sourceTree = "<group>"; };
+		0B5EA9851E8B48780057C000 /* eEyesWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = eEyesWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B5EA9871E8B48780057C000 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		0B5EA98A1E8B48780057C000 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		0B5EA98B1E8B48780057C000 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		0B5EA98E1E8B48780057C000 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		0B5EA9901E8B48780057C000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B7FD53E1E27D13200C7F0B6 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0BAB37ED1E705509001ADCDD /* button alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button alarm.png"; sourceTree = "<group>"; };
 		0BAB37EE1E705509001ADCDD /* button chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button chart.png"; sourceTree = "<group>"; };
@@ -139,6 +179,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0B5EA9821E8B48780057C000 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B5EA9881E8B48780057C000 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0BB21FD11E2533E600786F3A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,10 +315,32 @@
 			name = pix;
 			sourceTree = "<group>";
 		};
+		0B5EA9861E8B48780057C000 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B5EA9871E8B48780057C000 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0B5EA9891E8B48780057C000 /* eEyesWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0B3EC8E41E8B63F8007CDC24 /* eEyesWidget.entitlements */,
+				0B5EA98A1E8B48780057C000 /* TodayViewController.h */,
+				0B5EA98B1E8B48780057C000 /* TodayViewController.m */,
+				0B5EA98D1E8B48780057C000 /* MainInterface.storyboard */,
+				0B5EA9901E8B48780057C000 /* Info.plist */,
+			);
+			path = eEyesWidget;
+			sourceTree = "<group>";
+		};
 		0BB21FCB1E2533E600786F3A = {
 			isa = PBXGroup;
 			children = (
 				0BB21FD61E2533E600786F3A /* eEyes */,
+				0B5EA9891E8B48780057C000 /* eEyesWidget */,
+				0B5EA9861E8B48780057C000 /* Frameworks */,
 				0BB21FD51E2533E600786F3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -279,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				0BB21FD41E2533E600786F3A /* eEyes.app */,
+				0B5EA9851E8B48780057C000 /* eEyesWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +389,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0B5EA9841E8B48780057C000 /* eEyesWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B5EA9941E8B48780057C000 /* Build configuration list for PBXNativeTarget "eEyesWidget" */;
+			buildPhases = (
+				0B5EA9811E8B48780057C000 /* Sources */,
+				0B5EA9821E8B48780057C000 /* Frameworks */,
+				0B5EA9831E8B48780057C000 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eEyesWidget;
+			productName = eEyesWidget;
+			productReference = 0B5EA9851E8B48780057C000 /* eEyesWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		0BB21FD31E2533E600786F3A /* eEyes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BB21FEB1E2533E600786F3A /* Build configuration list for PBXNativeTarget "eEyes" */;
@@ -325,10 +413,12 @@
 				0BB21FD01E2533E600786F3A /* Sources */,
 				0BB21FD11E2533E600786F3A /* Frameworks */,
 				0BB21FD21E2533E600786F3A /* Resources */,
+				0B5EA9971E8B48780057C000 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0B5EA9921E8B48780057C000 /* PBXTargetDependency */,
 			);
 			name = eEyes;
 			productName = eEyes;
@@ -344,11 +434,24 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Nappy;
 				TargetAttributes = {
+					0B5EA9841E8B48780057C000 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = R4D8ALW54Z;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
+					};
 					0BB21FD31E2533E600786F3A = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = R4D8ALW54Z;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -373,11 +476,20 @@
 			projectRoot = "";
 			targets = (
 				0BB21FD31E2533E600786F3A /* eEyes */,
+				0B5EA9841E8B48780057C000 /* eEyesWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0B5EA9831E8B48780057C000 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B5EA98F1E8B48780057C000 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0BB21FD21E2533E600786F3A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +517,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0B5EA9811E8B48780057C000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3EC8E61E8B67A2007CDC24 /* AllSensors.m in Sources */,
+				0B3EC8E81E8B67A8007CDC24 /* XMLParserDelegate.m in Sources */,
+				0B3EC8E71E8B67A5007CDC24 /* Sensor.m in Sources */,
+				0B5EA98C1E8B48780057C000 /* TodayViewController.m in Sources */,
+				0B3EC8E51E8B6796007CDC24 /* HTTPComm.m in Sources */,
+				0B3EC8E91E8B67C0007CDC24 /* ConfigManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0BB21FD01E2533E600786F3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,7 +569,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0B5EA9921E8B48780057C000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B5EA9841E8B48780057C000 /* eEyesWidget */;
+			targetProxy = 0B5EA9911E8B48780057C000 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		0B5EA98D1E8B48780057C000 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B5EA98E1E8B48780057C000 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		0BB21FE01E2533E600786F3A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -464,6 +605,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0B5EA9951E8B48780057C000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = R4D8ALW54Z;
+				INFOPLIST_FILE = eEyesWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes.eEyesWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0B5EA9961E8B48780057C000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = eEyesWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eEyes.eEyes.eEyesWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		0BB21FE91E2533E600786F3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -589,6 +756,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B5EA9941E8B48780057C000 /* Build configuration list for PBXNativeTarget "eEyesWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B5EA9951E8B48780057C000 /* Debug */,
+				0B5EA9961E8B48780057C000 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0BB21FCF1E2533E600786F3A /* Build configuration list for PBXProject "eEyes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

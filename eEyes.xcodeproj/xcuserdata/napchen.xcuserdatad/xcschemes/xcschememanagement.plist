@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>eEyesWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0B5EA9841E8B48780057C000</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0BB21FD31E2533E600786F3A</key>
 		<dict>
 			<key>primary</key>

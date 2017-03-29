@@ -165,8 +165,14 @@
 
 }
 
-
-
-
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    NSString *urlString = url.absoluteString;
+    NSString *parameter = [urlString stringByReplacingOccurrencesOfString:@"eeyeswidget://" withString:@""];
+    
+    NSLog(@"parameter is %@", parameter);
+    
+    return true;
+}
 
 @end
